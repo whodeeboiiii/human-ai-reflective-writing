@@ -1,0 +1,1 @@
+// # Getting Started 설문 응답 저장

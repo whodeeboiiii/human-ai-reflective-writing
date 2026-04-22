@@ -1,0 +1,1 @@
+// # ★ AI 제안 accept/reject UI (핵심 공통 컴포넌트)

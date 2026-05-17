@@ -1,1 +1,0 @@
-// # buildSuggestPrompt(structuredInput, currentText)

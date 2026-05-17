@@ -1,0 +1,357 @@
+/* ==========================================================================
+   Flect — User Page scoped styles
+   Overlay on top of globals.css (design tokens + shared utilities).
+   ========================================================================== */
+
+/* ---- Header ------------------------------------------------------- */
+.userHeader {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 36px 32px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Re-anchor .hero-mark (absolute on Landing) to flow inline here */
+.userHeader :global(.hero-mark) {
+  position: static;
+  top: auto;
+  left: auto;
+}
+
+.userGreet {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.userGreetText {
+  position: relative;
+  padding-right: 14px;
+}
+.userGreetText::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 12px;
+  background: var(--line);
+}
+
+.userAvatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  color: var(--accent-deep);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: lowercase;
+}
+
+/* ---- Greeting ----------------------------------------------------- */
+.userGreeting {
+  padding: 48px 0 36px;
+}
+.userGreeting :global(.eyebrow) {
+  margin-bottom: 18px;
+}
+.userGreeting h1 {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  margin-bottom: 18px;
+  max-width: 22ch;
+  color: var(--ink);
+}
+.userGreeting h1 :global(.emph) {
+  font-style: italic;
+  color: var(--accent-deep);
+}
+
+.userGreetingSub {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.userGreetingSub .count {
+  color: var(--ink);
+  font-weight: 500;
+  background: var(--accent-soft);
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin: 0 4px;
+}
+
+/* ---- Grid section ------------------------------------------------- */
+.userGridSection {
+  padding: 8px 0 140px;
+}
+
+.noteGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---- Card base ---------------------------------------------------- */
+.noteCard {
+  position: relative;
+  list-style: none;
+}
+
+.noteCardLink {
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  padding: 28px 26px 24px;
+  background: #fffcf6;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 360ms var(--ease),
+    box-shadow 360ms var(--ease),
+    border-color 360ms var(--ease),
+    background 360ms var(--ease);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6),
+    0 1px 2px rgba(45, 37, 32, 0.04);
+}
+.noteCardLink:hover {
+  transform: translateY(-4px);
+  border-color: var(--line);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7),
+    0 18px 32px -16px rgba(45, 37, 32, 0.18),
+    0 6px 12px -8px rgba(154, 122, 30, 0.12);
+}
+
+/* Faint paper-grain top edge */
+.noteCardLink::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(232, 196, 104, 0.5) 50%,
+    transparent 100%
+  );
+  opacity: 0.4;
+  transition: opacity 360ms var(--ease);
+}
+.noteCardLink:hover::before {
+  opacity: 1;
+}
+
+.noteCardCorner {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+
+/* ---- Existing-note card content ---------------------------------- */
+.noteTitle {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 28px 0 18px;
+  text-wrap: balance;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.notePreview {
+  flex: 1;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--ink-mute);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-wrap: pretty;
+}
+
+.noteMeta {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.noteDate {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.noteTag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  padding: 5px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+  transition:
+    border-color 300ms var(--ease),
+    color 300ms var(--ease),
+    background 300ms var(--ease);
+}
+.noteCardLink:hover .noteTag {
+  border-color: var(--accent-deep);
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+}
+
+/* ---- New-note card ----------------------------------------------- */
+.noteCardNew .noteCardLink {
+  background: linear-gradient(
+    180deg,
+    rgba(232, 196, 104, 0.1) 0%,
+    rgba(232, 196, 104, 0.04) 100%
+  );
+  border: 1.5px dashed rgba(154, 122, 30, 0.4);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: none;
+}
+.noteCardNew .noteCardLink:hover {
+  border-color: var(--accent-deep);
+  background: linear-gradient(
+    180deg,
+    rgba(232, 196, 104, 0.18) 0%,
+    rgba(232, 196, 104, 0.08) 100%
+  );
+  box-shadow:
+    0 18px 32px -16px rgba(154, 122, 30, 0.28),
+    0 6px 12px -8px rgba(154, 122, 30, 0.18);
+}
+.noteCardNew .noteCardCorner {
+  color: var(--accent-deep);
+  opacity: 0.6;
+}
+
+.noteNewIcon {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(154, 122, 30, 0.25);
+  color: var(--accent-deep);
+  margin-bottom: 22px;
+  transition:
+    transform 360ms var(--ease),
+    background 360ms var(--ease);
+}
+.noteNewIcon svg {
+  width: 24px;
+  height: 24px;
+}
+.noteCardNew .noteCardLink:hover .noteNewIcon {
+  transform: rotate(90deg) scale(1.05);
+  background: #fff;
+}
+
+.noteNewLabel {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.noteNewHint {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  opacity: 0.7;
+  transition:
+    transform 300ms var(--ease),
+    opacity 300ms var(--ease);
+}
+.noteCardNew .noteCardLink:hover .noteNewHint {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* ---- Responsive --------------------------------------------------- */
+@media (max-width: 900px) {
+  .userHeader { padding-top: 28px; }
+  .userGreeting { padding: 56px 0 40px; }
+  .noteGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .noteCardLink { height: 280px; padding: 24px 22px 20px; }
+}
+
+@media (max-width: 560px) {
+  .userHeader { padding: 22px 22px 0; }
+  .userGreetText { display: none; }
+  .userGreeting { padding: 44px 0 32px; }
+  .userGreeting h1 { font-size: 2rem; }
+  .noteGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .noteCardLink { height: auto; min-height: 240px; }
+  .userGridSection { padding-bottom: 80px; }
+}

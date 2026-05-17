@@ -1,0 +1,257 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   Flect — Design Tokens  (reconstructed from _legacy/style.css)
+   ========================================================================== */
+
+:root {
+  /* Accent — warm golden */
+  --accent:      #E8C468;
+  --accent-soft: rgba(232, 196, 104, 0.15);
+  --accent-deep: #9A7A1E;
+
+  /* Ink scale — warm dark brown */
+  --ink:       #2D2520;
+  --ink-soft:  #6B5E57;
+  --ink-mute:  #9B8F8A;
+  --ink-faint: #C8BEBA;
+
+  /* Background scale — warm cream */
+  --bg:      #FAF7F2;
+  --bg-deep: #F0ECE5;
+  --bg-warm: #FFFCF6;
+
+  /* Border / line scale */
+  --line:      rgba(45, 37, 32, 0.14);
+  --line-soft: rgba(45, 37, 32, 0.08);
+
+  /* Typography — variables are injected by next/font or CDN */
+  --serif: var(--font-gowun-batang, 'Gowun Batang'), Georgia, serif;
+  --sans:  'Pretendard Variable', 'Pretendard', system-ui, sans-serif;
+  --mono:  var(--font-jetbrains-mono, 'JetBrains Mono'), 'Courier New', monospace;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Tailwind theme extension */
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --color-accent:     var(--accent);
+  --font-sans:        var(--sans);
+  --font-mono:        var(--mono);
+  --font-serif:       var(--serif);
+}
+
+/* ==========================================================================
+   Base reset
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Paper-grain ambient texture via fixed pseudo-element */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 12% 18%, rgba(232, 196, 104, 0.07), transparent 65%),
+    radial-gradient(ellipse 60% 50% at 88% 85%, rgba(232, 196, 104, 0.04), transparent 65%);
+  pointer-events: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* ==========================================================================
+   Layout utility
+   ========================================================================== */
+.wrap {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 560px) {
+  .wrap { padding: 0 22px; }
+}
+
+/* ==========================================================================
+   Shared typographic classes
+   ========================================================================== */
+.hero-mark {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+
+/* italic accent — applied inline as <span class="emph"> */
+.emph {
+  font-style: italic;
+  color: var(--accent-deep);
+}
+
+/* ==========================================================================
+   Reveal — CSS-driven entry animation triggered by .is-visible
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 600ms var(--ease),
+    transform 600ms var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: none; }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+  padding: 32px 0 40px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-brand {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.footer-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-meta a {
+  color: var(--ink-soft);
+  transition: color 240ms var(--ease);
+}
+.footer-meta a:hover { color: var(--ink); }
+
+/* ==========================================================================
+   Base button — extended by page-specific .ix-btn / .qa-btn variants
+   ========================================================================== */
+/* ==========================================================================
+   Ideation page — body class applied via useEffect in SurveyFlow
+   ========================================================================== */
+body.ideation {
+  overflow: hidden;
+}
+body.ideation::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 18% 10%, rgba(232, 196, 104, 0.10), transparent 65%),
+    radial-gradient(ellipse 60% 40% at 88% 80%, rgba(232, 196, 104, 0.06), transparent 65%);
+}
+
+/* ==========================================================================
+   Q&A page — body class applied via useEffect in ChatContainer
+   ========================================================================== */
+body.qa {
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow-x: hidden;
+}
+body.qa::before {
+  background:
+    radial-gradient(ellipse 70% 50% at 12% 8%,  rgba(232, 196, 104, 0.10), transparent 65%),
+    radial-gradient(ellipse 60% 40% at 92% 92%, rgba(232, 196, 104, 0.06), transparent 65%);
+}
+
+/* ==========================================================================
+   Base button — extended by page-specific .ix-btn / .qa-btn variants
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  border: none;
+  transition:
+    transform 280ms var(--ease),
+    background 280ms var(--ease),
+    color 280ms var(--ease),
+    box-shadow 280ms var(--ease);
+}

@@ -1,1 +1,0 @@
-// # buildOutlinePrompt(structuredInput, qaHistory)

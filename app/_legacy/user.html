@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flect — 내 글</title>
+  <meta name="description" content="Flect에서 작성한 당신의 글들을 한눈에. 새 글을 쓰거나 이어서 작성해보세요.">
+
+  <!-- Fonts: Pretendard (body) + Gowun Batang (heading) — same as Landing -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="user.css?v=1">
+</head>
+<body>
+
+<!-- ==========================================================================
+     PAGE HEADER — Flect mark (left), user greeting (right)
+     ========================================================================== -->
+<header class="user-header">
+  <a href="user.html" class="hero-mark" aria-label="Flect 홈">Flect</a>
+  <div class="user-greet">
+    <span class="user-greet-text">Hi, friend</span>
+    <span class="user-avatar" aria-hidden="true">f</span>
+  </div>
+</header>
+
+<!-- ==========================================================================
+     GREETING — large serif prompt + count
+     ========================================================================== -->
+<section class="user-greeting">
+  <div class="wrap">
+    <div class="eyebrow reveal is-visible">Your Notes &nbsp;·&nbsp; <span id="today-label">오늘</span></div>
+    <h1 class="reveal is-visible" data-delay="1">
+      오늘은 어떤 이야기를<br>
+      <span class="emph">담아볼까요?</span>
+    </h1>
+    <p class="user-greeting-sub reveal is-visible" data-delay="2">
+      당신의 글 <span class="count" id="note-count">3</span>개
+    </p>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     NOTE GRID
+     ========================================================================== -->
+<section class="user-grid-section">
+  <div class="wrap">
+    <ul class="note-grid reveal is-visible" data-delay="3">
+
+      <!-- New note card -->
+      <li class="note-card note-card--new">
+        <a href="/app/write" class="note-card-link" aria-label="새 글 쓰기">
+          <span class="note-card-corner">001 / new</span>
+          <span class="note-new-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <line x1="24" y1="10" x2="24" y2="38"></line>
+              <line x1="10" y1="24" x2="38" y2="24"></line>
+            </svg>
+          </span>
+          <span class="note-new-label">새 글 쓰기</span>
+          <span class="note-new-hint">백지에서 시작 →</span>
+        </a>
+      </li>
+
+      <!-- Card A -->
+      <li class="note-card">
+        <a href="/app/write/a" class="note-card-link">
+          <span class="note-card-corner">002</span>
+          <h2 class="note-title">비 오는 날의 도서관</h2>
+          <p class="note-preview">오랜만에 도서관에 들렀다. 빗소리와 책장 넘기는 소리가 묘하게 잘 어울려서, 한참을 가만히 앉아 있었다…</p>
+          <div class="note-meta">
+            <span class="note-date">오늘</span>
+            <span class="note-tag">성찰 일지</span>
+          </div>
+        </a>
+      </li>
+
+      <!-- Card B -->
+      <li class="note-card">
+        <a href="/app/write/b" class="note-card-link">
+          <span class="note-card-corner">003</span>
+          <h2 class="note-title">「작별인사」를 읽고</h2>
+          <p class="note-preview">김영하의 신작을 마침내 읽었다. AI와 인간의 경계에 대한 질문이 생각보다 오래 남았다…</p>
+          <div class="note-meta">
+            <span class="note-date">어제</span>
+            <span class="note-tag">독후감</span>
+          </div>
+        </a>
+      </li>
+
+      <!-- Card C -->
+      <li class="note-card">
+        <a href="/app/write/c" class="note-card-link">
+          <span class="note-card-corner">004</span>
+          <h2 class="note-title">교토에서의 사흘</h2>
+          <p class="note-preview">여름 끝자락의 교토는 생각보다 한적했다. 기온의 골목길을 걷다가 우연히 들어간 작은 다실에서…</p>
+          <div class="note-meta">
+            <span class="note-date">5일 전</span>
+            <span class="note-tag">여행기</span>
+          </div>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     FOOTER — same wordmark style as Landing
+     ========================================================================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-brand">Flect</div>
+      <div class="footer-meta">
+        <span>Contact · <a href="/cdn-cgi/l/email-protection#5b333e3737341b3d373e382f753a2b2b"><span class="__cf_email__" data-cfemail="9cf4f9f0f0f3dcfaf0f9ffe8b2fdecec">[email&#160;protected]</span></a></span>
+        <span>© <span id="year">2026</span> Flect.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="user.js"></script>
+</body>
+</html>

@@ -1,1 +1,0 @@
-// # 스크롤 시 기능 소개 (Framer Motion)

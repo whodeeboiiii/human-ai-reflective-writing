@@ -1,0 +1,613 @@
+/* ==========================================================================
+   Flect — Ideation Input scoped styles
+   Overlay on top of globals.css. body.ideation global rules are in globals.css.
+   ========================================================================== */
+
+/* ==========================================================================
+   Top Bar
+   ========================================================================== */
+.ixTop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 26px 36px;
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(250, 247, 242, 0.6) 100%);
+  pointer-events: none;
+}
+.ixTop > * { pointer-events: auto; }
+
+.ixBack {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 10px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: transparent;
+  border: 1px solid transparent;
+  transition:
+    color 240ms var(--ease),
+    border-color 240ms var(--ease),
+    background 240ms var(--ease),
+    opacity 240ms var(--ease);
+}
+.ixBack:hover {
+  color: var(--ink);
+  border-color: var(--line);
+  background: rgba(255, 252, 246, 0.7);
+}
+.ixBack svg { transition: transform 240ms var(--ease); }
+.ixBack:hover svg { transform: translateX(-2px); }
+.ixBack.isDisabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Progress dots */
+.ixProgress {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 8px 14px;
+  background: rgba(255, 252, 246, 0.55);
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: opacity 300ms var(--ease);
+}
+.ixProgress.isHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ixDotGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 4px;
+}
+.ixDotGroup + .ixDotGroup {
+  margin-left: 10px;
+  padding-left: 14px;
+  border-left: 1px dashed var(--line);
+}
+
+.ixDotGroupOptional {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  border-left: 0 !important;
+  transition:
+    max-width 480ms var(--ease),
+    opacity 320ms var(--ease),
+    margin-left 320ms var(--ease),
+    padding-left 320ms var(--ease);
+}
+.ixDotGroupOptional.isShown {
+  max-width: 240px;
+  opacity: 1;
+  margin-left: 10px !important;
+  padding-left: 14px !important;
+  border-left: 1px dashed var(--line) !important;
+}
+
+.ixDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--ink-faint);
+  transition:
+    background 280ms var(--ease),
+    border-color 280ms var(--ease),
+    transform 280ms var(--ease);
+}
+.ixDot.isPast {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+.ixDot.isCurrent {
+  background: var(--accent);
+  border-color: var(--accent-deep);
+  transform: scale(1.25);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.ixMark {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.ixMarkGlyph {
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border: 1px solid var(--ink);
+  transform: rotate(45deg);
+  display: inline-block;
+}
+
+/* ==========================================================================
+   Stage + Screen
+   ========================================================================== */
+.ixStage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+}
+
+.ixScreen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 32px 80px;
+}
+
+.ixScreenInner {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+.ixEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  margin-bottom: 36px;
+}
+.ixEyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.ixHeading {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4.6vw, 3.25rem);
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 28px;
+  text-wrap: balance;
+}
+.ixHeadingMid {
+  font-size: clamp(1.85rem, 4.2vw, 2.875rem);
+}
+
+.ixQ {
+  font-family: var(--serif);
+  font-size: clamp(1.625rem, 3.4vw, 2.375rem);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 14px;
+  max-width: 22ch;
+  text-wrap: balance;
+}
+.ixQSub {
+  font-family: var(--sans);
+  font-size: 0.9375rem;
+  color: var(--ink-mute);
+  line-height: 1.7;
+  max-width: 48ch;
+  margin-bottom: 38px;
+}
+
+.ixSub {
+  color: var(--ink-soft);
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  max-width: 48ch;
+  margin-bottom: 48px;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.ixBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 28px;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  font-family: var(--sans);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    transform 280ms var(--ease),
+    background 280ms var(--ease),
+    color 280ms var(--ease),
+    box-shadow 280ms var(--ease);
+  box-shadow: 0 1px 0 rgba(45, 37, 32, 0.1), 0 8px 24px -12px rgba(45, 37, 32, 0.2);
+}
+.ixBtn:hover {
+  transform: translateY(-1px);
+  background: var(--accent-deep);
+}
+.ixArrow {
+  display: inline-block;
+  transition: transform 280ms var(--ease);
+}
+.ixBtn:hover .ixArrow { transform: translateX(4px); }
+
+.ixBtnPrimary {
+  background: var(--accent);
+  color: var(--ink);
+  box-shadow: 0 1px 0 rgba(45, 37, 32, 0.1), 0 10px 28px -14px rgba(154, 122, 30, 0.55);
+}
+.ixBtnPrimary:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+.ixBtnPrimary:disabled {
+  background: var(--bg-deep);
+  color: var(--ink-faint);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.ixBtnGhost {
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+.ixBtnGhost:hover {
+  background: rgba(255, 252, 246, 0.7);
+  color: var(--ink);
+  border-color: var(--ink-faint);
+  transform: translateY(-1px);
+}
+
+.ixBtnSm {
+  padding: 13px 22px;
+  font-size: 14px;
+}
+
+.ixCtaRow {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.ixCtaRowDual {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.ixCtaHint {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Choice cards
+   ========================================================================== */
+.ixChoices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ixChoicesTwoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.ixChoice {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  background: #fffcf6;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  text-align: left;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 280ms var(--ease),
+    background 280ms var(--ease),
+    border-color 280ms var(--ease),
+    box-shadow 280ms var(--ease),
+    color 280ms var(--ease);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.ixChoice em {
+  font-style: normal;
+  color: var(--ink-mute);
+  font-size: 0.92em;
+  margin-left: 4px;
+}
+.ixChoice:hover {
+  transform: translateY(-2px) translateX(4px);
+  background: #fffaee;
+  border-color: rgba(154, 122, 30, 0.35);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7),
+    0 14px 28px -16px rgba(154, 122, 30, 0.28),
+    0 4px 10px -6px rgba(45, 37, 32, 0.08);
+}
+.ixChoice:focus-visible {
+  outline: none;
+  border-color: var(--accent-deep);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+/* Trailing arrow on hover */
+.ixChoice::before {
+  content: '→';
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translate(8px, -50%);
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--accent-deep);
+  opacity: 0;
+  transition: opacity 280ms var(--ease), transform 280ms var(--ease);
+}
+.ixChoice:hover::before {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+/* Inline hint: kept as data-hint + ::after so CSS attr() works */
+.ixChoice[data-hint]::after {
+  content: ' — ' attr(data-hint);
+  font-family: var(--sans);
+  font-size: 0.9375rem;
+  color: var(--ink-mute);
+  font-weight: 400;
+  opacity: 0;
+  transform: translateX(-8px);
+  display: inline-block;
+  transition: opacity 320ms var(--ease), transform 320ms var(--ease);
+  white-space: nowrap;
+}
+.ixChoice[data-hint]:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.ixChoice.isSelected {
+  background: var(--accent-soft);
+  border-color: var(--accent-deep);
+  color: var(--ink);
+}
+.ixChoice.isSelected::before {
+  opacity: 1;
+  transform: translate(0, -50%);
+  color: var(--accent-deep);
+}
+.ixChoice.isFiring {
+  background: var(--accent);
+  border-color: var(--accent-deep);
+  transform: translateY(-1px);
+}
+
+/* Ordinal variant */
+.ixChoicesOrdinal .ixChoice { padding-left: 18px; }
+
+.ixChoiceRank {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(232, 196, 104, 0.18);
+  border: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  font-weight: 500;
+  transition:
+    background 280ms var(--ease),
+    color 280ms var(--ease),
+    border-color 280ms var(--ease);
+}
+.ixChoice:hover .ixChoiceRank,
+.ixChoice.isSelected .ixChoiceRank {
+  background: var(--accent);
+  color: var(--ink);
+  border-color: var(--accent-deep);
+}
+
+.ixChoiceText { flex: 1; line-height: 1.5; }
+
+/* ==========================================================================
+   Open input (topic question)
+   ========================================================================== */
+.ixOpen {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.ixTextarea {
+  width: 100%;
+  padding: 22px 24px;
+  background: #fffcf6;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  resize: none;
+  transition:
+    border-color 240ms var(--ease),
+    background 240ms var(--ease),
+    box-shadow 240ms var(--ease);
+}
+.ixTextarea::placeholder {
+  color: var(--ink-faint);
+  font-family: var(--serif);
+  font-style: italic;
+}
+.ixTextarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: #fff;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.ixOpenFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.ixCounter {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ==========================================================================
+   Pipeline (complete screen)
+   ========================================================================== */
+.ixPipeline {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 44px;
+  flex-wrap: wrap;
+}
+.ixPipeline li {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-right: 18px;
+  position: relative;
+}
+.ixPipeline li:not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--line);
+  margin-right: 8px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--ink-faint);
+  display: inline-block;
+}
+.isDone { color: var(--ink-soft); }
+.isDone .dot { background: var(--accent-soft); border-color: var(--accent); }
+.isNext { color: var(--ink); }
+.isNext .dot {
+  background: var(--accent);
+  border-color: var(--accent-deep);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  animation: ixPulse 2.4s ease-in-out infinite;
+}
+@keyframes ixPulse {
+  0%, 100% { box-shadow: 0 0 0 3px var(--accent-soft); }
+  50%       { box-shadow: 0 0 0 6px rgba(232, 196, 104, 0.18); }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 760px) {
+  .ixTop { padding: 18px 22px; }
+  .ixScreen { padding: 90px 22px 60px; }
+  .ixEyebrow { margin-bottom: 24px; }
+  .ixQ { font-size: 1.5rem; }
+  .ixQSub { margin-bottom: 28px; }
+  .ixSub { margin-bottom: 36px; font-size: 1rem; }
+  .ixChoicesTwoCol { grid-template-columns: 1fr; }
+  .ixChoice[data-hint]::after { display: none; }
+  .ixCtaRowDual { flex-direction: column; align-items: stretch; }
+  .ixCtaRowDual .ixBtn { justify-content: center; }
+  .ixMark span:not(.ixMarkGlyph) { display: none; }
+}
+
+@media (max-width: 480px) {
+  .ixProgress { padding: 6px 10px; }
+  .ixDot { width: 6px; height: 6px; }
+  .ixDotGroup { gap: 8px; }
+  .ixBack span:not(:first-child) { display: none; }
+  .ixTextarea { font-size: 1.0625rem; padding: 18px 20px; }
+  .ixChoice { padding: 16px 18px; font-size: 0.9375rem; }
+  .ixChoiceRank { width: 32px; height: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ixPipeline .isNext .dot { animation: none; }
+}

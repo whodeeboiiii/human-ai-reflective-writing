@@ -1,2 +1,3 @@
-// # App 공통 레이아웃 (사이드바 등)
-// '로그인된' 사용자 영역
+export default function AppLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+}

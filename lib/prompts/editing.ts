@@ -1,1 +1,0 @@
-// # buildEditingPrompt(structuredInput, fullDraft)

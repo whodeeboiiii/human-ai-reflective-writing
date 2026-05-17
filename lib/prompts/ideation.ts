@@ -1,1 +1,0 @@
-// buildIdeationPrompt(structuredInput, history)

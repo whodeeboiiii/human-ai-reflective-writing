@@ -1,1 +1,7 @@
-// # Document, AIInteraction (User Study 로깅용)
+export interface Note {
+  id: string;
+  title: string;
+  preview: string;
+  modified: string;
+  tag: string;
+}

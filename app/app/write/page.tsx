@@ -1,1 +1,5 @@
-// # 새 글 시작 (Session 생성 후 [id]로 리다이렉트)
+import { redirect } from 'next/navigation';
+
+export default function WritePage() {
+  redirect('/app/write/new/structured-input');
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flect — Q&A Session</title>
+  <meta name="description" content="AI와 함께 당신의 이야기를 천천히 풀어보는 시간.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="ideation-qa.css?v=1">
+</head>
+<body class="qa">
+
+<!-- ==========================================================================
+     TOP BAR — back, step indicator, mark
+     ========================================================================== -->
+<header class="qa-top">
+  <button class="qa-back" type="button" id="qa-back" aria-label="이전 단계로">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="11 18 5 12 11 6"></polyline>
+    </svg>
+    <span>뒤로</span>
+  </button>
+
+  <div class="qa-step-indicator" aria-label="Step 2 of 3">
+    <span class="qa-step-label">Step</span>
+    <span class="qa-step-cur">02</span>
+    <span class="qa-step-of">/</span>
+    <span class="qa-step-total">03</span>
+    <span class="qa-step-name">Q&amp;A Session</span>
+  </div>
+
+  <a href="user.html" class="qa-mark" aria-label="Flect 홈">
+    <span class="qa-mark-glyph" aria-hidden="true"></span>
+    <span>Flect</span>
+  </a>
+</header>
+
+<!-- ==========================================================================
+     CONVERSATION
+     ========================================================================== -->
+<main class="qa-stage" id="qa-stage">
+  <div class="qa-thread" id="qa-thread" aria-live="polite" aria-relevant="additions">
+
+    <!-- Session header — anchors the conversation -->
+    <div class="qa-session-head" style="height: 137.297px">
+      <p class="qa-eyebrow">Session · Begun 14:23</p>
+      <h1 class="qa-session-title" style="font-size: 30px">
+        함께 이야기를<br><span class="emph">풀어볼 시간이에요.</span>
+      </h1>
+      <p class="qa-session-meta">
+        <span class="qa-context-pill"><span class="dot"></span>여행기</span>
+        <span class="qa-context-sep">·</span>
+        <span class="qa-context-topic">교토에서의 사흘</span>
+      </p>
+    </div>
+
+    <!-- Messages will be appended here by JS -->
+
+  </div>
+
+  <!-- Scroll-anchor / sentinel -->
+  <div id="qa-scroll-anchor" aria-hidden="true"></div>
+</main>
+
+<!-- ==========================================================================
+     INPUT AREA (sticky)
+     ========================================================================== -->
+<footer class="qa-composer" id="qa-composer">
+  <div class="qa-composer-inner">
+
+    <div class="qa-composer-shell">
+      <textarea
+        class="qa-input"
+        id="qa-input"
+        rows="5"
+        placeholder="답변을 적어주세요..."
+        aria-label="답변 입력"></textarea>
+
+      <div class="qa-composer-foot">
+        <div class="qa-composer-hint">
+          <span class="qa-kbd">Enter</span>
+          <span>줄바꿈</span>
+          <span class="qa-hint-sep">·</span>
+          <span class="qa-kbd">⌘</span><span class="qa-kbd">↵</span>
+          <span>보내기</span>
+        </div>
+        <div class="qa-composer-actions">
+          <button class="qa-btn qa-btn--ghost" type="button" id="qa-skip">
+            <span>건너뛰기</span>
+          </button>
+          <button class="qa-btn qa-btn--primary" type="button" id="qa-send" disabled>
+            <span>보내기</span>
+            <span class="qa-arrow" aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ==========================================================================
+     BACK CONFIRMATION MODAL
+     ========================================================================== -->
+<div class="qa-modal-backdrop" id="qa-modal" aria-hidden="true" role="dialog" aria-labelledby="qa-modal-title">
+  <div class="qa-modal">
+    <p class="qa-modal-eyebrow">Confirm</p>
+    <h2 class="qa-modal-title" id="qa-modal-title">정말 돌아갈까요?</h2>
+    <p class="qa-modal-body">지금까지 나눈 이야기는 사라져요.<br>다시 시작하려면 처음부터 답변하셔야 해요.</p>
+    <div class="qa-modal-actions">
+      <button class="qa-btn qa-btn--ghost" type="button" id="qa-modal-cancel">계속 진행</button>
+      <button class="qa-btn qa-btn--dark" type="button" id="qa-modal-confirm">
+        <span>돌아가기</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="ideation-qa.js"></script>
+</body>
+</html>

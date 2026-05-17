@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flect — 새 글 시작하기</title>
+  <meta name="description" content="당신이 쓰고 싶은 글에 대해 알아볼게요. 몇 가지 질문으로 생각을 정리하는 첫 단계.">
+
+  <!-- Fonts: Pretendard (body) + Gowun Batang (heading) — same as Landing/User -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="ideation-input.css?v=1">
+</head>
+<body class="ideation">
+
+<!-- ==========================================================================
+     TOP BAR — back, progress dots, mark
+     ========================================================================== -->
+<header class="ix-top">
+  <button class="ix-back" type="button" id="ix-back" aria-label="이전 질문으로">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="11 18 5 12 11 6"></polyline>
+    </svg>
+    <span>뒤로</span>
+  </button>
+
+  <nav class="ix-progress" id="ix-progress" aria-label="진행 상황">
+    <!-- dots injected by JS -->
+  </nav>
+
+  <a href="user.html" class="ix-mark" aria-label="Flect 홈">
+    <span class="ix-mark-glyph" aria-hidden="true"></span>
+    <span>Flect</span>
+  </a>
+</header>
+
+<!-- ==========================================================================
+     SCREEN STAGE — only one screen visible at a time
+     ========================================================================== -->
+<main class="ix-stage" id="ix-stage">
+
+  <!-- ============== Screen 0: Intro ============== -->
+  <section class="ix-screen ix-screen--intro is-active" data-screen="intro">
+    <div class="ix-screen-inner">
+      <p class="ix-eyebrow">New Session</p>
+      <h1 class="ix-heading">
+        우선 당신이 쓰고 싶은 글에<br>
+        <span class="emph">대해서 알아볼게요.</span>
+      </h1>
+      <p class="ix-sub">몇 가지 질문을 통해 당신의 생각을 정리해볼게요. <br>정답은 없어요.</p>
+
+      <div class="ix-cta-row">
+        <button class="ix-btn ix-btn--primary" type="button" data-go="next">
+          <span>시작하기</span>
+          <span class="ix-arrow" aria-hidden="true">→</span>
+        </button>
+        <p class="ix-cta-hint">약 1–2분 소요 · 언제든 멈출 수 있어요</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== Screen 1: 글의 종류 ============== -->
+  <section class="ix-screen ix-screen--question" data-screen="genre" data-step="main" data-step-index="1" data-step-total="5">
+    <div class="ix-screen-inner">
+      <p class="ix-eyebrow ix-eyebrow--mono">Question 1 of 5</p>
+      <h2 class="ix-q">어떤 글을 쓰고 싶으신가요?</h2>
+
+      <ul class="ix-choices" data-key="genre">
+        <li><button class="ix-choice" type="button" data-value="commentary"   data-hint="시사·이슈에 대한 견해와 입장">논평</button></li>
+        <li><button class="ix-choice" type="button" data-value="critique"     data-hint="작품·현상에 대한 분석과 평가">비평 / 평론</button></li>
+        <li><button class="ix-choice" type="button" data-value="book-report"  data-hint="읽은 책에 대한 감상과 생각">독후감</button></li>
+        <li><button class="ix-choice" type="button" data-value="review"       data-hint="경험한 것에 대한 솔직한 후기">리뷰</button></li>
+        <li><button class="ix-choice" type="button" data-value="travelogue"   data-hint="다녀온 곳에 대한 경험과 인상">여행기</button></li>
+        <li><button class="ix-choice" type="button" data-value="reflection"   data-hint="일상에서 길어 올린 작은 성찰">성찰 일지</button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============== Screen 2: 글의 주제 (Open) ============== -->
+  <section class="ix-screen ix-screen--question ix-screen--open" data-screen="topic" data-step="main" data-step-index="2" data-step-total="5">
+    <div class="ix-screen-inner">
+      <p class="ix-eyebrow ix-eyebrow--mono">Question 2 of 5</p>
+      <h2 class="ix-q">쓰고 싶은 글의 주제나 소재를<br>한 문장으로 적어주세요.</h2>
+
+      <div class="ix-open">
+        <textarea
+          class="ix-textarea"
+          id="ix-topic"
+          rows="3"
+          maxlength="200"
+          placeholder="예: 지난주 방문한 작은 카페에 대해 / 김영하의 『작별인사』를 읽고 든 생각 / ..."
+          data-key="topicSentence"></textarea>
+        <div class="ix-open-foot">
+          <span class="ix-counter"><span id="ix-topic-count">0</span> / 200</span>
+          <button class="ix-btn ix-btn--primary ix-btn--sm" type="button" id="ix-topic-submit" data-go="next" disabled>
+            <span>완료</span>
+            <span class="ix-arrow" aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== Screen 3: 머릿속 정리 정도 ============== -->
+  <section class="ix-screen ix-screen--question" data-screen="clarity" data-step="main" data-step-index="3" data-step-total="5">
+    <div class="ix-screen-inner">
+      <p class="ix-eyebrow ix-eyebrow--mono">Question 3 of 5</p>
+      <h2 class="ix-q">쓸 내용이 머릿속에<br>얼마나 정리되어 있나요?</h2>
+
+      <ul class="ix-choices ix-choices--ordinal" data-key="ideaClarity">
+        <li><button class="ix-choice" type="button" data-value="none">
+          <span class="ix-choice-rank">01</span>
+          <span class="ix-choice-text">거의 없어요, 막연한 인상만 있어요</span>
+        </button></li>
+        <li><button class="ix-choice" type="button" data-value="somewhat">
+          <span class="ix-choice-rank">02</span>
+          <span class="ix-choice-text">조금 있어요, 단편적인 생각들이 떠올라요</span>
+        </button></li>
+        <li><button class="ix-choice" type="button" data-value="mostly">
+          <span class="ix-choice-rank">03</span>
+          <span class="ix-choice-text">꽤 있어요, 큰 줄기는 잡혀 있어요</span>
+        </button></li>
+        <li><button class="ix-choice" type="button" data-value="clear">
+          <span class="ix-choice-rank">04</span>
+          <span class="ix-choice-text">거의 다 있어요, 정리만 하면 돼요</span>
+        </button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============== Screen 4: 글쓰기 경험 ============== -->
+  <section class="ix-screen ix-screen--question" data-screen="experience" data-step="main" data-step-index="4" data-step-total="5">
+    <div class="ix-screen-inner">
+      <p class="ix-eyebrow ix-eyebrow--mono">Question 4 of 5</p>
+      <h2 class="ix-q">글쓰기에 얼마나 익숙하신가요?</h2>
+      <p class="ix-q-sub">글쓰기에 익숙한 정도에 따라 AI의 개입 정도가 정해져요.</p>
+
+      <ul class="ix-choices ix-choices--ordinal" data-key="writingExperience">
+        <li><button class="ix-choice" type="button" data-value="none">
+          <span class="ix-choice-rank">01</span>
+          <span class="ix-choice-text">거의 안 써요</span>
+        </button></li>
+        <li><button class="ix-choice" type="button" data-value="casual">
+          <span class="ix-choice-rank">02</span>
+          <span class="ix-choice-text">가끔 써요 <em>(한 달에 한두 번)</em></span>
+        </button></li>
+        <li><button class="ix-choice" type="button" data-value="frequent">
+          <span class="ix-choice-rank">03</span>
+          <span class="ix-choice-text">자주 써요 <em>(주에 한두 번 이상)</em></span>
+        </button></li>
+        <li><button class="ix-choice" type="button" data-value="professional">
+          <span class="ix-choice-rank">04</span>
+          <span class="ix-choice-text">글쓰기를 직업/전공으로 다뤄요</span>
+        </button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============== Screen 5: 글의 중요성 ============== -->
+  <section class="ix-screen ix-screen--question" data-screen="importance" data-step="main" data-step-index="5" data-step-total="5">
+    <div class="ix-screen-inner">
+      <p class="ix-eyebrow ix-eyebrow--mono">Question 5 of 5</p>
+      <h2 class="ix-q">이 글이 얼마나 잘 써져야 하나요?</h2>
+      <p class="ix-q-sub">AI가 얼마나 깊이 도와드릴지 정하는 데 사용돼요.</p>
+
+      <ul class="ix-choices ix-choices--ordinal" data-key="importance">
+        <li><button class="ix-choice" type="button" data-value="1">
+          <span class="ix-choice-rank">01</span>
+          <span class="ix-choice-text">가볍게, 흘러가는 대로 쓰고 싶어요</span>
+        </button></li>
+        <li><button class="ix-choice" type="button" data-value="2">
+          <span class="ix-choice-rank">02</span>
+          <span class="ix-choice-text">적당히, 무난한 정도면 돼요</span>
+        </button></li>
+        <li><button class="ix-choice" type="button" data-value="3">
+          <span class="ix-choice-rank">03</span>
+          <span class="ix-choice-text">잘 쓰고 싶어요</span>
+        </button></li>
+        <li><button class="ix-choice" type="button" data-value="4">
+          <span class="ix-choice-rank">04</span>
+          <span class="ix-choice-text">아주 잘 써야 해요</span>
+        </button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============== Screen 6: Optional Gate ============== -->
+  <section class="ix-screen ix-screen--gate" data-screen="optional-gate">
+    <div class="ix-screen-inner">
+      <p class="ix-eyebrow">Step 1 · Optional</p>
+      <h2 class="ix-heading ix-heading--mid">
+        더 많은 정보를<br>
+        <span class="emph">주실 건가요?</span>
+      </h2>
+      <p class="ix-sub">선택사항이지만, 더 알려주시면<br>AI가 당신의 글에 더 잘 맞춰드릴 수 있어요.</p>
+
+      <div class="ix-cta-row ix-cta-row--dual">
+        <button class="ix-btn ix-btn--primary" type="button" data-go="next">
+          <span>네, 더 알려드릴게요</span>
+          <span class="ix-arrow" aria-hidden="true">→</span>
+        </button>
+        <button class="ix-btn ix-btn--ghost" type="button" data-go="skip-optional">
+          <span>건너뛰기</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== Screen 7: 예상 독자 ============== -->
+  <section class="ix-screen ix-screen--question" data-screen="audience" data-step="optional" data-step-index="1" data-step-total="5">
+    <div class="ix-screen-inner">
+      <p class="ix-eyebrow ix-eyebrow--mono">Optional · 1 of 5</p>
+      <h2 class="ix-q">이 글을 누가 읽었으면 하나요?</h2>
+
+      <ul class="ix-choices" data-key="audience">
+        <li><button class="ix-choice" type="button" data-value="self">나 자신을 위해 쓰는 글이에요</button></li>
+        <li><button class="ix-choice" type="button" data-value="close-circle">가까운 사람들 <em>(친구, 가족)</em></button></li>
+        <li><button class="ix-choice" type="button" data-value="interest-circle">같은 관심사를 가진 사람들</button></li>
+        <li><button class="ix-choice" type="button" data-value="public">더 넓은 대중</button></li>
+        <li><button class="ix-choice" type="button" data-value="undecided">아직 정하지 못했어요</button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============== Screen 8: 공유 여부 ============== -->
+  <section class="ix-screen ix-screen--question" data-screen="sharing" data-step="optional" data-step-index="2" data-step-total="5">
+    <div class="ix-screen-inner">
+      <p class="ix-eyebrow ix-eyebrow--mono">Optional · 2 of 5</p>
+      <h2 class="ix-q">이 글을 다른 사람과<br>공유할 생각이 있으신가요?</h2>
+      <p class="ix-q-sub">혼자 간직할 글인지, 누군가에게 보일 글인지에 따라 글의 결이 달라져요.</p>
+
+      <ul class="ix-choices" data-key="sharing">
+        <li><button class="ix-choice" type="button" data-value="private">나 자신을 위해 쓰는 글이에요</button></li>
+        <li><button class="ix-choice" type="button" data-value="close">가까운 사람들에게만 보여줄 거예요</button></li>
+        <li><button class="ix-choice" type="button" data-value="public">공개적으로 공유하고 싶어요</button></li>
+        <li><button class="ix-choice" type="button" data-value="undecided">아직 정하지 못했어요</button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============== Screen 9: 업로드 위치 ============== -->
+  <section class="ix-screen ix-screen--question" data-screen="venue" data-step="optional" data-step-index="3" data-step-total="5">
+    <div class="ix-screen-inner">
+      <p class="ix-eyebrow ix-eyebrow--mono">Optional · 3 of 5</p>
+      <h2 class="ix-q">이 글을 어디에 올릴 예정인가요?</h2>
+      <p class="ix-q-sub">글이 머무를 공간을 알면, 그 공간의 결에 맞게 도와드릴 수 있어요.</p>
+
+      <ul class="ix-choices ix-choices--two-col" data-key="venue">
+        <li><button class="ix-choice" type="button" data-value="personal-blog">개인 블로그</button></li>
+        <li><button class="ix-choice" type="button" data-value="community">온라인 커뮤니티</button></li>
+        <li><button class="ix-choice" type="button" data-value="official">공식적인 웹사이트</button></li>
+        <li><button class="ix-choice" type="button" data-value="review-site">리뷰 사이트</button></li>
+        <li><button class="ix-choice" type="button" data-value="press">전문 매체</button></li>
+        <li><button class="ix-choice" type="button" data-value="undecided">아직 모르겠어요</button></li>
+        <li><button class="ix-choice" type="button" data-value="none">공유하지 않을 거예요</button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============== Screen 10: 글의 어조 ============== -->
+  <section class="ix-screen ix-screen--question" data-screen="tone" data-step="optional" data-step-index="4" data-step-total="5">
+    <div class="ix-screen-inner">
+      <p class="ix-eyebrow ix-eyebrow--mono">Optional · 4 of 5</p>
+      <h2 class="ix-q">어떤 느낌의 글이었으면 하나요?</h2>
+
+      <ul class="ix-choices" data-key="tone">
+        <li><button class="ix-choice" type="button" data-value="warm">따뜻하고 개인적인</button></li>
+        <li><button class="ix-choice" type="button" data-value="reflective">성찰적이고 진지한</button></li>
+        <li><button class="ix-choice" type="button" data-value="critical">날카롭고 비판적인</button></li>
+        <li><button class="ix-choice" type="button" data-value="humorous">가볍고 유머러스한</button></li>
+        <li><button class="ix-choice" type="button" data-value="undecided">잘 모르겠어요</button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============== Screen 11: 예상 길이 ============== -->
+  <section class="ix-screen ix-screen--question" data-screen="length" data-step="optional" data-step-index="5" data-step-total="5">
+    <div class="ix-screen-inner">
+      <p class="ix-eyebrow ix-eyebrow--mono">Optional · 5 of 5</p>
+      <h2 class="ix-q">어느 정도 길이의 글을<br>생각하고 계신가요?</h2>
+
+      <ul class="ix-choices ix-choices--ordinal" data-key="expectedLength">
+        <li><button class="ix-choice" type="button" data-value="short">
+          <span class="ix-choice-rank">SM</span>
+          <span class="ix-choice-text">짧게 <em>(300자 이내, 한두 문단)</em></span>
+        </button></li>
+        <li><button class="ix-choice" type="button" data-value="medium">
+          <span class="ix-choice-rank">MD</span>
+          <span class="ix-choice-text">보통 <em>(300~1000자, 몇 문단)</em></span>
+        </button></li>
+        <li><button class="ix-choice" type="button" data-value="long">
+          <span class="ix-choice-rank">LG</span>
+          <span class="ix-choice-text">길게 <em>(1000자 이상, 에세이 분량)</em></span>
+        </button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============== Screen 12: Complete ============== -->
+  <section class="ix-screen ix-screen--complete" data-screen="complete">
+    <div class="ix-screen-inner">
+      <p class="ix-eyebrow">Step 1 of 3 · Complete</p>
+      <h2 class="ix-heading">
+        고마워요. 이제 함께 생각을<br>
+        <span class="emph">풀어볼 차례예요.</span>
+      </h2>
+      <p class="ix-sub">다음 단계에서는 몇 가지 질문을 통해<br>당신의 이야기를 더 깊이 들여다볼게요.</p>
+
+      <ul class="ix-pipeline" aria-hidden="true">
+        <li class="is-done"><span class="dot"></span><span>Structured Input</span></li>
+        <li class="is-next"><span class="dot"></span><span>Q&amp;A Session</span></li>
+        <li><span class="dot"></span><span>Outline Composition</span></li>
+      </ul>
+
+      <div class="ix-cta-row">
+        <button class="ix-btn ix-btn--primary" type="button" data-go="finish">
+          <span>다음 단계로</span>
+          <span class="ix-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="ideation-input.js"></script>
+</body>
+</html>

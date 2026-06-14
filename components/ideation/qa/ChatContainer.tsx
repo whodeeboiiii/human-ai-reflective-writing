@@ -7,17 +7,23 @@ import { useStructuredInputStore } from '@/store/structuredInputStore';
 import { useIdeationStore } from '@/store/ideationStore';
 import {
   INTRO_FIRST,
-  QUESTIONS,
-  CLOSING,
   GENRE_LABELS,
   MOCK_CONTEXT,
 } from '@/lib/data/qa';
-import type { QATurnType } from '@/types/ideation';
+import type { QATurnType, QATurn, BookContext, ElementProgress, ElementKey } from '@/types/ideation';
+import type { InterventionLevel } from '@/types/intervention';
+import {
+  computeBaselineNeed,
+  computeFinalIntervention,
+  INTERVENTION_PARAMS,
+  INTERVENTION_LABEL,
+} from '@/lib/intervention';
 import { AIMessage } from './AIMessage';
 import { UserMessage } from './UserMessage';
 import { ThinkingIndicator } from './ThinkingIndicator';
 import { ChatInput } from './ChatInput';
 import { BackConfirmModal } from './BackConfirmModal';
+import { SidePanel } from './SidePanel';
 import styles from './ideation-qa.module.css';
 
 interface ChatMessage {
@@ -40,10 +46,23 @@ function nowStamp(): string {
   return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 }
 
+// Fixed order the session walks through. The client owns this pointer so the LLM
+// can't re-infer (and drift back to) an earlier element each turn.
+const ELEMENT_ORDER: ElementKey[] = ['orientation', 'feelings', 'evaluation', 'takeaway'];
+
+function nextUncompletedElement(completed: ElementKey[]): ElementKey | null {
+  return ELEMENT_ORDER.find((e) => !completed.includes(e)) ?? null;
+}
+
 export default function ChatContainer({ sessionId }: { sessionId: string }) {
   const router = useRouter();
   const { answers } = useStructuredInputStore();
-  const { addTurn } = useIdeationStore();
+  const addTurn = useIdeationStore((s) => s.addTurn);
+  const setTurns = useIdeationStore((s) => s.setTurns);
+  // Reactive subscriptions — side panel must re-render as turns/progress change
+  const turns = useIdeationStore((s) => s.turns);
+  const elementProgressMax = useIdeationStore((s) => s.elementProgressMax);
+  const answerSummaries = useIdeationStore((s) => s.answerSummaries);
 
   const genreLabel = answers.genre ? (GENRE_LABELS[answers.genre] ?? MOCK_CONTEXT.genreLabel) : MOCK_CONTEXT.genreLabel;
   const topicSentence = answers.topicSentence ?? MOCK_CONTEXT.topicSentence;
@@ -55,13 +74,20 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
   const [composerEnabled, setComposerEnabled] = useState(false);
   const [isDone, setIsDone] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [currentElement, setCurrentElement] = useState<ElementKey | null>(null);
 
   // Ref-based handoffs between async flow and React event handlers
   const onStreamEndRef = useRef<(() => void) | null>(null);
   const onUserInputRef = useRef<((text: string, skipped: boolean) => void) | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const mountedRef = useRef(true);
+  const hasBootedRef = useRef(false);
   const lastSpeakerRef = useRef<'assistant' | 'user' | null>(null);
-  const qIndexRef = useRef(0);
+  // Most recent user answer awaiting a summarize decision (made once questionType is known).
+  const lastUserAnswerRef = useRef<{ id: string; text: string } | null>(null);
+  // Client-owned element state machine (injected into every API call).
+  const currentElementRef = useRef<ElementKey | null>('orientation');
+  const completedElementsRef = useRef<ElementKey[]>([]);
   const addTurnRef = useRef(addTurn);
   addTurnRef.current = addTurn;
 
@@ -71,7 +97,6 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
     document.body.classList.add('qa');
     return () => {
       document.body.classList.remove('qa');
-      mountedRef.current = false;
     };
   }, []);
 
@@ -89,6 +114,44 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
       scrollAnchorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
     });
   }, []);
+
+  const handleImportSession = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const content = e.target?.result as string;
+        const json = JSON.parse(content) as { transcript: QATurn[] };
+        if (!Array.isArray(json.transcript)) {
+          alert('Invalid log format: transcript is not an array');
+          return;
+        }
+        setTurns(json.transcript);
+        setMessages(
+          json.transcript
+            .filter((t) => t.type !== 'intro')
+            .map((t) => ({
+              id: t.id,
+              role: t.role,
+              content: t.content,
+              type: t.type,
+              isCont: t.isCont ?? false,
+              timestamp: t.timestamp ?? '00:00',
+              skipped: t.skipped,
+            }))
+        );
+        setComposerEnabled(true);
+        alert(`Session imported: ${json.transcript.length} turns loaded`);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      } catch (err) {
+        alert(`Failed to import: ${err instanceof Error ? err.message : 'Unknown error'}`);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      }
+    };
+    reader.readAsText(file);
+  }, [setTurns]);
 
   // Called by AIMessage when streaming ends
   const handleStreamEnd = useCallback(() => {
@@ -116,38 +179,60 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
     });
   }
 
-  function addUserMessage(text: string, skipped: boolean) {
+  function addUserMessage(text: string) {
     if (!mountedRef.current) return;
     const isCont = lastSpeakerRef.current === 'user';
     lastSpeakerRef.current = 'user';
     const id = crypto.randomUUID();
     const timestamp = nowStamp();
-    const msg: ChatMessage = { id, role: 'user', content: text, type: 'user', isCont, timestamp, skipped };
+    const msg: ChatMessage = { id, role: 'user', content: text, type: 'user', isCont, timestamp };
     setMessages((prev) => [...prev, msg]);
-    addTurnRef.current({ id, role: 'user', content: text, type: 'predefined', isCont, skipped, timestamp });
+    addTurnRef.current({ id, role: 'user', content: text, type: 'predefined', isCont, timestamp });
+    // Hold this answer; whether we summarize it is decided after the next question's
+    // questionType is known (only main/followup answers get a side-panel summary).
+    lastUserAnswerRef.current = { id, text };
     scrollToBottom();
   }
 
-  function waitForUser(): Promise<{ text: string; skipped: boolean }> {
+  // Fire-and-forget: condense the answer to a one-line key point for the side panel.
+  // On failure the panel falls back to the raw answer (graceful degradation).
+  async function summarizeAnswer(id: string, text: string) {
+    try {
+      const res = await fetch('/api/ideation/summarize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }),
+      });
+      if (!res.ok) return;
+      const { summary } = (await res.json()) as { summary: string };
+      if (summary && mountedRef.current) {
+        useIdeationStore.getState().setAnswerSummary(id, summary);
+      }
+    } catch {
+      // ignore — raw answer remains shown
+    }
+  }
+
+  function waitForUser(): Promise<string> {
     return new Promise((resolve) => {
       setComposerEnabled(true);
-      onUserInputRef.current = (text, skipped) => {
+      onUserInputRef.current = (text) => {
         setComposerEnabled(false);
-        resolve({ text, skipped });
+        resolve(text);
       };
     });
   }
 
-  function think(ms: number): Promise<void> {
-    return new Promise((resolve) => {
-      if (!mountedRef.current) { resolve(); return; }
-      const isCont = lastSpeakerRef.current === 'assistant';
-      setThinkingState({ isCont, timestamp: nowStamp() });
-      setTimeout(() => {
-        if (mountedRef.current) setThinkingState(null);
-        resolve();
-      }, ms);
-    });
+  // Show the "thinking" indicator on the AI side. Stays up until hideThinking()
+  // is called (i.e. for the whole duration the LLM is actually working).
+  function showThinking(): void {
+    if (!mountedRef.current) return;
+    const isCont = lastSpeakerRef.current === 'assistant';
+    setThinkingState({ isCont, timestamp: nowStamp() });
+  }
+
+  function hideThinking(): void {
+    setThinkingState(null);
   }
 
   function delay(ms: number): Promise<void> {
@@ -156,39 +241,185 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
 
   // ── Boot sequence (runs once on mount) ──
   useEffect(() => {
-    const intro2 = `${genreLabel}에 관한 글, 그리고 "${topicSentence}"라는 주제로 함께 출발해볼게요. 질문에 정답은 없어요. 떠오르는 대로 편하게 답해주시면 돼요.`;
+    // React Strict Mode fires effects twice; reset mountedRef and guard against double-boot.
+    mountedRef.current = true;
+    if (hasBootedRef.current) return;
+    hasBootedRef.current = true;
+
+    // Each Q&A session starts fresh — discard any turns from a previous run.
+    useIdeationStore.getState().reset();
+    currentElementRef.current = 'orientation';
+    completedElementsRef.current = [];
+
+    const liveAnswers = useStructuredInputStore.getState().answers;
+    const liveGenreLabel = liveAnswers.genre
+      ? (GENRE_LABELS[liveAnswers.genre] ?? MOCK_CONTEXT.genreLabel)
+      : MOCK_CONTEXT.genreLabel;
+    const liveTopicSentence = liveAnswers.topicSentence ?? MOCK_CONTEXT.topicSentence;
+    const intro2 = `${liveGenreLabel}에 관한 글, 그리고 "${liveTopicSentence}"라는 주제로 함께 출발해볼게요. 질문에 정답은 없어요. 떠오르는 대로 편하게 답해주시면 돼요.`;
 
     async function askNext(): Promise<void> {
       if (!mountedRef.current) return;
-      if (qIndexRef.current >= QUESTIONS.length) {
-        await delay(320);
-        await think(900);
-        if (!mountedRef.current) return;
-        await streamMessage(CLOSING.content, 'closing');
+      // Show "thinking" the moment the LLM call begins, and keep it visible for the
+      // whole call. A minimum visible time prevents flicker on fast responses.
+      showThinking();
+      const minVisible = delay(650);
+      let res: Response;
+      try {
+        res = await fetch('/api/ideation/questions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            structuredInput: useStructuredInputStore.getState().answers,
+            turns: useIdeationStore.getState().turns,
+            bookContext: useIdeationStore.getState().bookContext,
+            interventionLevel: useIdeationStore.getState().interventionLevel,
+            currentElement: currentElementRef.current,
+            completedElements: completedElementsRef.current,
+          }),
+        });
+      } catch (err) {
+        hideThinking();
+        console.error('questions API fetch failed', err);
+        return;
+      }
+      if (!res.ok) {
+        hideThinking();
+        console.error('questions API error', res.status);
+        return;
+      }
+      const { content, type, questionType, isDone, elementProgress } = (await res.json()) as {
+        content: string;
+        type: QATurnType;
+        questionType?: 'main' | 'followup' | 'supplementary' | 'clarification' | 'skip' | 'closing';
+        isDone: boolean;
+        elementProgress?: ElementProgress;
+        currentElement?: ElementKey | null;
+      };
+      if (elementProgress) {
+        useIdeationStore.getState().updateElementProgressMax(elementProgress);
+      }
+
+      // ── Deterministic element state machine (client-owned) ──
+      // Decide the gauge element for THIS question and advance the pointer for the
+      // NEXT call. The LLM's own currentElement is intentionally ignored here.
+      const threshold =
+        INTERVENTION_PARAMS[useIdeationStore.getState().interventionLevel ?? 2].completionThreshold;
+      const progressMax = useIdeationStore.getState().elementProgressMax;
+      const P = currentElementRef.current;
+      const C = completedElementsRef.current;
+      let gaugeElement: ElementKey | null;
+      if (questionType === 'skip' && P) {
+        // User skipped the current element → this turn's question targets the next one.
+        const newCompleted = [...C, P];
+        const nextEl = nextUncompletedElement(newCompleted);
+        completedElementsRef.current = newCompleted;
+        currentElementRef.current = nextEl;
+        gaugeElement = nextEl;
+      } else {
+        // This question is about the current element; advance only for the next call,
+        // once the element's (monotonic) completeness reaches the threshold.
+        gaugeElement = P;
+        if (P) {
+          let cur: ElementKey | null = P;
+          let comp = C;
+          while (cur && progressMax[cur] >= threshold) {
+            comp = [...comp, cur];
+            cur = nextUncompletedElement(comp);
+          }
+          completedElementsRef.current = comp;
+          currentElementRef.current = cur;
+        }
+      }
+      // Summarize the just-answered user turn ONLY if it led to a real question
+      // (main/followup). skip/clarification answers get no side-panel summary.
+      const pendingAnswer = lastUserAnswerRef.current;
+      lastUserAnswerRef.current = null;
+      if (pendingAnswer && (questionType === 'main' || questionType === 'followup')) {
+        // Mark the turn as panel-eligible immediately (shows raw text until the
+        // summary arrives), then fill in the one-line summary asynchronously.
+        useIdeationStore.getState().setAnswerSummary(pendingAnswer.id, '');
+        summarizeAnswer(pendingAnswer.id, pendingAnswer.text);
+      }
+      await minVisible; // keep the indicator up for at least the minimum beat
+      if (!mountedRef.current) return;
+      hideThinking();
+      setCurrentElement(gaugeElement);
+      await streamMessage(content, type);
+      if (isDone) {
         if (mountedRef.current) setIsDone(true);
         return;
       }
-      const q = QUESTIONS[qIndexRef.current++];
-      await think(850);
       if (!mountedRef.current) return;
-      await streamMessage(q.content, q.type);
-      if (!mountedRef.current) return;
-      const { text, skipped } = await waitForUser();
-      addUserMessage(text, skipped);
+      const text = await waitForUser();
+      addUserMessage(text);
       await askNext();
     }
 
+    async function fetchBookContext(): Promise<void> {
+      const answers = useStructuredInputStore.getState().answers;
+      if (answers.genre !== 'book-report' || !answers.topicSentence) return;
+      try {
+        const res = await fetch(
+          `/api/book-search?query=${encodeURIComponent(answers.topicSentence)}`
+        );
+        if (!res.ok) return;
+        const data = (await res.json()) as { bookContext: BookContext | null };
+        if (data.bookContext) {
+          useIdeationStore.getState().setBookContext(data.bookContext);
+        }
+      } catch {
+        // graceful degradation — Q&A proceeds without book context
+      }
+    }
+
+    function calculateAndStoreInterventionLevel(): void {
+      const { writingFrequency, ideaReadiness, userInterventionWant } =
+        useStructuredInputStore.getState().answers;
+
+      let level: InterventionLevel;
+      if (writingFrequency && ideaReadiness && userInterventionWant) {
+        const baseline = computeBaselineNeed(writingFrequency, ideaReadiness);
+        level = computeFinalIntervention(baseline, userInterventionWant);
+        console.log(
+          `[개입 수준] ${level}단계 (${INTERVENTION_LABEL[level]}) · baseline=${baseline} ` +
+            `· inputs={빈도:${writingFrequency}, 준비도:${ideaReadiness}, 희망:${userInterventionWant}} ` +
+            `· completionThreshold=${INTERVENTION_PARAMS[level].completionThreshold} ` +
+            `· followupThreshold=${INTERVENTION_PARAMS[level].followupThreshold}`
+        );
+      } else {
+        // fallback to 2 (낮음) if any field is missing
+        level = 2;
+        console.log(
+          `[개입 수준] fallback 2단계 (${INTERVENTION_LABEL[2]}) · 입력 누락 ` +
+            `{빈도:${writingFrequency ?? '-'}, 준비도:${ideaReadiness ?? '-'}, 희망:${userInterventionWant ?? '-'}}`
+        );
+      }
+      useIdeationStore.getState().setInterventionLevel(level);
+    }
+
     async function boot() {
+      // Calculate intervention level immediately
+      calculateAndStoreInterventionLevel();
+
+      // Start book search in parallel with intro messages
+      const bookSearchPromise = fetchBookContext();
+
       await delay(320);
       if (!mountedRef.current) return;
       await streamMessage(INTRO_FIRST.content, 'intro');
       await delay(380);
       if (!mountedRef.current) return;
       await streamMessage(intro2, 'intro');
+
+      // Ensure book context is ready before first LLM call
+      await bookSearchPromise;
+
       await askNext();
     }
 
     boot();
+    return () => { mountedRef.current = false; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -200,15 +431,8 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
     cb(text, false);
   }
 
-  function handleSkip() {
-    const cb = onUserInputRef.current;
-    if (!cb) return;
-    onUserInputRef.current = null;
-    cb('', true);
-  }
-
   return (
-    <div>
+    <div className={styles.qaRoot}>
       {/* Top Bar */}
       <header className={styles.qaTop}>
         <button
@@ -248,9 +472,10 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
         </Link>
       </header>
 
-      {/* Thread */}
-      <main className={styles.qaStage} id="qa-stage">
-        <div className={styles.qaThread} aria-live="polite" aria-relevant="additions">
+      {/* Two-Column Layout: Thread + Side Panel */}
+      <main className={styles.qaStageWrapper}>
+        <div className={styles.qaStage} id="qa-stage">
+          <div className={styles.qaThread} aria-live="polite" aria-relevant="additions">
           {/* Session header */}
           <div className={styles.qaSessionHead}>
             <p className={styles.qaEyebrow}>Session · Begun {sessionStart}</p>
@@ -330,7 +555,19 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
 
           {/* Scroll anchor */}
           <div ref={scrollAnchorRef} aria-hidden="true" />
+          </div>
         </div>
+
+        {/* Side Panel */}
+        <SidePanel
+          turns={turns}
+          answerSummaries={answerSummaries}
+          elementProgressMax={elementProgressMax}
+          currentElement={currentElement}
+          completionThreshold={
+            INTERVENTION_PARAMS[useIdeationStore.getState().interventionLevel ?? 2].completionThreshold
+          }
+        />
       </main>
 
       {/* Composer */}
@@ -338,15 +575,75 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
         enabled={composerEnabled}
         done={isDone}
         onSend={handleSend}
-        onSkip={handleSkip}
       />
 
       {/* Back-navigation confirmation modal */}
       <BackConfirmModal
         isOpen={showModal}
         onCancel={() => setShowModal(false)}
-        onConfirm={() => router.push(`/app/write/${sessionId}/structured-input`)}
+        onConfirm={() => {
+          // SurveyFlow will also reset on mount, but reset here for immediate clarity.
+          useIdeationStore.getState().reset();
+          router.push(`/app/write/${sessionId}/structured-input`);
+        }}
       />
+
+      {/* Ghost action tray — bottom-right, appears on hover */}
+      <div className={styles.qaGhostTray}>
+        <Link
+          href={`/app/write/${sessionId}/outline`}
+          className={styles.qaGhostBtn}
+          title="지금까지의 답변을 유지한 채로 다음 단계로 건너뜀"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="12"
+            height="12"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="13 6 19 12 13 18" />
+          </svg>
+          <span>아웃라인으로 건너뛰기</span>
+        </Link>
+        <button
+          type="button"
+          className={styles.qaGhostBtn}
+          onClick={() => fileInputRef.current?.click()}
+          title="로그 파일 (JSON) 업로드해서 세션 복구"
+          aria-label="세션 로그 임포트"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="12"
+            height="12"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          <span>임포트</span>
+        </button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".json"
+          onChange={handleImportSession}
+          style={{ display: 'none' }}
+          aria-hidden="true"
+        />
+      </div>
     </div>
   );
 }

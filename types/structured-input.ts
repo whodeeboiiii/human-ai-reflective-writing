@@ -1,14 +1,8 @@
-export type GenreValue =
-  | 'commentary'
-  | 'critique'
-  | 'book-report'
-  | 'review'
-  | 'travelogue'
-  | 'reflection';
+import type { WritingFrequency, UserInterventionWant } from './intervention';
 
-export type ClarityValue = 'none' | 'somewhat' | 'mostly' | 'clear';
-export type ExperienceValue = 'none' | 'casual' | 'frequent' | 'professional';
-export type ImportanceValue = 1 | 2 | 3 | 4;
+export type GenreValue = 'critique' | 'book-report' | 'review' | 'travelogue';
+
+export type IdeaReadiness = 'none' | 'little' | 'some' | 'much' | 'almost_complete';
 export type AudienceValue =
   | 'self'
   | 'close-circle'
@@ -30,9 +24,9 @@ export type LengthValue = 'short' | 'medium' | 'long';
 export interface StructuredInput {
   genre?: GenreValue;
   topicSentence?: string;
-  ideaClarity?: ClarityValue;
-  writingExperience?: ExperienceValue;
-  importance?: ImportanceValue;
+  ideaReadiness?: IdeaReadiness;
+  writingFrequency?: WritingFrequency;
+  userInterventionWant?: UserInterventionWant;
   audience?: AudienceValue;
   sharing?: SharingValue;
   venue?: VenueValue;

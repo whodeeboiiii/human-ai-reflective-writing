@@ -1,0 +1,377 @@
+<!-- Figure 2: User Scenario for Flect -->
+<!-- Academic figure: virtual persona + schematic abstractions, NOT real screenshots -->
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Spline+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#1d1b18;
+    --ink-soft:#56514a;
+    --paper:#faf8f4;
+    --line:#d9d3c8;
+
+    /* Ideation phase = cool slate-blue */
+    --idea:#2f5d7c;
+    --idea-tint:#eaf1f6;
+    --idea-edge:#bcd2e0;
+
+    /* Writing phase = warm terracotta */
+    --write:#9c4f2e;
+    --write-tint:#f7eee7;
+    --write-edge:#e4c4ad;
+
+    --gold:#b58a2e;
+    --sans:'Spline Sans', system-ui, sans-serif;
+    --serif:'Newsreader', Georgia, serif;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:#ece7df;}
+  .fig{
+    width:1280px;
+    margin:0 auto;
+    background:
+      radial-gradient(120% 80% at 0% 0%, #fffdf9 0%, var(--paper) 55%) ,
+      var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    padding:38px 44px 30px;
+    border:1px solid var(--line);
+  }
+
+  /* ---------- Header ---------- */
+  .head{display:flex;align-items:flex-start;gap:22px;margin-bottom:26px;}
+  .persona{
+    display:flex;align-items:center;gap:14px;
+    flex:0 0 auto;
+    padding:12px 16px 12px 12px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:#fff;
+    box-shadow:0 1px 0 rgba(0,0,0,.03);
+  }
+  .avatar{
+    width:48px;height:48px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #f0e9dc, #d8cdb8);
+    border:1px solid #c9bda3;
+    display:grid;place-items:center;flex:0 0 auto;
+  }
+  .avatar svg{width:28px;height:28px;}
+  .persona .who{font-weight:700;font-size:14px;line-height:1.25;letter-spacing:.1px;}
+  .persona .who small{display:block;font-weight:500;font-size:11.5px;color:var(--ink-soft);margin-top:2px;}
+
+  .opening{flex:1;}
+  .opening .quote{
+    position:relative;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:18px;
+    line-height:1.4;
+    color:var(--ink);
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:12px 18px;
+    box-shadow:0 1px 0 rgba(0,0,0,.03);
+  }
+  .opening .quote::before{
+    content:"";
+    position:absolute;left:-9px;top:18px;
+    width:16px;height:16px;background:#fff;
+    border-left:1px solid var(--line);border-bottom:1px solid var(--line);
+    transform:rotate(45deg);
+  }
+  .figtag{
+    font-family:var(--serif);font-size:13px;color:var(--ink-soft);
+    margin-top:8px;letter-spacing:.2px;
+  }
+  .figtag b{color:var(--idea);font-weight:600;font-style:normal;}
+
+  /* ---------- Phase scaffold ---------- */
+  .stage-area{display:flex;align-items:stretch;gap:0;}
+  .phase{
+    position:relative;
+    border-radius:18px;
+    padding:30px 20px 18px;
+  }
+  .phase.ideation{
+    background:var(--idea-tint);
+    border:1.5px solid var(--idea-edge);
+    flex:1 1 auto;
+    display:flex;gap:14px;
+  }
+  .phase.writing{
+    background:var(--write-tint);
+    border:1.5px solid var(--write-edge);
+    flex:0 0 300px;
+    margin-left:34px;
+  }
+  .phase-label{
+    position:absolute;top:-12px;left:22px;
+    font-family:var(--sans);font-weight:700;font-size:11.5px;letter-spacing:1.4px;
+    text-transform:uppercase;
+    padding:3px 12px;border-radius:20px;color:#fff;
+  }
+  .ideation .phase-label{background:var(--idea);}
+  .writing .phase-label{background:var(--write);}
+
+  /* connector between phases */
+  .phase-connector{
+    flex:0 0 34px;align-self:center;
+    display:grid;place-items:center;
+    position:relative;
+  }
+
+  /* ---------- Stage card ---------- */
+  .stage{
+    flex:1 1 0;
+    display:flex;flex-direction:column;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px 12px 13px;
+    min-width:0;
+  }
+  .stage-top{display:flex;align-items:center;gap:8px;margin-bottom:9px;}
+  .num{
+    flex:0 0 auto;width:24px;height:24px;border-radius:50%;
+    display:grid;place-items:center;font-weight:700;font-size:13px;color:#fff;
+  }
+  .ideation .num{background:var(--idea);}
+  .writing .num{background:var(--write);}
+  .stage-name{font-weight:700;font-size:13.5px;line-height:1.15;letter-spacing:.1px;}
+  .stage-name small{display:block;font-weight:500;font-size:10.5px;color:var(--ink-soft);margin-top:1px;}
+
+  /* schematic mock area */
+  .mock{
+    background:#fbfaf7;border:1px dashed var(--line);border-radius:8px;
+    padding:9px;min-height:118px;margin-bottom:9px;
+  }
+  .mock .row{display:flex;align-items:center;gap:5px;margin-bottom:6px;}
+  .lbl{font-size:9px;color:var(--ink-soft);font-weight:600;letter-spacing:.2px;white-space:nowrap;}
+  .pill{height:9px;border-radius:5px;background:#e7e1d6;flex:1;}
+  .pill.fill{background:var(--idea);}
+  .pill.sm{flex:0 0 26px;}
+  .chip{font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;background:var(--idea-tint);color:var(--idea);border:1px solid var(--idea-edge);}
+  .slider{position:relative;height:8px;border-radius:5px;background:#e7e1d6;flex:1;}
+  .slider .knob{position:absolute;top:50%;width:13px;height:13px;border-radius:50%;background:#fff;border:2px solid var(--idea);transform:translateY(-50%);}
+
+  /* chat schematic */
+  .bubble-ai,.bubble-u{font-size:9.5px;line-height:1.3;padding:5px 8px;border-radius:9px;margin-bottom:5px;max-width:88%;}
+  .bubble-ai{background:#eef0f1;color:#333;border-top-left-radius:2px;}
+  .bubble-u{background:var(--idea);color:#fff;margin-left:auto;border-top-right-radius:2px;}
+  .gauges{display:flex;gap:4px;margin-top:4px;}
+  .gauge{flex:1;text-align:center;}
+  .gauge .bar{height:5px;border-radius:3px;background:#e7e1d6;overflow:hidden;}
+  .gauge .bar i{display:block;height:100%;background:var(--gold);}
+  .gauge .gname{font-size:7.5px;color:var(--ink-soft);margin-top:2px;font-weight:600;letter-spacing:.1px;}
+
+  /* cards schematic */
+  .cardstack{display:flex;flex-direction:column;gap:5px;}
+  .matcard{
+    font-size:9px;font-weight:600;color:#444;
+    background:#fff;border:1px solid var(--line);border-radius:6px;
+    padding:5px 7px;display:flex;align-items:center;gap:6px;
+    box-shadow:0 1px 2px rgba(0,0,0,.04);
+  }
+  .matcard .grip{color:#bbb;font-size:10px;letter-spacing:-1px;}
+  .matcard.ghost{opacity:.45;border-style:dashed;transform:translateX(10px);}
+  .draghint{font-size:8px;color:var(--idea);font-weight:600;text-align:center;margin-top:5px;}
+
+  /* editor schematic */
+  .editor{display:flex;gap:6px;height:100%;}
+  .ed-side{flex:0 0 52px;display:flex;flex-direction:column;gap:4px;}
+  .ed-side .scard{font-size:7.5px;font-weight:600;color:var(--write);background:var(--write-tint);border:1px solid var(--write-edge);border-radius:4px;padding:3px 4px;line-height:1.1;}
+  .ed-main{flex:1;display:flex;flex-direction:column;gap:4px;}
+  .ed-main .tline{height:6px;border-radius:3px;background:#e7e1d6;}
+  .ed-main .tline.short{width:60%;}
+  .ed-tip{font-size:8px;font-weight:600;color:#fff;background:var(--write);border-radius:5px;padding:3px 6px;display:inline-block;margin-top:2px;align-self:flex-start;}
+
+  .writing .mock{border-color:var(--write-edge);}
+  .writing .stage{border-color:var(--write-edge);}
+
+  /* speech bubble per stage */
+  .say{
+    position:relative;margin-top:auto;
+    font-family:var(--serif);font-style:italic;font-size:12.5px;line-height:1.34;
+    color:var(--ink);
+    background:#fffdf7;border:1px solid var(--gold);border-radius:10px;
+    padding:8px 10px 8px 11px;
+  }
+  .say::before{
+    content:"";position:absolute;top:-7px;left:16px;
+    width:12px;height:12px;background:#fffdf7;
+    border-left:1px solid var(--gold);border-top:1px solid var(--gold);
+    transform:rotate(45deg);
+  }
+
+  /* arrows between stages inside ideation */
+  .arrow{
+    flex:0 0 22px;align-self:center;display:grid;place-items:center;color:var(--idea);
+  }
+  .arrow.warm{color:var(--write);}
+  .arrow svg{width:22px;height:22px;}
+
+  /* ---------- Outcome band (5) ---------- */
+  .outcome{
+    margin-top:28px;display:flex;align-items:center;gap:16px;
+    background:linear-gradient(90deg,var(--idea-tint),var(--write-tint));
+    border:1.5px solid var(--line);border-radius:14px;
+    padding:14px 20px;
+  }
+  .outcome .onum{
+    flex:0 0 auto;width:30px;height:30px;border-radius:50%;
+    background:var(--gold);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;
+  }
+  .outcome .otext{font-size:14px;line-height:1.4;}
+  .outcome .otext b{color:var(--idea);}
+  .outcome .otext em{font-style:normal;color:var(--write);font-weight:600;}
+  .outcome .resolve{margin-left:auto;flex:0 0 auto;display:flex;align-items:center;gap:8px;}
+  .resolve .before,.resolve .after{font-size:10px;font-weight:700;letter-spacing:.3px;padding:5px 10px;border-radius:8px;text-transform:uppercase;}
+  .resolve .before{background:#fff;border:1px dashed #c9b69a;color:#9c4f2e;}
+  .resolve .after{background:var(--idea);color:#fff;}
+  .resolve svg{width:18px;height:18px;color:var(--ink-soft);}
+
+  .caption{
+    text-align:center;font-family:var(--serif);font-size:14px;color:var(--ink);
+    margin-top:18px;
+  }
+  .caption b{font-weight:600;}
+</style>
+
+<div class="fig">
+
+  <!-- HEADER : persona + opening fuzzy-area thought -->
+  <div class="head">
+    <div class="persona">
+      <div class="avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6f6450" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.5 3.1-5.6 7-5.6s7 2.1 7 5.6"/>
+        </svg>
+      </div>
+      <div class="who">Our User
+        <small>CS undergraduate ·<br>minimal creative-writing experience</small>
+      </div>
+    </div>
+    <div class="opening">
+      <div class="quote">&ldquo;I just finished a book I really liked&hellip; I want to write a review, but I have no idea where to start.&rdquo;</div>
+      <div class="figtag">The user opens <b>Flect</b> to write a book review and enters the Ideation Phase, which consists of three stages.</div>
+    </div>
+  </div>
+
+  <!-- STAGE AREA -->
+  <div class="stage-area">
+
+    <!-- ===== IDEATION PHASE (1,2,3) ===== -->
+    <div class="phase ideation">
+      <div class="phase-label">Ideation Phase &mdash; resolving the Fuzzy Area</div>
+
+      <!-- STAGE 1 -->
+      <div class="stage">
+        <div class="stage-top">
+          <div class="num">1</div>
+          <div class="stage-name">Structured Input<small>genre · topic · readiness · frequency · AI involvement</small></div>
+        </div>
+        <div class="mock">
+          <div class="row"><span class="lbl">Genre</span><span class="chip">Book review</span></div>
+          <div class="row"><span class="lbl">Topic</span><span class="pill"></span></div>
+          <div class="row"><span class="lbl">Organized?</span><div class="slider"><span class="knob" style="left:30%"></span></div></div>
+          <div class="row"><span class="lbl">Write often?</span><div class="slider"><span class="knob" style="left:22%"></span></div></div>
+          <div class="row"><span class="lbl">AI help</span><div class="slider"><span class="knob" style="left:55%"></span></div></div>
+        </div>
+        <div class="say">&ldquo;First I tell it what I&rsquo;m writing and how much help I want.&rdquo;</div>
+      </div>
+
+      <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M13 6l6 6-6 6"/></svg></div>
+
+      <!-- STAGE 2 -->
+      <div class="stage">
+        <div class="stage-top">
+          <div class="num">2</div>
+          <div class="stage-name">LLM Q&amp;A Session<small>Socratic questions on the four elements</small></div>
+        </div>
+        <div class="mock">
+          <div class="bubble-ai">Why did you pick this book?</div>
+          <div class="bubble-u">Because the title spoke to me&hellip;</div>
+          <div class="bubble-ai">What stayed with you?</div>
+          <div class="gauges">
+            <div class="gauge"><div class="bar"><i style="width:90%"></i></div><div class="gname">Orient.</div></div>
+            <div class="gauge"><div class="bar"><i style="width:70%"></i></div><div class="gname">Feeling</div></div>
+            <div class="gauge"><div class="bar"><i style="width:55%"></i></div><div class="gname">Eval.</div></div>
+            <div class="gauge"><div class="bar"><i style="width:30%"></i></div><div class="gname">Take-away</div></div>
+          </div>
+        </div>
+        <div class="say">&ldquo;It keeps asking me &lsquo;why&rsquo;&mdash;my vague thoughts turn into answers.&rdquo;</div>
+      </div>
+
+      <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M13 6l6 6-6 6"/></svg></div>
+
+      <!-- STAGE 3 -->
+      <div class="stage">
+        <div class="stage-top">
+          <div class="num">3</div>
+          <div class="stage-name">Outline Composition<small>editable material cards, drag to order</small></div>
+        </div>
+        <div class="mock">
+          <div class="cardstack">
+            <div class="matcard"><span class="grip">&#8942;&#8942;</span>The title caught my eye</div>
+            <div class="matcard"><span class="grip">&#8942;&#8942;</span>It made me rethink rest</div>
+            <div class="matcard ghost"><span class="grip">&#8942;&#8942;</span>What I&rsquo;ll carry forward</div>
+          </div>
+          <div class="draghint">&#8645; drag to rearrange &middot; optional flow hints</div>
+        </div>
+        <div class="say">&ldquo;My answers became cards I can drag into the order I want.&rdquo;</div>
+      </div>
+    </div>
+
+    <!-- connector between phases -->
+    <div class="phase-connector">
+      <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#9c4f2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M13 6l6 6-6 6"/></svg>
+    </div>
+
+    <!-- ===== WRITING PHASE (4) ===== -->
+    <div class="phase writing">
+      <div class="phase-label">Writing Phase</div>
+      <div class="stage" style="height:100%;">
+        <div class="stage-top">
+          <div class="num">4</div>
+          <div class="stage-name">Writing Phase<small>editor + outline sidebar; on-demand AI</small></div>
+        </div>
+        <div class="mock">
+          <div class="editor">
+            <div class="ed-side">
+              <div class="scard">1 &middot; Title</div>
+              <div class="scard">2 &middot; Rethink</div>
+              <div class="scard">3 &middot; Carry</div>
+            </div>
+            <div class="ed-main">
+              <div class="tline"></div>
+              <div class="tline"></div>
+              <div class="tline short"></div>
+              <div class="tline"></div>
+              <span class="ed-tip">Suggest next sentence &middot; Fix grammar</span>
+            </div>
+          </div>
+        </div>
+        <div class="say">&ldquo;With the outline beside me, the blank page isn&rsquo;t scary anymore.&rdquo;</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- OUTCOME (5) -->
+  <div class="outcome">
+    <div class="onum">5</div>
+    <div class="otext">Flect <b>resolves the Fuzzy Area before writing begins</b> and offers only <em>lightweight assistance during writing</em>, keeping the user as the author.</div>
+    <div class="resolve">
+      <span class="before">Fuzzy Area</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M13 6l6 6-6 6"/></svg>
+      <span class="after">Clear Structure</span>
+    </div>
+  </div>
+
+  <div class="caption"><b>Figure 2.</b> User Scenario. A novice writer moves through the Ideation Phase (Structured Input &rarr; LLM Q&amp;A Session &rarr; Outline Composition) and into the Writing Phase, resolving the Fuzzy Area before composition begins.</div>
+
+</div>

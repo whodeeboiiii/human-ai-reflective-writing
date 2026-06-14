@@ -77,6 +77,7 @@
   letter-spacing: 0.14em;
 }
 
+
 .qaMark {
   justify-self: end;
   display: inline-flex;
@@ -100,10 +101,14 @@
 
 /* ==========================================================================
    Stage / Thread
+   The chat column is the ONLY vertically-scrolling region. Its bounds are set
+   by .qaStageWrapper (below), so the bottom input strip never overlaps it.
    ========================================================================== */
 .qaStage {
-  width: 100%;
-  padding: 110px 32px 360px;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 12px 16px 32px;
   position: relative;
   z-index: 1;
 }
@@ -391,7 +396,9 @@
 .qaFinalText strong { color: var(--ink); font-weight: 500; }
 
 /* ==========================================================================
-   Composer (sticky bottom)
+   Composer — fixed strip occupying the bottom 1/5 of the viewport.
+   Its height matches the space .qaStageWrapper reserves at the bottom, so the
+   chat column ends exactly at the composer's top edge (no overlap, no hiding).
    ========================================================================== */
 .qaComposer {
   position: fixed;
@@ -399,8 +406,12 @@
   right: 0;
   bottom: 0;
   z-index: 15;
-  padding: 24px 32px 28px;
-  background: linear-gradient(180deg, rgba(250,247,242,0) 0%, var(--bg) 32%, var(--bg) 100%);
+  height: var(--qa-input-h);
+  display: flex;
+  align-items: stretch;
+  padding: 14px 32px 20px;
+  background: var(--bg);
+  border-top: 1px solid var(--line-soft);
   pointer-events: none;
 }
 .qaComposerInner {
@@ -408,8 +419,16 @@
   max-width: 760px;
   margin: 0 auto;
   pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 0;
 }
 .qaComposerShell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
   background: #FFFCF6;
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -433,8 +452,8 @@
 
 .qaInput {
   width: 100%;
-  min-height: 132px;
-  max-height: 280px;
+  flex: 1;
+  min-height: 0;
   padding: 16px 18px 12px;
   background: transparent;
   border: 0;
@@ -445,6 +464,25 @@
   line-height: 1.7;
   color: var(--ink);
   letter-spacing: -0.005em;
+}
+
+/* C-4: skip-nudge tip above composer */
+.qaSkipHint {
+  margin-bottom: 10px;
+  padding: 10px 14px;
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  background: var(--bg-warm);
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  animation: skipHintFade 360ms var(--ease);
+}
+
+@keyframes skipHintFade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .qaInput::placeholder { color: var(--ink-faint); font-style: italic; }
 .qaInput:disabled { cursor: not-allowed; opacity: 0.55; }
@@ -549,6 +587,51 @@
 .qaBtnLg { padding: 14px 26px; font-size: 15px; }
 
 /* ==========================================================================
+   Ghost action tray — fixed bottom-right, invisible until hovered
+   ========================================================================== */
+.qaGhostTray {
+  position: fixed;
+  bottom: calc(var(--qa-input-h) + 12px);
+  right: 32px;
+  z-index: 14;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 220ms var(--ease);
+}
+.qaGhostTray:hover { opacity: 1; }
+
+.qaGhostBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  background: rgba(255, 252, 246, 0.85);
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition:
+    color 180ms var(--ease),
+    border-color 180ms var(--ease),
+    background 180ms var(--ease);
+}
+.qaGhostBtn:hover {
+  color: var(--ink);
+  border-color: var(--line);
+  background: rgba(255, 252, 246, 0.98);
+}
+
+/* ==========================================================================
    Modal
    ========================================================================== */
 .qaModalBackdrop {
@@ -614,7 +697,7 @@
   .qaTop { padding: 16px 20px; }
   .qaStepName { display: none; }
   .qaMark span:not(.qaMarkGlyph) { display: none; }
-  .qaStage { padding: 100px 20px 320px; }
+  .qaStage { padding: 12px 20px 24px; }
   .qaSessionHead { margin-bottom: 44px; padding-bottom: 28px; }
   .qaMsg { gap: 12px; margin-top: 28px; }
   .qaMsg.qaMsgCont { margin-top: 12px; }
@@ -640,4 +723,242 @@
   .qaWord { animation: none; opacity: 1; }
   .qaCaret { animation: none; opacity: 0.6; }
   .qaThinking span { animation: none; opacity: 0.5; }
+}
+
+/* ==========================================================================
+   Three-zone app shell: chat (scrolls) + sidebar (pinned) + input (fixed).
+   The shell variables (consumed here and by .qaComposer) live on .qaRoot.
+   ========================================================================== */
+.qaRoot {
+  /* approximate height of the fixed top bar */
+  --qa-top-h: 92px;
+  /* bottom input strip = approx 30% of the viewport, with a sensible floor */
+  --qa-input-h: max(30vh, 252px);
+}
+
+/* Fixed region between the top bar and the bottom input strip. */
+.qaStageWrapper {
+  position: fixed;
+  top: var(--qa-top-h);
+  bottom: var(--qa-input-h);
+  left: 0;
+  right: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  padding: 0 32px;
+}
+
+/* ==========================================================================
+   Side Panel — fills the shell height and stays put (the panel itself does
+   not scroll with the page; only the accumulated-answers list scrolls inside).
+   ========================================================================== */
+
+.sidePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 24px;
+  background: rgba(255, 252, 246, 0.4);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  height: 100%;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.sidePanelHeading {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Gauges Section */
+
+.sidePanelGauges {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gaugesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.gauge {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  margin: calc(-1 * 8px);
+  border-radius: 8px;
+  transition: background 300ms var(--ease);
+}
+
+.gaugeActive {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.gaugeLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+.gaugeActive .gaugeLabel {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.gaugeActiveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: gaugePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes gaugePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.gaugeBarContainer {
+  width: 100%;
+  height: 6px;
+  background: var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.gaugeBar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent));
+  border-radius: 3px;
+  transition: width 300ms var(--ease);
+}
+
+.gaugeValue {
+  font-size: 11px;
+  color: var(--ink-soft);
+  text-align: right;
+  font-family: var(--mono);
+}
+
+/* Answers Section */
+
+.sidePanelAnswers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+
+.sidePanelEmpty {
+  color: var(--ink-mute);
+  font-size: 13px;
+  margin: 0;
+  font-style: italic;
+}
+
+.answersList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 6px;
+}
+
+.answerItem {
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.5);
+  border-left: 2px solid var(--accent);
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.answerText {
+  margin: 0;
+  word-break: break-word;
+}
+
+/* Raw answer shown briefly while its one-line summary is being generated. */
+.answerTextPending {
+  color: var(--ink-mute);
+  opacity: 0.72;
+}
+
+/* ==========================================================================
+   Responsive: Collapse side panel on smaller screens
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+  /* Narrow screens revert to normal page flow: the whole page scrolls and the
+     input drops to the end of the document instead of a fixed bottom strip. */
+  .qaStageWrapper {
+    position: static;
+    margin: var(--qa-top-h) auto 0;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .qaStage {
+    height: auto;
+    overflow: visible;
+  }
+
+  .sidePanel {
+    height: auto;
+    overflow: visible;
+  }
+
+  .qaComposer {
+    position: static;
+    height: auto;
+    margin-top: 16px;
+    border-top: 0;
+  }
+
+  .qaComposerShell {
+    flex: none;
+  }
+
+  .qaInput {
+    flex: none;
+    min-height: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .qaStageWrapper {
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  .sidePanel {
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .sidePanelAnswers {
+    max-height: 300px;
+  }
 }

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 22" width="82" height="22">
+  <!-- Diamond glyph: 13×13 square rotated 45° -->
+  <rect
+    x="4.5" y="4.5"
+    width="13" height="13"
+    transform="rotate(45 11 11)"
+    fill="#E8C468"
+    stroke="#2D2520"
+    stroke-width="1"
+  />
+  <!-- Wordmark -->
+  <text
+    x="28" y="15"
+    font-family="'Courier New', monospace"
+    font-size="12"
+    font-weight="500"
+    letter-spacing="2.64"
+    fill="#2D2520"
+  >FLECT</text>
+</svg>

@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStructuredInputStore } from '@/store/structuredInputStore';
+import { useIdeationStore } from '@/store/ideationStore';
 import {
   SEQUENCE,
   MAIN_SCREENS,
@@ -27,6 +28,15 @@ export default function SurveyFlow({ sessionId }: { sessionId: string }) {
   const [current, setCurrent] = useState<ScreenName>('intro');
   const [optionalActivated, setOptionalActivated] = useState(false);
   const [firingValue, setFiringValue] = useState<string | null>(null);
+
+  const hasResetRef = useRef(false);
+  useEffect(() => {
+    if (hasResetRef.current) return;
+    hasResetRef.current = true;
+    // Pipeline entry point — wipe all previous session data.
+    useStructuredInputStore.getState().reset();
+    useIdeationStore.getState().reset();
+  }, []);
 
   useEffect(() => {
     document.body.classList.add('ideation');
@@ -74,18 +84,14 @@ export default function SurveyFlow({ sessionId }: { sessionId: string }) {
   }
 
   function advance() {
-    if (current === 'importance') { go('optional-gate'); return; }
+    if (current === 'userInterventionWant') { go('optional-gate'); return; }
     if (current === 'length') { go('complete'); return; }
     const i = SEQUENCE.indexOf(current);
     if (i >= 0 && i + 1 < SEQUENCE.length) go(SEQUENCE[i + 1]);
   }
 
   function handleChoiceSelect(answerKey: keyof StructuredInput, rawValue: string) {
-    if (answerKey === 'importance') {
-      setAnswer({ importance: Number(rawValue) as 1 | 2 | 3 | 4 });
-    } else {
-      setAnswer({ [answerKey]: rawValue } as unknown as Partial<StructuredInput>);
-    }
+    setAnswer({ [answerKey]: rawValue } as unknown as Partial<StructuredInput>);
     setFiringValue(rawValue);
     setTimeout(() => advance(), 180);
   }

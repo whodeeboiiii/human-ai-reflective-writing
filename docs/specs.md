@@ -26,8 +26,6 @@
 15. [User Study Plan](#15-user-study-plan)
 16. [Out of Scope](#16-out-of-scope)
 17. [Milestones](#17-milestones)
-18. [Risks & Mitigations](#18-risks--mitigations)
-19. [References](#19-references)
 
 ---
 
@@ -68,19 +66,11 @@ Does an Ideation-first interaction model (Structured Input → Socratic Q&A → 
 - How does writer perceived **Agency** vary across the three phases?
 - Does perceived **Authenticity** of the final text correlate with the depth of Ideation engagement?
 
-### Success Definitions
-
-| Tier | Outcome |
-|---|---|
-| Worst | Users find Ideation a burden; no measurable Agency/Authenticity difference from LLM ghostwriting. |
-| Average | Working three-phase prototype. Some users report meaningful Agency/Authenticity in interviews. Qualitative evidence that Ideation aids Fuzzy Area resolution. |
-| Best | Ideation Phase method yields evidence addressing Hwang et al.'s "Communication of writers' internal states" open question. Prototype + study quality sufficient for CHI/CSCW submission. |
-
 ---
 
 ## 3. Target Users
 
-**Primary persona**: Casual writers who want to write personal essays (commentary, critique, book reviews, reviews, travelogues, reflective journals) but feel stuck before starting, or feel that LLM-generated text does not feel like theirs.
+**Primary persona**: Casual writers who want to write personal essays (book reviews, travelogues, reviews) but feel stuck before starting, or feel that LLM-generated text does not feel like theirs.
 
 **Demographic**: 20s–30s, comfortable with digital tools, occasional but not professional writers.
 
@@ -88,8 +78,7 @@ Does an Ideation-first interaction model (Structured Input → Socratic Q&A → 
 - Professional writers seeking productivity tools (their voice ownership is already secure).
 - Diary writers who write without structure ("emotional venting") — Ideation intervention would feel intrusive.
 - Academic / technical writers whose work is fact-driven rather than experience-driven.
-
-> Note: "논평" (commentary on objective facts) was removed from the supported genre list as it does not center personal experience and emotion.
+- 'Reflective Essay', 'Commentary' is removed from the supported writing list for now. Only include reviews, such as book reviews, movie reviews, etc.
 
 ---
 
@@ -144,7 +133,7 @@ A one-question-per-screen survey that captures the writer's context for downstre
 
 | # | Question | Type | Options |
 |---|---|---|---|
-| 1 | 어떤 글을 쓰고 싶으신가요? | Single-select | 비평/평론, 독후감, 리뷰, 여행기, 성찰 일지 |
+| 1 | 어떤 글을 쓰고 싶으신가요? | Single-select | 영화 리뷰, 독후감, 제품 리뷰, 장소 리뷰, 여행기 |
 | 2 | 쓰고 싶은 글의 주제나 소재를 한 문장으로 적어주세요. | Open text | — |
 | 3 | 쓸 내용이 머릿속에 얼마나 정리되어 있나요? | Single-select (ordinal) | 거의 없음 / 조금 있음 / 꽤 있음 / 거의 다 있음 |
 | 4 | 글쓰기에 얼마나 익숙하신가요? | Single-select | 거의 안 씀 / 가끔 / 자주 / 직업·전공으로 |
@@ -332,10 +321,7 @@ Editing Phase implementation is reserved for the post-course paper extension.
 - No author identity is collected (no login).
 - An anonymous `author_hash` is generated client-side from a stable random ID (stored in localStorage) for de-duplication only.
 
-### Why this exists
-- SWAI course rubric values business-applicable feature scope. Community provides a clear "deployed service" surface.
-- Satisfies SWAI's "교과적용도" criterion by exercising Google Sheets as a writable DB in the live system, not just analytics.
-- Generates a small dataset of published essays for later qualitative analysis.
+*details to be provided later*
 
 ---
 
@@ -606,22 +592,11 @@ N = 3–5 casual writers. Recruitment via Yonsei community channels (Everytime, 
 - Acceptance / rejection of AI suggestions
 - Verbal satisfaction / frustration
 
-**Post-interview (20 min).** Semi-structured probe across four dimensions:
-- **Perceived Agency** — control over the writing process and creative decisions
-- **Perceived Authenticity** — does the writer view the text as their own?
-- **Resolution of the Fuzzy Area** — did Ideation help concretize abstract intention?
-- **Intention to Reuse** — would they use Flect again, under what conditions?
+**Post-interview (20 min).** Semi-structured probe across four dimensions: Perceived Agency, Perceived Authenticity, Resolution of the Fuzzy Area, Intention to Reuse
 
 ### Analysis
 - **Thematic coding** of interview transcripts (open codes → axial categories aligned to the four dimensions).
 - **Behavioral triangulation** from screen recordings + `ai_interactions` table (acceptance rate, phase dwell time, session restarts).
-
-### Limitations
-- Small N positions this as a **formative evaluation**, not confirmatory.
-- Larger controlled study (e.g. varying AI intervention intensity) reserved for paper extension.
-
-### Timing
-Start no later than **2026-05-23**. Hard deadline **2026-05-30**.
 
 ---
 
@@ -657,35 +632,5 @@ Explicitly excluded from this term's deliverables:
 | 13–14 | May 26–Jun 8 | User study completion, thematic analysis, final report |
 | 15 | Jun 9–15 | Final presentation |
 
-User study window is the hardest constraint. Start by 5/23 at the latest.
-
----
-
-## 18. Risks & Mitigations
-
-| Risk | Likelihood | Impact | Mitigation |
-|---|---|---|---|
-| Tiptap custom extension learning curve | Med | High | Spend Day 1 of Week 11 on a Tiptap-only spike with the Notion-clone tutorial; only then start integration. |
-| LLM streaming latency hurts Tab-suggest UX | Med | Med | Cache recent context; consider lighter Upstage model for suggest endpoint specifically. |
-| Outline composition feels prescriptive (the writer feels overridden) | High | Med | Outline is always editable. Make the editing affordance obvious. Frame outline as "an option, not a verdict" in UI copy. |
-| User Study recruitment underperforms | Med | High | Start recruitment Week 11. Accept N=3 minimum. |
-| Critical voice loss on full pipeline test | Low | High | Internal pilot with 1 person in Week 12 before official study. |
-| SWAI Google Sheets write quota hit during demo | Low | Med | Use a separate dev sheet; rate-limit on client. |
-
----
-
-## 19. References
-
-[1] Hwang, A. H. C., Liao, Q. V., Blodgett, S. L., Olteanu, A., & Trischler, A. (2025). 'It was 80% me, 20% AI': Seeking Authenticity in Co-Writing with Large Language Models. *Proceedings of the ACM on Human-Computer Interaction*, 9(2), 1-41.
-
-[2] Lee, M., Liang, P., & Yang, Q. (2022). CoAuthor: Designing a human-ai collaborative writing dataset for exploring language model capabilities. *Proceedings of the 2022 CHI conference on human factors in computing systems*, 1-19.
-
-[3] Flower, L., & Hayes, J. R. (1981). A cognitive process theory of writing. *College Composition & Communication*, 32(4), 365-387.
-
-[4] Xu, J., et al. (2026). DiaryPlay: AI-Assisted Creation of Interactive Story Vignettes for Everyday Storytelling. *Proceedings of CHI 2026*.
-
-[5] Zhang, C., Guo, S., Davis, A., & Koh, E. (2026). Narrix: Remixing Narrative Strategies from Examples for Story Writing. *Proceedings of CHI 2026*.
-
----
 
 **End of specs.md**

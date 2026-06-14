@@ -611,3 +611,174 @@
 @media (prefers-reduced-motion: reduce) {
   .ixPipeline .isNext .dot { animation: none; }
 }
+
+/* ==========================================================================
+   Intervention slider (Q5)
+   ========================================================================== */
+.ixSliderBlock {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Full width of the question column for a longer, more legible track. */
+.ixSliderTrackWrap {
+  --thumb: 28px;
+  position: relative;
+  width: 100%;
+  height: var(--thumb);
+  display: flex;
+  align-items: center;
+}
+
+/* Decorative step ticks, inset by the thumb radius so they line up with
+   the thumb's travel. Sit behind the thumb (which is larger and covers them). */
+.ixSliderTicks {
+  position: absolute;
+  left: calc(var(--thumb) / 2);
+  right: calc(var(--thumb) / 2);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 1;
+}
+.ixSliderTick {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 2px solid var(--line);
+  transition: background 280ms var(--ease), border-color 280ms var(--ease);
+}
+.ixSliderTick.isFilled {
+  background: var(--accent);
+  border-color: var(--accent-deep);
+}
+
+.ixSlider {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: var(--thumb);
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.ixSlider:focus-visible {
+  outline: none;
+}
+
+/* ── Track (WebKit / Blink) ── */
+.ixSlider::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--accent) 0 var(--fill, 50%),
+    var(--bg-deep) var(--fill, 50%) 100%
+  );
+  border: 1px solid var(--line-soft);
+}
+/* ── Track (Firefox) ── */
+.ixSlider::-moz-range-track {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--bg-deep);
+  border: 1px solid var(--line-soft);
+}
+.ixSlider::-moz-range-progress {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+/* ── Thumb (WebKit / Blink) ── */
+.ixSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--thumb);
+  height: var(--thumb);
+  margin-top: calc((10px - var(--thumb)) / 2);
+  border-radius: 999px;
+  background: var(--bg);
+  border: 3px solid var(--accent-deep);
+  box-shadow: 0 2px 8px -2px rgba(45, 37, 32, 0.35), 0 0 0 0 var(--accent-soft);
+  cursor: grab;
+  transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
+}
+.ixSlider:hover::-webkit-slider-thumb {
+  transform: scale(1.08);
+}
+.ixSlider:active::-webkit-slider-thumb {
+  cursor: grabbing;
+  transform: scale(1.12);
+  box-shadow: 0 2px 10px -2px rgba(45, 37, 32, 0.4), 0 0 0 6px var(--accent-soft);
+}
+.ixSlider:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 2px 10px -2px rgba(45, 37, 32, 0.4), 0 0 0 6px var(--accent-soft);
+}
+
+/* ── Thumb (Firefox) ── */
+.ixSlider::-moz-range-thumb {
+  width: var(--thumb);
+  height: var(--thumb);
+  border-radius: 999px;
+  background: var(--bg);
+  border: 3px solid var(--accent-deep);
+  box-shadow: 0 2px 8px -2px rgba(45, 37, 32, 0.35);
+  cursor: grab;
+  transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
+}
+.ixSlider:active::-moz-range-thumb {
+  cursor: grabbing;
+  transform: scale(1.12);
+  box-shadow: 0 2px 10px -2px rgba(45, 37, 32, 0.4), 0 0 0 6px var(--accent-soft);
+}
+.ixSlider:focus-visible::-moz-range-thumb {
+  box-shadow: 0 2px 10px -2px rgba(45, 37, 32, 0.4), 0 0 0 6px var(--accent-soft);
+}
+
+/* End labels under the track. */
+.ixSliderEnds {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* Live readout of the current step. */
+.ixSliderReadout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  min-height: 52px;
+}
+.ixSliderReadoutLabel {
+  font-family: var(--sans);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.ixSliderReadoutHint {
+  font-family: var(--sans);
+  font-size: 0.9375rem;
+  color: var(--ink-mute);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ixSlider::-webkit-slider-thumb { transition: none; }
+  .ixSlider::-moz-range-thumb { transition: none; }
+  .ixSliderTick { transition: none; }
+}

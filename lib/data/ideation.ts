@@ -27,15 +27,25 @@ export interface OpenScreenData {
   maxLength: number;
 }
 
-export type QuestionScreenData = ChoiceScreenData | OpenScreenData;
+export interface SliderScreenData {
+  type: 'slider';
+  eyebrow: string;
+  question: string;
+  sub?: string;
+  answerKey: keyof StructuredInput;
+  choices: Choice[];
+  labels?: { left: string; center: string; right: string };
+}
+
+export type QuestionScreenData = ChoiceScreenData | OpenScreenData | SliderScreenData;
 
 export const SEQUENCE = [
   'intro',
   'genre',
   'topic',
-  'clarity',
-  'experience',
-  'importance',
+  'ideaReadiness',
+  'writingFrequency',
+  'userInterventionWant',
   'optional-gate',
   'audience',
   'sharing',
@@ -50,9 +60,9 @@ export type ScreenName = (typeof SEQUENCE)[number];
 export const MAIN_SCREENS: ScreenName[] = [
   'genre',
   'topic',
-  'clarity',
-  'experience',
-  'importance',
+  'ideaReadiness',
+  'writingFrequency',
+  'userInterventionWant',
 ];
 export const OPTIONAL_SCREENS: ScreenName[] = [
   'audience',
@@ -70,12 +80,10 @@ export const SCREENS_DATA: Partial<Record<ScreenName, QuestionScreenData>> = {
     answerKey: 'genre',
     layout: 'list',
     choices: [
-      { value: 'commentary',  label: '논평',       hint: '시사·이슈에 대한 견해와 입장' },
       { value: 'critique',    label: '비평 / 평론', hint: '작품·현상에 대한 분석과 평가' },
       { value: 'book-report', label: '독후감',      hint: '읽은 책에 대한 감상과 생각' },
       { value: 'review',      label: '리뷰',        hint: '경험한 것에 대한 솔직한 후기' },
       { value: 'travelogue',  label: '여행기',      hint: '다녀온 곳에 대한 경험과 인상' },
-      { value: 'reflection',  label: '성찰 일지',   hint: '일상에서 길어 올린 작은 성찰' },
     ],
   },
 
@@ -89,48 +97,50 @@ export const SCREENS_DATA: Partial<Record<ScreenName, QuestionScreenData>> = {
     maxLength: 200,
   },
 
-  clarity: {
+  ideaReadiness: {
     type: 'choices',
     eyebrow: 'Question 3 of 5',
     question: '쓸 내용이 머릿속에\n얼마나 정리되어 있나요?',
-    answerKey: 'ideaClarity',
+    answerKey: 'ideaReadiness',
     layout: 'ordinal',
     choices: [
-      { value: 'none',     label: '거의 없어요, 막연한 인상만 있어요' },
-      { value: 'somewhat', label: '조금 있어요, 단편적인 생각들이 떠올라요' },
-      { value: 'mostly',   label: '꽤 있어요, 큰 줄기는 잡혀 있어요' },
-      { value: 'clear',    label: '거의 다 있어요, 정리만 하면 돼요' },
+      { value: 'none',            label: '거의 없어요, 또는 잘 모르겠어요' },
+      { value: 'little',          label: '조금 있어요, 단편적인 생각들이 떠올라요' },
+      { value: 'some',            label: '어느 정도 있어요, 큰 줄기는 잡혀 있어요' },
+      { value: 'much',            label: '꽤 많이 있어요' },
+      { value: 'almost_complete', label: '거의 다 있어요, 정리만 하면 돼요' },
     ],
   },
 
-  experience: {
+  writingFrequency: {
     type: 'choices',
     eyebrow: 'Question 4 of 5',
-    question: '글쓰기에 얼마나 익숙하신가요?',
-    sub: '글쓰기에 익숙한 정도에 따라 AI의 개입 정도가 정해져요.',
-    answerKey: 'writingExperience',
+    question: '최근 1년 동안 글을 얼마나 자주 작성하셨나요?',
+    sub: '글쓰기 빈도에 따라 AI의 개입 정도가 정해져요.',
+    answerKey: 'writingFrequency',
     layout: 'ordinal',
     choices: [
-      { value: 'none',         label: '거의 안 써요' },
-      { value: 'casual',       label: '가끔 써요',       labelSub: '(한 달에 한두 번)' },
-      { value: 'frequent',     label: '자주 써요',       labelSub: '(주에 한두 번 이상)' },
-      { value: 'professional', label: '글쓰기를 직업/전공으로 다뤄요' },
+      { value: 'daily',         label: '거의 매일' },
+      { value: 'few_per_week',  label: '주에 두세 번' },
+      { value: 'once_per_week', label: '주에 한 번' },
+      { value: 'few_per_month', label: '한 달에 한두 번' },
+      { value: 'rarely',        label: '거의 안 씀' },
     ],
   },
 
-  importance: {
-    type: 'choices',
+  userInterventionWant: {
+    type: 'slider',
     eyebrow: 'Question 5 of 5',
-    question: '이 글이 얼마나 잘 써져야 하나요?',
-    sub: 'AI가 얼마나 깊이 도와드릴지 정하는 데 사용돼요.',
-    answerKey: 'importance',
-    layout: 'ordinal',
+    question: 'AI가 글에 얼마나 개입했으면 좋겠나요?',
+    answerKey: 'userInterventionWant',
     choices: [
-      { value: '1', label: '가볍게, 흘러가는 대로 쓰고 싶어요' },
-      { value: '2', label: '적당히, 무난한 정도면 돼요' },
-      { value: '3', label: '잘 쓰고 싶어요' },
-      { value: '4', label: '아주 잘 써야 해요' },
+      { value: 'very_low',  label: '매우 낮음',  hint: '핵심 질문만 간단히 해줘요' },
+      { value: 'low',       label: '낮음' },
+      { value: 'neutral',   label: '보통',      hint: '적당히 도와주세요' },
+      { value: 'high',      label: '높음' },
+      { value: 'very_high', label: '매우 높음', hint: '최대한 깊이 파고들어 주세요' },
     ],
+    labels: { left: '매우 낮음', center: '보통', right: '매우 높음' },
   },
 
   audience: {

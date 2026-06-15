@@ -1,4 +1,4 @@
-import SurveyFlow from '@/components/ideation/structured-input/SurveyFlow';
+import StructuredInputSwitch from '@/components/ideation/structured-input/StructuredInputSwitch';
 
 export default async function StructuredInputPage({
   params,
@@ -6,5 +6,6 @@ export default async function StructuredInputPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  return <SurveyFlow sessionId={id} />;
+  // Quick 세션이면 QuickStructuredInput, 아니면 기존 SurveyFlow를 렌더 (스위치 내부에서 분기).
+  return <StructuredInputSwitch sessionId={id} />;
 }

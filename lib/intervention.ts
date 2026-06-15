@@ -64,15 +64,15 @@ export function computeFinalIntervention(
 
 // completionThreshold: 각 요소에 누적된 elementProgressDelta 합계가
 // 이 값 이상이 되면 해당 요소를 완료로 판단.
-// 답변 하나의 최대 기여량이 50이므로, 예)
-//   Lv1(50)  = 우수 답변 1개 또는 평범 5개
-//   Lv3(100) = 우수 답변 2개 또는 평범 10개
-//   Lv5(160) = 우수 답변 3~4개, 또는 구체적 답변 5~6개
+// 답변 하나의 최대 기여량(delta 상한)은 80이고, 80은 좀처럼 나오지 않는다.
+// threshold는 아무리 높아도 100을 넘지 않게 설계한다:
+//   Lv1~Lv4 (≤80) = 매우 강한 답변 하나(≈80)로도 한 번에 통과 가능
+//   Lv5    (100)  = 한 번의 강한 답변(80)으로는 못 넘으므로 답변이 최소 2개 필요
 export const INTERVENTION_PARAMS: Record<InterventionLevel, InterventionParams> =
 {
-  1: { followupThreshold: 'off', completionThreshold: 40 },
-  2: { followupThreshold: 'low', completionThreshold: 50 },
-  3: { followupThreshold: 'medium', completionThreshold: 65 },
+  1: { followupThreshold: 'off', completionThreshold: 50 },
+  2: { followupThreshold: 'low', completionThreshold: 60 },
+  3: { followupThreshold: 'medium', completionThreshold: 70 },
   4: { followupThreshold: 'high', completionThreshold: 80 },
   5: { followupThreshold: 'very_high', completionThreshold: 100 },
 };

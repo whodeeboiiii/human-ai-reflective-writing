@@ -1,0 +1,416 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "지난주 독서모임에서 읽은 <불안>이라는 책",
+    "writingFrequency": "주에 한 번 씀",
+    "interventionLevel": 2,
+    "interventionLabel": "낮음",
+    "completionThreshold": 50,
+    "followupThreshold": "low",
+    "updatedAt": "2026-06-15T09:25:23.359Z"
+  },
+  "debugLog": [
+    {
+      "at": "2026-06-15T09:17:34.442Z",
+      "exchangeIdx": 0,
+      "userInput": null,
+      "activeElementBefore": "orientation",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalReasoning": null,
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:0 F:0 E:0 T:0",
+      "threshold": 50,
+      "completedElements": [],
+      "transitionedTo": "orientation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "main",
+      "genReasoning": "학생이 대화를 시작했으며, 이번 턴에 다룰 요소는 아직 지정되지 않은 상태다. 세션 시작 시 현재 요소는 null이며, 첫 질문은 Orientation(외적 사실)을 열어 처음부터 진행하는 것이 적절하다.",
+      "acknowledgment": "시작했어요.",
+      "question": "먼저, 지난주 독서모임에서 읽은 <불안>이라는 책에 대해 좀 더 이야기 나눠볼게요. 그 책을 어떻게 만나게 되셨고, 어떤 계기로 읽게 되셨는지 자유롭게 들려주세요."
+    },
+    {
+      "at": "2026-06-15T09:18:07.237Z",
+      "exchangeIdx": 1,
+      "userInput": "독서모임에서 추천해 준 책이라서 읽게 되었어. 서점에서 전에 스테디셀러 섹션에서 본 것 같기도 하고, 제목이 현재 내 상태를 비춰주는 것 같아서 선택하게 되었어.",
+      "activeElementBefore": "orientation",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 45,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalReasoning": "독서모임 추천과 서점에서 본 기억, 제목과의 정서적 연계를 구체적으로 서술해 외적 사실 측면에서 책 선택 계기를 충분히 설명했다.",
+      "progressAfter": {
+        "orientation": 45,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:45 F:0 E:0 T:0",
+      "threshold": 50,
+      "completedElements": [],
+      "transitionedTo": "orientation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "followup",
+      "genReasoning": "학생의 직전 답변에서 '제목이 현재 내 상태를 비춰주는 것 같아서 선택하게 되었다'는 구체적인 계기를 포착해 외적 사실 요소 내에서 '선택한 이유'에 대한 꼬리 질문을 추가한다.",
+      "acknowledgment": "책을 독서모임에서 추천해줘서 읽게 되었고, 제목이 현재 내 상태를 비춰주는 것 같아 선택하셨군요.",
+      "question": "제목이 '불안'이라서 특별히 더 끌린 이유가 있었나요? 그때 어떤 상황에서 그 책을 선택하게 되셨는지 좀 더 들려주시면 좋을 것 같아요."
+    },
+    {
+      "at": "2026-06-15T09:18:53.625Z",
+      "exchangeIdx": 2,
+      "userInput": "지금 학부생 막학기를 끝내고 이제 대학원 진학을 앞둔 상태인데, 학생 신분을 마무리하고 미래를 향해 발돋움하는 과정에서 '미래에 대한 불안'이 많이 생겼어.",
+      "activeElementBefore": "orientation",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 30,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalReasoning": "학생의 답변은 현재 자신의 상황을 설명하며 '불안'이라는 제목에 끌린 구체적인 계기를 제시하고 있으나, 독서모임에서의 추천이나 구체적인 선택 순간에 대한 서술이 빠져 있어 외적 사실의 특정 요소에 대한 기여도가 중간 수준(20~40) 사이에서 30 정도로 평가됨.",
+      "progressAfter": {
+        "orientation": 75,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:75 F:0 E:0 T:0",
+      "threshold": 50,
+      "completedElements": [
+        "orientation"
+      ],
+      "transitionedTo": "feelings",
+      "ending": false,
+      "endReason": null,
+      "questionType": "main",
+      "genReasoning": "학생이 책을 선택한 구체적 계기가 '미래에 대한 불안'이라는 것을 확인했고, 이는 감정·반응 요소를 탐색할 수 있는 단서가 되었다. 특히 대학원 진학을 앞둔 시점의 불안감을 언급한 만큼, 책에서 불안의 원인을 다룬 인상 깊은 부분에 대한 탐구가 필요하다.",
+      "acknowledgment": "학생이 대학원 진학을 앞둔 상황에서 '미래에 대한 불안'을 많이 느꼈다고 말씀하셨네요.",
+      "question": "그 책에서 읽으면서 '미래에 대한 불안'이 특히 와닿았던 구체적인 장면이나 구절이 있었나요?"
+    },
+    {
+      "at": "2026-06-15T09:19:42.776Z",
+      "exchangeIdx": 3,
+      "userInput": "책에서는 불안의 원인들이 되는 요소들을 제시하고, 불안의 해결책에 대해서 이야기해. 그 중 '기대'가 불안의 원인들 중에서 나한테 가장 인상깊었어.",
+      "activeElementBefore": "feelings",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 10,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalReasoning": "학생의 답변은 '기대'를 불안의 원인으로 제시했지만 구체적인 장면이나 구절을 언급하지 않아 10점에 해당하며, 질문에 대한 정상적인 답변이므로 intent는 'answer'이다.",
+      "progressAfter": {
+        "orientation": 75,
+        "feelings": 10,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:75 F:10 E:0 T:0",
+      "threshold": 50,
+      "completedElements": [
+        "orientation"
+      ],
+      "transitionedTo": "feelings",
+      "ending": false,
+      "endReason": null,
+      "questionType": "followup",
+      "genReasoning": "현재 세션 상태 요소가 '감정·반응'으로 설정되어 있어, 직전 질문에서 학생이 '기대'가 인상깊었다는 답변을 했다. 이 답변에서 '기대'라는 구체적 단서를 잡아 감정·반응 요소를 한 단계 더 파고들어야 한다.",
+      "acknowledgment": "학생이 '기대'가 인상깊었다고 말했고, 책에 불안의 원인과 해결책에 대한 내용이 있다고 하셨네요.",
+      "question": "그 '기대'가 어떤 부분에서 특히 강렬하게 느껴졌나요? 책 속에서 '기대'가 어떻게 묘사되거나 설명되었는지 구체적으로 떠올려볼 수 있을까요?"
+    },
+    {
+      "at": "2026-06-15T09:21:18.622Z",
+      "exchangeIdx": 4,
+      "userInput": "책에서는 자본주의 사회에서 발생하는 내적/외적 기대가 불안의 원인이 된다고 했어. 사회에서는 돈을 많이 벌면 이론상 엄청 높은 곳까지 올라갈 수 있고, 사람마다 한계치가 없으니까, 자기 자신에 대해 '무제한적 기대'를 갖게 된다고 했어. 하지만 이 어마어마한 기대를 충족시킬 수 없으니까, 기대와 현실 사이의 간극이 생겨 불안이 극대화된다고 하네.",
+      "activeElementBefore": "feelings",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 50,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalReasoning": "학생은 책에서 '기대'가 불안에 미치는 구체적 메커니즘과 사회적 맥락을 명확히 서술했으며, 인용구와 함께 설명할 수 있는 수준으로 글쓰기 재료로 바로 사용할 수 있다.",
+      "progressAfter": {
+        "orientation": 75,
+        "feelings": 60,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:75 F:60 E:0 T:0",
+      "threshold": 50,
+      "completedElements": [
+        "orientation",
+        "feelings"
+      ],
+      "transitionedTo": "evaluation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "main",
+      "genReasoning": "학생이 '기대'가 불안의 원인 중 인상깊었다고 말했고, 책에서 자본주의와 내적·외적 기대가 어떻게 설명되는지 구체적으로 설명했어요. 이제 같은 'Feelings' 카테고리 안에서 그 순간의 감정 반응을 더 파고들어야 해요.",
+      "acknowledgment": "학생이 '기대'가 인상깊었고, 책에서 자본주의 사회에서 발생하는 내적/외적 기대와 그와 현실 사이 간극으로 인한 불안 극대화에 대해 구체적으로 설명해주셨어요.",
+      "question": "그 '기대'와 현실 사이의 간극을 읽을 때, 어떤 감정이나 생각이 가장 먼저 떠올랐나요?"
+    },
+    {
+      "at": "2026-06-15T09:22:48.120Z",
+      "exchangeIdx": 5,
+      "userInput": "내 상황이랑 꽤나 비슷하다고 느꼈어. 나는 연구를 하면서 학계에 영향을 끼칠 수 있는 사람이 되어야겠다는 '기대'가 있는데, 사실 지금은 이제 막 학부를 끝내고 연구를 해보려 하는 초보자 단계이잖아. 내가 꿈꾸는 미래가 실제로 올 수 있을지 걱정되니까 불안이 생기는 것 같아. 이렇게 책을 읽으면서 내 감정에 대해 더 알아가게 되었어.",
+      "activeElementBefore": "evaluation",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 50,
+        "takeaway": 0
+      },
+      "evalReasoning": "답변은 책의 '기대'와 현실 간극에 대한 개인적 경험을 구체적으로 서술하며, 불안의 원인을 자기 삶과 연결해 설명하고 있어 매우 구체적이고 글 재료로 바로 쓸 수 있는 수준이다.",
+      "progressAfter": {
+        "orientation": 75,
+        "feelings": 60,
+        "evaluation": 50,
+        "takeaway": 0
+      },
+      "progressSummary": "O:75 F:60 E:50 T:0",
+      "threshold": 50,
+      "completedElements": [
+        "orientation",
+        "feelings",
+        "evaluation"
+      ],
+      "transitionedTo": "takeaway",
+      "ending": false,
+      "endReason": null,
+      "questionType": "main",
+      "genReasoning": "학생이 '기대'와 현실 사이의 간극을 자신의 연구 상황에 비유하며 구체적인 감정(걱정)을 표현했고, 이를 통해 '감정·반응' 요소가 충분히 확장된 상태다.",
+      "acknowledgment": "학생의 답변에서 '기대'와 현실의 간극에서 오는 걱정과 불안이 구체적으로 드러나네요.",
+      "question": "그 걱정을 느낄 때 책 속에서 어떤 특정 문장이나 표현이 가장 먼저 떠올랐나요? 그 문장이 어떻게 마음에 와닿았는지 들려주세요."
+    },
+    {
+      "at": "2026-06-15T09:24:49.364Z",
+      "exchangeIdx": 6,
+      "userInput": "인간이 갓난아기일 때는 부모님께 '무조건적 사랑'만 받는다는데, 어른이 되고 사회에 나갈수록 사회에서 요구하는 기대, 그리고 그 기대를 부합해야지만 주어지는 사랑을 통해서 옛날처럼 일방적인 사랑을 받기 힘들다는 구절이 인상깊었어. 뭔가 '진짜 어른'이 되는 과정 가운데에 내가 있는 것 같은데, 그럴수록 사회의 요구치가 생각보다 높다는 느낌이 계속 들어서 슬프거든.",
+      "activeElementBefore": "takeaway",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 40
+      },
+      "evalReasoning": "학생의 답변은 '기대'와 현실의 간극에서 오는 걱정이 구체적인 문장과 표현으로 드러나 있으며, 그 문장이 마음에 와닿은 이유를 상세히 서술하여 깨달음과 여운을 남기고 있다.",
+      "progressAfter": {
+        "orientation": 75,
+        "feelings": 60,
+        "evaluation": 50,
+        "takeaway": 40
+      },
+      "progressSummary": "O:75 F:60 E:50 T:40",
+      "threshold": 50,
+      "completedElements": [
+        "orientation",
+        "feelings",
+        "evaluation"
+      ],
+      "transitionedTo": "takeaway",
+      "ending": false,
+      "endReason": null,
+      "questionType": "followup",
+      "genReasoning": "emotional resonance를 강화하기 위해 학생이 언급한 '무조건적 사랑'과 '사회적 기대'라는 두 가지 요소를 연결한 구체적 질문을 생성했습니다. '진짜 어른'이 되는 과정에 대한 학생의 인식을 더 깊이 파고들어 내적 반응의 강도를 구체화하려는 목적입니다.",
+      "acknowledgment": "학생이 '무조건적 사랑'과 '사회적 기대' 사이의 대비를 통해 '진짜 어른'이 되는 과정에서의 외로움을 느낀다고 말씀해주셨어요. 그 외로움과 걱정이 구체적으로 어떤 감정으로 다가왔는지 더 자세히 알고 싶어요.",
+      "question": "그 문장이 '진짜 어른'이 되는 과정에서 느끼는 외로움과 걱정을 어떤 감정으로 더 구체화시켜주었나요? 슬픔과 외로움 중에서 어떤 감정이 더 강하게 다가왔는지, 혹은 다른 감정이었는지 들려주세요."
+    },
+    {
+      "at": "2026-06-15T09:25:23.359Z",
+      "exchangeIdx": 7,
+      "userInput": "뭐 외롭기도 한데, 그냥 '역시 어른이 되는 것은 힘들구나'라는 정도의 감정이었어. 막 사회에서 고립되는 느낌은 아니고..",
+      "activeElementBefore": "takeaway",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 10
+      },
+      "evalReasoning": "학생의 답변은 외로움과 걱정을 구체화할 수 있는 장면, 표현, 내적 성찰이 부족하고 '역시 어른이 되는 것은 힘들구나'라는 일반적 감상만 제시하여 깨달음·여운 요소에 대한 기여도가 10점에 해당한다.",
+      "progressAfter": {
+        "orientation": 75,
+        "feelings": 60,
+        "evaluation": 50,
+        "takeaway": 50
+      },
+      "progressSummary": "O:75 F:60 E:50 T:50",
+      "threshold": 50,
+      "completedElements": [
+        "orientation",
+        "feelings",
+        "evaluation",
+        "takeaway"
+      ],
+      "transitionedTo": null,
+      "ending": true,
+      "endReason": "all-done",
+      "questionType": "closing",
+      "genReasoning": null,
+      "acknowledgment": null,
+      "question": "오늘 함께 나눈 이야기가 너의 마음에 작은 위로가 되었길 바라. 앞으로도 너를 응원할게, 언제든지 또 이야기 들려줘."
+    }
+  ],
+  "transcript": [
+    {
+      "id": "50d24e50-4355-4af9-bb3d-b1e84f940040",
+      "role": "assistant",
+      "content": "시작했어요.\n\n먼저, 지난주 독서모임에서 읽은 <불안>이라는 책에 대해 좀 더 이야기 나눠볼게요. 그 책을 어떻게 만나게 되셨고, 어떤 계기로 읽게 되셨는지 자유롭게 들려주세요.",
+      "type": "llm-generated",
+      "isCont": true,
+      "timestamp": "18:17"
+    },
+    {
+      "id": "233854d1-7606-4fed-b1af-99fe13bd6bab",
+      "role": "user",
+      "content": "독서모임에서 추천해 준 책이라서 읽게 되었어. 서점에서 전에 스테디셀러 섹션에서 본 것 같기도 하고, 제목이 현재 내 상태를 비춰주는 것 같아서 선택하게 되었어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "18:18"
+    },
+    {
+      "id": "29fde9ca-2b66-4826-8cc1-cf4188041ba4",
+      "role": "assistant",
+      "content": "책을 독서모임에서 추천해줘서 읽게 되었고, 제목이 현재 내 상태를 비춰주는 것 같아 선택하셨군요.\n\n제목이 '불안'이라서 특별히 더 끌린 이유가 있었나요? 그때 어떤 상황에서 그 책을 선택하게 되셨는지 좀 더 들려주시면 좋을 것 같아요.",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "18:18"
+    },
+    {
+      "id": "a4f356b7-33dc-4d3d-8e1d-8152645da91f",
+      "role": "user",
+      "content": "지금 학부생 막학기를 끝내고 이제 대학원 진학을 앞둔 상태인데, 학생 신분을 마무리하고 미래를 향해 발돋움하는 과정에서 '미래에 대한 불안'이 많이 생겼어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "18:18"
+    },
+    {
+      "id": "cad96d99-5899-4179-974c-0c593d47ec4f",
+      "role": "assistant",
+      "content": "학생이 대학원 진학을 앞둔 상황에서 '미래에 대한 불안'을 많이 느꼈다고 말씀하셨네요.\n\n그 책에서 읽으면서 '미래에 대한 불안'이 특히 와닿았던 구체적인 장면이나 구절이 있었나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "18:18"
+    },
+    {
+      "id": "237d1690-8f71-4d25-8d34-51fae1e16530",
+      "role": "user",
+      "content": "책에서는 불안의 원인들이 되는 요소들을 제시하고, 불안의 해결책에 대해서 이야기해. 그 중 '기대'가 불안의 원인들 중에서 나한테 가장 인상깊었어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "18:19"
+    },
+    {
+      "id": "dc2f1357-77cf-4d23-bd6c-966d50755679",
+      "role": "assistant",
+      "content": "학생이 '기대'가 인상깊었다고 말했고, 책에 불안의 원인과 해결책에 대한 내용이 있다고 하셨네요.\n\n그 '기대'가 어떤 부분에서 특히 강렬하게 느껴졌나요? 책 속에서 '기대'가 어떻게 묘사되거나 설명되었는지 구체적으로 떠올려볼 수 있을까요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "18:19"
+    },
+    {
+      "id": "1e53393a-0895-44e8-9b88-0e7d24cb5bcd",
+      "role": "user",
+      "content": "책에서는 자본주의 사회에서 발생하는 내적/외적 기대가 불안의 원인이 된다고 했어. 사회에서는 돈을 많이 벌면 이론상 엄청 높은 곳까지 올라갈 수 있고, 사람마다 한계치가 없으니까, 자기 자신에 대해 '무제한적 기대'를 갖게 된다고 했어. 하지만 이 어마어마한 기대를 충족시킬 수 없으니까, 기대와 현실 사이의 간극이 생겨 불안이 극대화된다고 하네.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "18:21"
+    },
+    {
+      "id": "3e69ecc1-a234-4aec-8c53-70007a7b015b",
+      "role": "assistant",
+      "content": "학생이 '기대'가 인상깊었고, 책에서 자본주의 사회에서 발생하는 내적/외적 기대와 그와 현실 사이 간극으로 인한 불안 극대화에 대해 구체적으로 설명해주셨어요.\n\n그 '기대'와 현실 사이의 간극을 읽을 때, 어떤 감정이나 생각이 가장 먼저 떠올랐나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "18:21"
+    },
+    {
+      "id": "893d322a-feb1-446b-a4fd-aa2c1f35131a",
+      "role": "user",
+      "content": "내 상황이랑 꽤나 비슷하다고 느꼈어. 나는 연구를 하면서 학계에 영향을 끼칠 수 있는 사람이 되어야겠다는 '기대'가 있는데, 사실 지금은 이제 막 학부를 끝내고 연구를 해보려 하는 초보자 단계이잖아. 내가 꿈꾸는 미래가 실제로 올 수 있을지 걱정되니까 불안이 생기는 것 같아. 이렇게 책을 읽으면서 내 감정에 대해 더 알아가게 되었어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "18:22"
+    },
+    {
+      "id": "3081b977-5d4b-480e-81ab-eb234085c99e",
+      "role": "assistant",
+      "content": "학생의 답변에서 '기대'와 현실의 간극에서 오는 걱정과 불안이 구체적으로 드러나네요.\n\n그 걱정을 느낄 때 책 속에서 어떤 특정 문장이나 표현이 가장 먼저 떠올랐나요? 그 문장이 어떻게 마음에 와닿았는지 들려주세요.",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "18:22"
+    },
+    {
+      "id": "5b31e078-780b-48b1-9e80-d73f66a50cbf",
+      "role": "user",
+      "content": "인간이 갓난아기일 때는 부모님께 '무조건적 사랑'만 받는다는데, 어른이 되고 사회에 나갈수록 사회에서 요구하는 기대, 그리고 그 기대를 부합해야지만 주어지는 사랑을 통해서 옛날처럼 일방적인 사랑을 받기 힘들다는 구절이 인상깊었어. 뭔가 '진짜 어른'이 되는 과정 가운데에 내가 있는 것 같은데, 그럴수록 사회의 요구치가 생각보다 높다는 느낌이 계속 들어서 슬프거든.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "18:24"
+    },
+    {
+      "id": "0affbf8a-ff28-481d-bf22-4a64088a9376",
+      "role": "assistant",
+      "content": "학생이 '무조건적 사랑'과 '사회적 기대' 사이의 대비를 통해 '진짜 어른'이 되는 과정에서의 외로움을 느낀다고 말씀해주셨어요. 그 외로움과 걱정이 구체적으로 어떤 감정으로 다가왔는지 더 자세히 알고 싶어요.\n\n그 문장이 '진짜 어른'이 되는 과정에서 느끼는 외로움과 걱정을 어떤 감정으로 더 구체화시켜주었나요? 슬픔과 외로움 중에서 어떤 감정이 더 강하게 다가왔는지, 혹은 다른 감정이었는지 들려주세요.",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "18:24"
+    },
+    {
+      "id": "09fecffb-b863-4d56-b93b-329c2c2c2435",
+      "role": "user",
+      "content": "뭐 외롭기도 한데, 그냥 '역시 어른이 되는 것은 힘들구나'라는 정도의 감정이었어. 막 사회에서 고립되는 느낌은 아니고..",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "18:25"
+    },
+    {
+      "role": "assistant",
+      "type": "closing",
+      "question": "오늘 함께 나눈 이야기가 너의 마음에 작은 위로가 되었길 바라. 앞으로도 너를 응원할게, 언제든지 또 이야기 들려줘.",
+      "intent": "answer",
+      "questionType": "closing",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 10
+      },
+      "progressAfter": {
+        "orientation": 75,
+        "feelings": 60,
+        "evaluation": 50,
+        "takeaway": 50
+      },
+      "completedElements": [
+        "orientation",
+        "feelings",
+        "evaluation",
+        "takeaway"
+      ],
+      "currentElement": null,
+      "ending": true,
+      "endReason": "all-done"
+    }
+  ]
+}

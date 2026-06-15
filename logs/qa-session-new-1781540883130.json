@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "genre": "여행기",
+    "topic": "제주도에서 보낸 사흘",
+    "writingFrequency": "한 달에 한두 번 씀",
+    "interventionLevel": null,
+    "interventionLabel": null,
+    "completionThreshold": 60,
+    "followupThreshold": "low",
+    "updatedAt": "2026-06-15T16:28:03.130Z"
+  },
+  "debugLog": [
+    {
+      "at": "2026-06-15T16:28:03.130Z",
+      "exchangeIdx": 0,
+      "userInput": null,
+      "activeElementBefore": "orientation",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalGap": null,
+      "evalFallback": false,
+      "evalReasoning": null,
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:0 F:0 E:0 T:0",
+      "threshold": 60,
+      "completedElements": [],
+      "skippedElements": [],
+      "clarifyStreak": 0,
+      "transitionedTo": "orientation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "main",
+      "genReasoning": "사용자가 글쓰기 상담을 시작하려는 의사를 밝혔으므로, '외적 사실' 요소를 열어 글에 대한 기본 배경을 파악한다.",
+      "acknowledgment": null,
+      "question": "먼저 제주도에서 보낸 사흘에 대해 좀 더 들려주세요. 그것을 어떻게 접하게 되셨고, 어떤 계기로 이 글을 쓰게 되셨는지 편하게 이야기해 주세요."
+    }
+  ],
+  "transcript": [
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "question": "먼저 제주도에서 보낸 사흘에 대해 좀 더 들려주세요. 그것을 어떻게 접하게 되셨고, 어떤 계기로 이 글을 쓰게 되셨는지 편하게 이야기해 주세요.",
+      "intent": "answer",
+      "questionType": "main",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "completedElements": [],
+      "skippedElements": [],
+      "currentElement": "orientation",
+      "ending": false,
+      "endReason": null
+    }
+  ]
+}

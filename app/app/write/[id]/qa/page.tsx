@@ -1,4 +1,4 @@
-import ChatContainer from '@/components/ideation/qa/ChatContainer';
+import QASwitch from '@/components/ideation/qa/QASwitch';
 
 export default async function QAPage({
   params,
@@ -6,5 +6,6 @@ export default async function QAPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  return <ChatContainer sessionId={id} />;
+  // Quick 세션이면 QuickQASession, 아니면 기존 ChatContainer (스위치 내부에서 분기).
+  return <QASwitch sessionId={id} />;
 }

@@ -79,9 +79,11 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
   const lastSpeakerRef = useRef<'assistant' | 'user' | null>(null);
   // Most recent user answer awaiting a summarize decision (made once questionType is known).
   const lastUserAnswerRef = useRef<{ id: string; text: string } | null>(null);
-  // Client-owned element state machine (injected into every API call).
+  // Server-owned state, echoed back on every API call (server is authoritative).
   const currentElementRef = useRef<ElementKey | null>('orientation');
   const completedElementsRef = useRef<ElementKey[]>([]);
+  const skippedElementsRef = useRef<ElementKey[]>([]);
+  const clarifyStreakRef = useRef<number>(0);
   const addTurnRef = useRef(addTurn);
   addTurnRef.current = addTurn;
 
@@ -244,6 +246,8 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
     useIdeationStore.getState().reset();
     currentElementRef.current = 'orientation';
     completedElementsRef.current = [];
+    skippedElementsRef.current = [];
+    clarifyStreakRef.current = 0;
 
     const liveAnswers = useStructuredInputStore.getState().answers;
     const liveGenreLabel = liveAnswers.genre
@@ -271,6 +275,8 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
             // Echo back the server-owned state machine values from the previous turn.
             currentElement: currentElementRef.current,
             completedElements: completedElementsRef.current,
+            skippedElements: skippedElementsRef.current,
+            clarifyStreak: clarifyStreakRef.current,
             elementProgress: useIdeationStore.getState().elementProgress,
           }),
         });
@@ -284,7 +290,10 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
         console.error('questions API error', res.status);
         return;
       }
-      const { content, type, questionType, isDone, currentElement, completedElements, elementProgress } =
+      const {
+        content, type, questionType, isDone,
+        currentElement, completedElements, skippedElements, clarifyStreak, elementProgress,
+      } =
         (await res.json()) as {
           content: string;
           type: QATurnType;
@@ -292,6 +301,8 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
           isDone: boolean;
           currentElement: ElementKey | null;
           completedElements: ElementKey[];
+          skippedElements: ElementKey[];
+          clarifyStreak: number;
           elementProgress: ElementProgress;
         };
 
@@ -299,6 +310,8 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
       useIdeationStore.getState().setElementProgress(elementProgress);
       currentElementRef.current = currentElement;
       completedElementsRef.current = completedElements;
+      skippedElementsRef.current = skippedElements ?? [];
+      clarifyStreakRef.current = clarifyStreak ?? 0;
       // Side-panel highlight: the element this turn's question targets.
       const gaugeElement: ElementKey | null = currentElement;
 

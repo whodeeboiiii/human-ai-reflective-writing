@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "genre": "여행기",
+    "topic": "제주도에서 보낸 사흘",
+    "writingFrequency": "한 달에 한두 번 씀",
+    "interventionLevel": null,
+    "interventionLabel": null,
+    "completionThreshold": 60,
+    "followupThreshold": "low",
+    "updatedAt": "2026-06-15T16:41:25.501Z"
+  },
+  "debugLog": [
+    {
+      "at": "2026-06-15T16:41:25.501Z",
+      "exchangeIdx": 0,
+      "userInput": null,
+      "activeElementBefore": "orientation",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalGap": null,
+      "evalFallback": false,
+      "evalReasoning": null,
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:0 F:0 E:0 T:0",
+      "threshold": 60,
+      "completedElements": [],
+      "skippedElements": [],
+      "clarifyStreak": 0,
+      "transitionedTo": "orientation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "main",
+      "genReasoning": "세션 시작을 알리는 학생의 말에 따라, 외적 사실(오리엔테이션) 요소를 여는 메인 질문으로 제주도 여행 계획을 접하게 된 계기를 묻는 자연스러운 발문을 생성한다.",
+      "acknowledgment": "시작하셨습니다. 제주도에서 보낸 사흘에 대해 어떤 계기로 이 글을 쓰게 되셨는지 편하게 이야기해 주세요.",
+      "question": "제주도 여행을 떠나게 된 계기는 무엇이었는지, 구체적으로 어떤 부분이 끌려서 가기로 하셨나요?"
+    }
+  ],
+  "transcript": [
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "content": "시작하셨습니다. 제주도에서 보낸 사흘에 대해 어떤 계기로 이 글을 쓰게 되셨는지 편하게 이야기해 주세요.",
+      "question": "제주도 여행을 떠나게 된 계기는 무엇이었는지, 구체적으로 어떤 부분이 끌려서 가기로 하셨나요?",
+      "intent": "answer",
+      "questionType": "main",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "completedElements": [],
+      "skippedElements": [],
+      "currentElement": "orientation",
+      "ending": false,
+      "endReason": null
+    }
+  ]
+}

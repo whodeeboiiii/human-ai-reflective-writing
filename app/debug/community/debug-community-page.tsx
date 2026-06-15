@@ -15,6 +15,24 @@ import { useEffect, useState } from 'react';
 
 const TABLE = 'community_posts';
 
+// ── AI 시드용 제목 목록 (장르별, 본문은 AI가 제목에 맞게 생성) ──────
+interface SeedPost {
+  nickname: string;
+  genre: string;
+  title: string;
+  tags: string;
+}
+const SEED_POSTS: SeedPost[] = [
+  { nickname: '근', genre: '독후감', title: '《데미안》을 다시 읽고', tags: '성장,고전,자아' },
+  { nickname: '우마무스메', genre: '여행기', title: '비 내리는 교토에서 보낸 사흘', tags: '교토,혼자여행,비' },
+  { nickname: '필자식', genre: '영화·공연 리뷰', title: '《괴물》을 보고 나서', tags: '영화,가족,여운' },
+  { nickname: '잇섭', genre: '제품 리뷰', title: '한 달간 써 본 무선 이어버드', tags: '가젯,일상,리뷰' },
+  { nickname: '골목책방', genre: '장소 리뷰', title: '동네 끝 작은 책방에서', tags: '책방,동네,취향' },
+  { nickname: '예아', genre: '성찰 일지', title: '퇴사를 결심한 밤', tags: '회고,결심,진로' },
+  { nickname: '오렌지', genre: '독후감', title: '《아몬드》가 남긴 질문', tags: '감정,청소년,공감' },
+  { nickname: '가즈아', genre: '여행기', title: '혼자 떠난 제주 한 바퀴', tags: '제주,자전거,혼행' },
+];
+
 // ── 더미 데이터 생성 ──────────────────────────────────────────
 function sampleData(deviceId: string) {
   const n = Math.floor(Math.random() * 1000);
@@ -153,6 +171,80 @@ export default function CommunityDebugPage() {
 
   const apiLike = () => call('API like', '/api/community/like', jsonPost({ id: idInput }), { id: idInput });
 
+  // ── AI 생성 + 발행 ──────────────────────────────────────────
+  const [seeding, setSeeding] = useState(false);
+
+  // 제목 하나로 AI 본문 생성 → 커뮤니티 발행. 두 단계를 각각 로그에 남김.
+  async function genPublishOne(seed: SeedPost) {
+    // 1) AI 본문 생성
+    let content = '';
+    {
+      const start = performance.now();
+      try {
+        const res = await fetch(
+          '/api/debug/generate-content',
+          jsonPost({ title: seed.title, genre: seed.genre, tags: seed.tags }),
+        );
+        const ms = Math.round(performance.now() - start);
+        const json = (await res.json()) as { content?: string; error?: string };
+        content = json.content ?? '';
+        setLog((prev) => [
+          {
+            ts: new Date().toLocaleTimeString(),
+            label: `AI 생성 · ${seed.title}`,
+            ms,
+            ok: res.ok && !!content,
+            status: res.status,
+            request: { title: seed.title, genre: seed.genre },
+            response: content ? `${content.slice(0, 120)}… (${content.length}자)` : json,
+          },
+          ...prev,
+        ]);
+      } catch (err) {
+        setLog((prev) => [
+          {
+            ts: new Date().toLocaleTimeString(),
+            label: `AI 생성 · ${seed.title}`,
+            ms: Math.round(performance.now() - start),
+            ok: false,
+            status: 'NETWORK_ERROR',
+            request: { title: seed.title, genre: seed.genre },
+            response: String(err),
+          },
+          ...prev,
+        ]);
+      }
+    }
+    if (!content) return; // 생성 실패 시 발행 건너뜀
+
+    // 2) 커뮤니티 발행
+    await call(
+      `API publish · ${seed.title}`,
+      '/api/community/publish',
+      jsonPost({
+        author_nickname: seed.nickname,
+        genre: seed.genre,
+        title: seed.title,
+        content,
+        outline_json: '',
+        tags: seed.tags,
+        device_id: deviceId,
+      }),
+      { title: seed.title, genre: seed.genre, nickname: seed.nickname },
+    );
+  }
+
+  async function genPublishAll() {
+    setSeeding(true);
+    try {
+      for (const seed of SEED_POSTS) {
+        await genPublishOne(seed); // 순차 실행 (LLM 동시호출 부담·로그 가독성)
+      }
+    } finally {
+      setSeeding(false);
+    }
+  }
+
   return (
     <div style={S.page}>
       <h1 style={S.h1}>🛠 커뮤니티 백엔드 디버그 패널</h1>
@@ -170,6 +262,32 @@ export default function CommunityDebugPage() {
           placeholder="insert/publish 하면 자동으로 채워짐"
         />
       </div>
+
+      {/* AI 시드 */}
+      <section style={{ ...S.section, borderColor: '#ea580c' }}>
+        <h2 style={{ ...S.h2, color: '#ea580c' }}>AI 글 생성 + 발행 (시드)</h2>
+        <p style={S.desc}>
+          각 제목에 맞춰 AI가 약 500자 본문을 생성한 뒤 커뮤니티에 발행합니다. outline은 사용하지 않습니다.
+        </p>
+        <div style={S.btnRow}>
+          <button style={{ ...S.btn, borderColor: '#ea580c', color: '#ea580c' }} onClick={genPublishAll} disabled={seeding}>
+            {seeding ? '생성·발행 중…' : `전체 ${SEED_POSTS.length}개 생성 + 발행`}
+          </button>
+        </div>
+        <div style={{ ...S.btnRow, marginTop: 8 }}>
+          {SEED_POSTS.map((seed) => (
+            <button
+              key={seed.title}
+              style={{ ...S.btn, fontSize: 12 }}
+              onClick={() => genPublishOne(seed)}
+              disabled={seeding}
+              title={`${seed.genre} · ${seed.tags}`}
+            >
+              {seed.title}
+            </button>
+          ))}
+        </div>
+      </section>
 
       {/* Level 1 */}
       <section style={{ ...S.section, borderColor: '#16a34a' }}>

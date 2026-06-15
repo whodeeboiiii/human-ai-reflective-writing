@@ -1,0 +1,291 @@
+/* Quick Mode Q&A — mobile-first. Flect warm tokens (app/globals.css) 재사용. */
+
+.quickRoot {
+  --quick-accent: var(--accent-deep);   /* 진행 중 채움 (가독성 위해 deep gold) */
+  --quick-success: #5E8A6B;             /* 완료 (warm 팔레트에 맞춘 sage) */
+  --quick-track: var(--bg-deep);        /* 빈 트랙 */
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* ── 상단 프레임 (세로 약 1/5, §4.4) ── */
+.quickTopFrame {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 18vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 12px;
+  background: var(--bg-warm);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.wholeSkipLink {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  padding: 4px 8px;
+  font-size: 12px;
+  color: var(--ink-mute);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.wholeSkipLink:hover { color: var(--ink-soft); }
+
+/* ── ProgressCircles ── */
+.circlesFrame {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  gap: 6px;
+  width: 100%;
+  max-width: 520px;
+}
+
+.circleItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1 1 0;
+  min-width: 0;
+  transition: transform 0.2s var(--ease);
+}
+.circleCurrent { transform: scale(1.1); }
+
+.circleRing {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  transition: box-shadow 0.2s var(--ease);
+}
+.circleCurrent .circleRing {
+  box-shadow: 0 0 0 2px var(--bg-warm), 0 0 0 4px var(--quick-accent);
+}
+.circleDone .circleRing { box-shadow: 0 0 0 2px var(--bg-warm), 0 0 0 4px var(--quick-success); }
+
+.circleHole {
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  background: var(--bg-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circlePct {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.circleDone .circlePct { color: var(--quick-success); }
+
+.circleLabel {
+  font-size: 11px;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--ink-mute);
+  white-space: nowrap;
+}
+.circleCurrent .circleLabel { color: var(--ink); font-weight: 700; }
+.circleDone .circleLabel { color: var(--ink-soft); }
+
+/* ── 채팅 스레드 ── */
+.quickThread {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 18px 14px 28px;
+}
+.quickThreadInner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── 완료 CTA ── */
+.quickDone {
+  margin-top: 22px;
+  padding: 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.quickDoneText {
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+/* ── 하단 sticky 입력 ── */
+.quickComposer {
+  position: sticky;
+  bottom: 0;
+  background: var(--bg-warm);
+  border-top: 1px solid var(--line-soft);
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+}
+.quickComposerInner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.quickTextarea {
+  width: 100%;
+  resize: none;
+  font-family: var(--sans);
+  font-size: 16px; /* iOS 자동 줌 방지 */
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+.quickTextarea:focus {
+  outline: none;
+  border-color: var(--quick-accent);
+}
+.quickTextarea:disabled { opacity: 0.6; }
+
+.quickComposerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* ── 버튼 ── */
+.quickBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px; /* 터치 타깃 (§9.1) */
+  padding: 0 18px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.quickBtnPrimary {
+  background: var(--ink);
+  color: var(--bg-warm);
+}
+.quickBtnPrimary:disabled {
+  background: var(--ink-faint);
+  cursor: not-allowed;
+}
+.quickBtnLg {
+  min-height: 50px;
+  padding: 0 26px;
+  font-size: 16px;
+}
+
+/* ── SkipGuard ── */
+.skipGuardWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.skipBtn {
+  min-height: 44px;
+  padding: 0 14px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  cursor: pointer;
+}
+.skipBtn:hover { background: var(--bg-deep); }
+.skipBtnDisabled {
+  color: var(--ink-faint);
+  border-color: var(--line-soft);
+  cursor: not-allowed;
+}
+.skipBtnDisabled:hover { background: none; }
+
+.skipGuardHint {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  white-space: nowrap;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: var(--bg-warm);
+  background: var(--ink);
+  border-radius: 8px;
+}
+
+/* ── floor 경고 모달 ── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(45, 37, 32, 0.4);
+}
+.modalCard {
+  width: 100%;
+  max-width: 360px;
+  padding: 24px 22px 20px;
+  background: var(--bg-warm);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(45, 37, 32, 0.2);
+}
+.modalTitle {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.modalBody {
+  margin: 0 0 20px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.modalActions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.modalBtn {
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.modalBtnGhost {
+  background: none;
+  border-color: var(--line);
+  color: var(--ink-soft);
+}
+.modalBtnPrimary {
+  background: var(--ink);
+  color: var(--bg-warm);
+}
+
+/* ── 데스크톱 ── */
+@media (min-width: 768px) {
+  .quickTopFrame { min-height: 130px; }
+  .circleRing { width: 64px; height: 64px; }
+}

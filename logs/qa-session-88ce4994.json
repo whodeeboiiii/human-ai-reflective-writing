@@ -1,0 +1,521 @@
+{
+  "meta": {
+    "genre": "여행기",
+    "topic": "제주도에서 보낸 사흘",
+    "writingFrequency": "한 달에 한두 번 씀",
+    "interventionLevel": null,
+    "interventionLabel": null,
+    "completionThreshold": 60,
+    "followupThreshold": "low",
+    "updatedAt": "2026-06-15T16:28:21.950Z"
+  },
+  "debugLog": [
+    {
+      "at": "2026-06-15T16:28:04.828Z",
+      "exchangeIdx": 1,
+      "userInput": "친구가 제주 사진을 보여줘서 갑자기 가고 싶어졌어요.",
+      "activeElementBefore": "orientation",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 30,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalGap": "친구의 사진 외에 어떤 요소가 여행 결정에 더 영향을 미쳤는지 궁금해요.",
+      "evalFallback": false,
+      "evalReasoning": "학생의 답변은 제주도 여행 계기를 구체적으로 언급했으나 구체적 장면이나 설명이 부족해 delta 30으로 평가한다.",
+      "progressAfter": {
+        "orientation": 30,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:30 F:0 E:0 T:0",
+      "threshold": 60,
+      "completedElements": [],
+      "skippedElements": [],
+      "clarifyStreak": 0,
+      "transitionedTo": "orientation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "followup",
+      "genReasoning": "이전 답변에서 '친구가 제주 사진을 보여줘서'라는 구체적 단서가 나왔으므로, 이를 바탕으로 외적 사실의 다음 세부 요소인 교통·일정·숙소 선택 등 구체적 상황을 물어보는 것이 자연스럽다.",
+      "acknowledgment": "친구가 제주 사진을 보여줘서 가고 싶으셨군요.",
+      "question": "그 사진을 본 후, 제주도까지 어떻게 이동하셨고, 첫날 일정은 어떻게 잡으셨나요?"
+    },
+    {
+      "at": "2026-06-15T16:28:06.665Z",
+      "exchangeIdx": 2,
+      "userInput": "친구가 제주 사진을 보여줘서 갑자기 가고 싶어졌어요.",
+      "activeElementBefore": "orientation",
+      "intent": "skip",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalGap": null,
+      "evalFallback": false,
+      "evalReasoning": "질문에 대한 답변이지만 구체적 이동 방법이나 첫날 일정에 대한 언급이 없어 외적 사실 요소에 기여도가 낮으며, 의도를 나타내는 신호도 없어 회피나 무응답으로 판단됨",
+      "progressAfter": {
+        "orientation": 30,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:30 F:0 E:0 T:0",
+      "threshold": 60,
+      "completedElements": [
+        "orientation"
+      ],
+      "skippedElements": [
+        "orientation"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": "feelings",
+      "ending": false,
+      "endReason": null,
+      "questionType": "skip",
+      "genReasoning": "학생이 외적 사실 요소에서 여행 동기만 간단히 언급했으므로, 아직 여행 자체에 대한 기본 정보가 부족합니다. 제주도 사흘 여행의 구체적인 시작점과 첫날 경험, 이동 수단 등을 물어 더 풍부한 외적 사실을 확보해야 합니다.",
+      "acknowledgment": "친구가 제주 사진을 보여줘서 가고 싶으셨군요.",
+      "question": "그 사진을 본 후 실제로 제주도까지 어떻게 이동하셨고, 첫날 일정은 어떻게 잡으셨나요?"
+    },
+    {
+      "at": "2026-06-15T16:28:08.581Z",
+      "exchangeIdx": 3,
+      "userInput": "비 오는 바다를 혼자 보고 있으니 마음이 좀 가라앉았어요.",
+      "activeElementBefore": "feelings",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 80,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalGap": null,
+      "evalFallback": false,
+      "evalReasoning": "학생의 답변은 제주도 여행 중 비 오는 바다를 혼자 보는 경험에 대한 구체적인 감정과 반응을 포함하고 있어 질문의 요소에 충분히 기여했으며, 구체적인 장면, 신체 반응, 개인적 연결을 모두 담고 있어 글 재료로 바로 사용할 수 있는 수준이다.",
+      "progressAfter": {
+        "orientation": 30,
+        "feelings": 80,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:30 F:80 E:0 T:0",
+      "threshold": 60,
+      "completedElements": [
+        "orientation",
+        "feelings"
+      ],
+      "skippedElements": [
+        "orientation"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": "evaluation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "main",
+      "genReasoning": "학생이 '비 오는 바다'라는 구체적 장면을 제시했고, 이는 감정·반응 요소에서 가장 크게 움직인 순간으로 볼 수 있다. 이 장면을 중심으로 내적 반응을 더 깊이 탐구하기 위해 followup 질문을 한다.",
+      "acknowledgment": "친구가 제주 사진을 보여줘서 가고 싶으셨고, 비 오는 바다를 혼자 보며 마음이 가라앉았다고 하셨네요.",
+      "question": "그때 비 소리가 어떤 느낌이었는지, 그리고 그 풍경 속에서 혼자 있다는 생각이 마음에 어떤 파장을 일으켰는지 조금 더 구체적으로 이야기해 주실 수 있을까요?"
+    },
+    {
+      "at": "2026-06-15T16:28:11.275Z",
+      "exchangeIdx": 4,
+      "userInput": "혼자 있는 시간이 생각보다 나한테 필요했구나 싶었어요.",
+      "activeElementBefore": "evaluation",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 20,
+        "takeaway": 0
+      },
+      "evalGap": "비 소리의 구체적 느낌과 혼자 있는 풍경에 대한 감각적 묘사가 빠져 있다.",
+      "evalFallback": false,
+      "evalReasoning": "학생의 답변은 비 소리나 풍경 같은 구체적 장면 대신 자신의 깨달음만 서술하여 질문에 대한 구체적 응답이 부족하며, 의도를 명확히 분류하는 것은 정상적인 답변으로 볼 수 있다.",
+      "progressAfter": {
+        "orientation": 30,
+        "feelings": 80,
+        "evaluation": 20,
+        "takeaway": 0
+      },
+      "progressSummary": "O:30 F:80 E:20 T:0",
+      "threshold": 60,
+      "completedElements": [
+        "orientation",
+        "feelings"
+      ],
+      "skippedElements": [
+        "orientation"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": "evaluation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "followup",
+      "genReasoning": "학생의 직전 답변에서 '혼자 있는 시간의 필요성'이라는 내적 깨달음을 발견했으며, 이는 평가(Evaluation) 요소에서 대상으로의 연결과 의미를 묻는 내용이다.",
+      "acknowledgment": "친구가 제주 사진을 보여줘서 가고 싶으셨다며 비 오는 바다를 혼자 보며 마음이 가라앉았다고 하셨네요.",
+      "question": "비 오는 바다를 보며 마음이 가라앉았던 그 경험이, 제주도에서의 사흘 동안 다른 순간들과 연결지어 볼 때 어떤 의미로 다가왔는지 이야기해 주실 수 있을까요?"
+    },
+    {
+      "at": "2026-06-15T16:28:13.548Z",
+      "exchangeIdx": 5,
+      "userInput": "혼자 있는 시간이 생각보다 나한테 필요했구나 싶었어요.",
+      "activeElementBefore": "evaluation",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 30,
+        "takeaway": 0
+      },
+      "evalGap": "비 오는 바다에서의 구체적인 감각적 묘사와 그 경험이 제주도 다른 순간(예: 자연 탐방, 사람들과의 교류 등)과 어떻게 연결되는지 추가적인 서술이 필요하다.",
+      "evalFallback": false,
+      "evalReasoning": "학생의 답변은 비 오는 바다에서의 고독 경험이 제주도 여행 중 혼자 있는 시간의 필요성을 깨달은 점과 연결되어 의미를 확장했으나, 구체적인 장면·표현·생각이 부족해 글 재료로 바로 쓰기엔 미흡하다.",
+      "progressAfter": {
+        "orientation": 30,
+        "feelings": 80,
+        "evaluation": 50,
+        "takeaway": 0
+      },
+      "progressSummary": "O:30 F:80 E:50 T:0",
+      "threshold": 60,
+      "completedElements": [
+        "orientation",
+        "feelings"
+      ],
+      "skippedElements": [
+        "orientation"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": "evaluation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "followup",
+      "genReasoning": "학생의 직전 답변에서 '비 오는 바다에서의 마음을 가라앉는 경험'이 제주도 여행의 핵심 단서로 등장했습니다. 이 단서를 바탕으로 그 경험이 제주도에서의 다른 순간(예: 자연 탐방, 사람들과의 교류 등)과 어떻게 연결되는지 파고드는 것이 이번 followup 질문의 목표입니다.",
+      "acknowledgment": "친구가 제주 사진을 보여줘서 가고 싶으셨고, 비 오는 바다를 혼자 보며 마음이 가라앉았다고 하셨네요.",
+      "question": "비 내리는 바다를 혼자 바라보며 마음이 가라앉았던 그 경험이, 제주도에서 다른 장면이나 사람들과 만났던 순간들에도 어떤 식으로 연결되어 나타났는지 이야기해 주실 수 있을까요?"
+    },
+    {
+      "at": "2026-06-15T16:28:15.784Z",
+      "exchangeIdx": 6,
+      "userInput": "혼자 있는 시간이 생각보다 나한테 필요했구나 싶었어요.",
+      "activeElementBefore": "evaluation",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 10,
+        "takeaway": 0
+      },
+      "evalGap": "구체적인 제주도 경험과 다른 사람 또는 순간과의 연결 관계",
+      "evalFallback": false,
+      "evalReasoning": "학생의 답변은 비 오는 바다에서의 경험을 '혼자 있는 시간'의 필요성이라는 일반적인 통찰로 추상화했으나, 구체적인 장면·표현·생각이나 제주도 내 다른 순간들과의 연결 고리가 제시되지 않아 해당 평가 요소에 대한 기여도가 낮다.",
+      "progressAfter": {
+        "orientation": 30,
+        "feelings": 80,
+        "evaluation": 60,
+        "takeaway": 0
+      },
+      "progressSummary": "O:30 F:80 E:60 T:0",
+      "threshold": 60,
+      "completedElements": [
+        "orientation",
+        "feelings"
+      ],
+      "skippedElements": [
+        "orientation"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": "evaluation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "followup",
+      "genReasoning": "직전 답변에서 '비 오는 바다를 혼자 보며 마음이 가라앉았다'는 구체적 단서를 발견했음. 이는 여행기 작성 시 중요한 감정·반응 요소로, 고독감과 연결 지어 내적 반응을 더 구체화하도록 유도함.",
+      "acknowledgment": "친구가 제주 사진을 보여줘서 가고 싶으셨고, 비 오는 바다를 혼자 보며 마음이 가라앉았다고 하셨네요.",
+      "question": "비 내리는 바다를 홀로 바라보던 그 순간에, 혹시 마음속에서 어떤 소리나 이미지가 떠올랐나요? 그때의 감각이 제주도에서 다른 경험들과 어떻게 이어져 가는지도 궁금해요."
+    },
+    {
+      "at": "2026-06-15T16:28:18.240Z",
+      "exchangeIdx": 7,
+      "userInput": "혼자 있는 시간이 생각보다 나한테 필요했구나 싶었어요.",
+      "activeElementBefore": "evaluation",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 10,
+        "takeaway": 0
+      },
+      "evalGap": "비 내리는 바다의 구체적 감각(소리, 이미지)과 제주도 내 다른 경험과의 연결 고리 서술이 부족함.",
+      "evalFallback": false,
+      "evalReasoning": "학생의 답변은 '혼자 있는 시간이 생각보다 나에게 필요했다'는 감정과 깨달음을 제시했으나, 비 내리는 바다의 구체적인 소리나 이미지, 감각적 경험, 제주도 내 다른 경험과의 연결고리에 대한 구체적인 서술이 결여되어 있어 평가 요소에서 낮은 점수를 받는다.",
+      "progressAfter": {
+        "orientation": 30,
+        "feelings": 80,
+        "evaluation": 70,
+        "takeaway": 0
+      },
+      "progressSummary": "O:30 F:80 E:70 T:0",
+      "threshold": 60,
+      "completedElements": [
+        "orientation",
+        "feelings"
+      ],
+      "skippedElements": [
+        "orientation"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": "evaluation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "followup",
+      "genReasoning": "이전 질문에서 '비 내리는 바다를 혼자 보며 마음이 가라앉았다'는 구체적 단서(비 소리, 이미지, 감각)를 잡아 평가 요소를 파고들었지만, 여전히 '혼자 있는 시간이 필요했다'는 추상적 반응에 머물렀다. 이제 그 순간을 더 깊이 파고들어 감각적 요소(비 소리, 이미지)와 내적 의미(혼자 있음이 주는 가치)를 연결시키는 방향으로 followup 질문을 구성한다.",
+      "acknowledgment": "친구가 제주 사진을 보여줘서 가고 싶으셨고, 비 오는 바다를 혼자 보며 마음이 가라앉았다고 하셨네요.",
+      "question": "비 내리는 바다를 홀로 바라보던 그 순간에, 마음속에서 어떤 소리나 이미지가 떠오르며 스스로에게 어떤 의미를 주었는지 구체적으로 이야기해 주실 수 있을까요?"
+    },
+    {
+      "at": "2026-06-15T16:28:20.488Z",
+      "exchangeIdx": 8,
+      "userInput": "혼자 있는 시간이 생각보다 나한테 필요했구나 싶었어요.",
+      "activeElementBefore": "evaluation",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 20,
+        "takeaway": 0
+      },
+      "evalGap": "비 내리는 바다의 구체적인 풍경이나 감각적 이미지, 내적 대화 또는 반성적 사고의 세부 내용이 미흡함",
+      "evalFallback": false,
+      "evalReasoning": "간결한 자기 성찰이 포함되어 있으나 구체적 장면이나 표현이 부족해 30~50대 delta 범위 내에서 낮은 점수를 부여함",
+      "progressAfter": {
+        "orientation": 30,
+        "feelings": 80,
+        "evaluation": 90,
+        "takeaway": 0
+      },
+      "progressSummary": "O:30 F:80 E:90 T:0",
+      "threshold": 60,
+      "completedElements": [
+        "orientation",
+        "feelings",
+        "evaluation"
+      ],
+      "skippedElements": [
+        "orientation"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": "takeaway",
+      "ending": false,
+      "endReason": null,
+      "questionType": "main",
+      "genReasoning": "학생이 '친구의 제주 사진'이라는 계기와 '비 오는 바다를 혼자 보며 마음이 가라앉았다'는 경험을 이야기했지만, '왜 이 경험이 필요했는지'에 대한 내적 의미를 더 깊이 탐구해야 한다. '깨달음·여운' 요소는 아직 본격적으로 다루지 않았으므로, '왜 필요했는가'라는 원인 탐구를 통해 내적 성찰을 이끌어내는 것이 적절하다. 학생의 답변을 참고하여 '필요하다는 느낌'이 어떤 구체적인 내적 신호나 변화에서 비롯되었는지 묻는다.",
+      "acknowledgment": "친구가 제주 사진을 보여줘서 가고 싶으셨고, 비 오는 바다를 혼자 보며 마음이 가라앉았다고 하셨네요.",
+      "question": "그 순간부터 혼자 있는 시간이 내 안에 어떤 신호로 다가왔는지, 구체적으로 어떤 느낌이나 생각이 스쳐 지나갔는지 말씀해 주실 수 있을까요?"
+    },
+    {
+      "at": "2026-06-15T16:28:21.950Z",
+      "exchangeIdx": 9,
+      "userInput": "돌아와서는 일상에 좀 더 감사하게 됐어요.",
+      "activeElementBefore": "takeaway",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 30
+      },
+      "evalGap": "제주에서의 비 오는 바다 풍경과 내면 신호가 어떻게 일상 감사로 이어졌는지 구체적인 심리적 연결 고리가 부족합니다.",
+      "evalFallback": false,
+      "evalReasoning": "학생의 답변은 '일상에 감사하게 되었다'는 추상적인 변화를 서술했으나, 제주에서의 특정 순간(비 오는 바다, 혼자 있는 시간)과 연결된 구체적인 느낌, 생각, 신호가 제시되지 않았다.",
+      "progressAfter": {
+        "orientation": 30,
+        "feelings": 80,
+        "evaluation": 90,
+        "takeaway": 30
+      },
+      "progressSummary": "O:30 F:80 E:90 T:30",
+      "threshold": 60,
+      "completedElements": [
+        "orientation",
+        "feelings",
+        "evaluation",
+        "takeaway"
+      ],
+      "skippedElements": [
+        "orientation"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": null,
+      "ending": true,
+      "endReason": "all-done",
+      "questionType": "closing",
+      "genReasoning": null,
+      "acknowledgment": null,
+      "question": "제주도의 추억이 일상에 따뜻한 빛으로 스며들었으면 좋겠어요. 다시 만나서 이야기를 나눌 날을 기대하며, 오늘도 행복한 하루 보내세요."
+    }
+  ],
+  "transcript": [
+    {
+      "id": "88ce4994-b2e0-4916-9d7e-12b5e39a81d4",
+      "role": "assistant",
+      "content": "먼저 제주도에서 보낸 사흘에 대해 좀 더 들려주세요. 그것을 어떻게 접하게 되셨고, 어떤 계기로 이 글을 쓰게 되셨는지 편하게 이야기해 주세요.",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "d20f1540-a991-4839-941e-eeb8ab001d14",
+      "role": "user",
+      "content": "친구가 제주 사진을 보여줘서 갑자기 가고 싶어졌어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "704fdaea-e6df-481b-9648-7ae662528d55",
+      "role": "assistant",
+      "content": "친구가 제주 사진을 보여줘서 가고 싶으셨군요.\n\n그 사진을 본 후, 제주도까지 어떻게 이동하셨고, 첫날 일정은 어떻게 잡으셨나요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "eaa58133-d247-4dbf-996d-80797d62e403",
+      "role": "user",
+      "content": "친구가 제주 사진을 보여줘서 갑자기 가고 싶어졌어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "b5f014a8-155b-438b-83df-f1dad63d2685",
+      "role": "assistant",
+      "content": "친구가 제주 사진을 보여줘서 가고 싶으셨군요.\n\n그 사진을 본 후 실제로 제주도까지 어떻게 이동하셨고, 첫날 일정은 어떻게 잡으셨나요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "515d11b5-2cf1-4611-b6e4-164b42eadea5",
+      "role": "user",
+      "content": "비 오는 바다를 혼자 보고 있으니 마음이 좀 가라앉았어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "b3c7597f-b20f-4ae3-8508-b2e8087a1005",
+      "role": "assistant",
+      "content": "친구가 제주 사진을 보여줘서 가고 싶으셨고, 비 오는 바다를 혼자 보며 마음이 가라앉았다고 하셨네요.\n\n그때 비 소리가 어떤 느낌이었는지, 그리고 그 풍경 속에서 혼자 있다는 생각이 마음에 어떤 파장을 일으켰는지 조금 더 구체적으로 이야기해 주실 수 있을까요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "6dc4f95b-b853-482c-9c5a-ab526e7585f6",
+      "role": "user",
+      "content": "혼자 있는 시간이 생각보다 나한테 필요했구나 싶었어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "4fb50926-bcda-4a84-9b40-1a9014026033",
+      "role": "assistant",
+      "content": "친구가 제주 사진을 보여줘서 가고 싶으셨다며 비 오는 바다를 혼자 보며 마음이 가라앉았다고 하셨네요.\n\n비 오는 바다를 보며 마음이 가라앉았던 그 경험이, 제주도에서의 사흘 동안 다른 순간들과 연결지어 볼 때 어떤 의미로 다가왔는지 이야기해 주실 수 있을까요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "63488c0e-2795-4d5b-98f2-481caeb43869",
+      "role": "user",
+      "content": "혼자 있는 시간이 생각보다 나한테 필요했구나 싶었어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "3edfdf1f-3bfc-4278-92b4-1ef3f4cb480b",
+      "role": "assistant",
+      "content": "친구가 제주 사진을 보여줘서 가고 싶으셨고, 비 오는 바다를 혼자 보며 마음이 가라앉았다고 하셨네요.\n\n비 내리는 바다를 혼자 바라보며 마음이 가라앉았던 그 경험이, 제주도에서 다른 장면이나 사람들과 만났던 순간들에도 어떤 식으로 연결되어 나타났는지 이야기해 주실 수 있을까요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "b23c1637-f6ea-4eef-813f-1e0c7cc3ca47",
+      "role": "user",
+      "content": "혼자 있는 시간이 생각보다 나한테 필요했구나 싶었어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "de22d036-537b-40f0-a3ad-ee328a8063b7",
+      "role": "assistant",
+      "content": "친구가 제주 사진을 보여줘서 가고 싶으셨고, 비 오는 바다를 혼자 보며 마음이 가라앉았다고 하셨네요.\n\n비 내리는 바다를 홀로 바라보던 그 순간에, 혹시 마음속에서 어떤 소리나 이미지가 떠올랐나요? 그때의 감각이 제주도에서 다른 경험들과 어떻게 이어져 가는지도 궁금해요.",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "285823a6-6d93-494b-b159-ed4c711b7078",
+      "role": "user",
+      "content": "혼자 있는 시간이 생각보다 나한테 필요했구나 싶었어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "e5a3c9ec-0668-4e5d-8aae-9784fb6cdbc5",
+      "role": "assistant",
+      "content": "친구가 제주 사진을 보여줘서 가고 싶으셨고, 비 오는 바다를 혼자 보며 마음이 가라앉았다고 하셨네요.\n\n비 내리는 바다를 홀로 바라보던 그 순간에, 마음속에서 어떤 소리나 이미지가 떠오르며 스스로에게 어떤 의미를 주었는지 구체적으로 이야기해 주실 수 있을까요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "081d8fdb-b6fb-4774-a059-aa993659d414",
+      "role": "user",
+      "content": "혼자 있는 시간이 생각보다 나한테 필요했구나 싶었어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "b09b1750-3d04-49b5-bdab-848180d27f39",
+      "role": "assistant",
+      "content": "친구가 제주 사진을 보여줘서 가고 싶으셨고, 비 오는 바다를 혼자 보며 마음이 가라앉았다고 하셨네요.\n\n그 순간부터 혼자 있는 시간이 내 안에 어떤 신호로 다가왔는지, 구체적으로 어떤 느낌이나 생각이 스쳐 지나갔는지 말씀해 주실 수 있을까요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "e753cf54-405d-4160-9c96-c9742f8791bf",
+      "role": "user",
+      "content": "돌아와서는 일상에 좀 더 감사하게 됐어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "role": "assistant",
+      "type": "closing",
+      "question": "제주도의 추억이 일상에 따뜻한 빛으로 스며들었으면 좋겠어요. 다시 만나서 이야기를 나눌 날을 기대하며, 오늘도 행복한 하루 보내세요.",
+      "intent": "answer",
+      "questionType": "closing",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 30
+      },
+      "progressAfter": {
+        "orientation": 30,
+        "feelings": 80,
+        "evaluation": 90,
+        "takeaway": 30
+      },
+      "completedElements": [
+        "orientation",
+        "feelings",
+        "evaluation",
+        "takeaway"
+      ],
+      "skippedElements": [
+        "orientation"
+      ],
+      "currentElement": null,
+      "ending": true,
+      "endReason": "all-done"
+    }
+  ]
+}

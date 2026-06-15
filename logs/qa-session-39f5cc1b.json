@@ -1,0 +1,378 @@
+{
+  "meta": {
+    "genre": "여행기",
+    "topic": "제주도에서 보낸 사흘",
+    "writingFrequency": "한 달에 한두 번 씀",
+    "interventionLevel": null,
+    "interventionLabel": null,
+    "completionThreshold": 60,
+    "followupThreshold": "low",
+    "updatedAt": "2026-06-15T16:23:49.639Z"
+  },
+  "debugLog": [
+    {
+      "at": "2026-06-15T16:23:36.336Z",
+      "exchangeIdx": 1,
+      "userInput": "그냥 좋았어요.",
+      "activeElementBefore": "orientation",
+      "intent": "skip",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalGap": null,
+      "evalFallback": false,
+      "evalReasoning": "학생의 답변은 '그냥 좋았어요' 라는 단순한 감정 표현만 포함하고 있어, 제주도 여행을 알게 된 경로나 글을 쓰게 된 동기와 같은 외적 사실 및 구체적 계기, 상황을 전혀 언급하지 않았기 때문에 해당 요소에 대한 기여도가 매우 낮다.",
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:0 F:0 E:0 T:0",
+      "threshold": 60,
+      "completedElements": [
+        "orientation"
+      ],
+      "skippedElements": [
+        "orientation"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": "feelings",
+      "ending": false,
+      "endReason": null,
+      "questionType": "skip",
+      "genReasoning": "학생이 '그냥 좋았어요'라고 매우 짧고 추상적으로 답해 구체성이 부족한 상황이므로, 같은 감정 요소를 다른 각도로 파고들기 위해 신체 감각이나 주변 분위기를 묻는 꼬리 질문을 던집니다.",
+      "acknowledgment": "학생이 '그냥 좋았어요'라고 답했습니다.",
+      "question": "그 순간 어떤 소리나 향기, 혹은 주변 풍경이 마음에 와닿았나요?"
+    },
+    {
+      "at": "2026-06-15T16:23:38.169Z",
+      "exchangeIdx": 2,
+      "userInput": "음 잘 모르겠어요.",
+      "activeElementBefore": "feelings",
+      "intent": "clarify",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalGap": null,
+      "evalFallback": false,
+      "evalReasoning": "학생의 답변은 질문에 대한 내용을 제공하지 않고 명확성을 확인하지 않으며, 특정 사례나 묘사가 전혀 포함되어 있지 않아 delta 0",
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:0 F:0 E:0 T:0",
+      "threshold": 60,
+      "completedElements": [
+        "orientation"
+      ],
+      "skippedElements": [
+        "orientation"
+      ],
+      "clarifyStreak": 1,
+      "transitionedTo": "feelings",
+      "ending": false,
+      "endReason": null,
+      "questionType": "clarification",
+      "genReasoning": "학생이 '그냥 좋았어요'라고 답했으나 '잘 모르겠어요'라고 말하며 구체적 감정을 떠올리지 못했다. 감정 요소에서 구체적 장면이나 감각을 끌어내기 위해 다시 질문을 던지지만, 이번에는 감정을 어떻게 표현해야 할지 어려워하는 학생의 상태를 확인하고, 내적 반응보다는 외적 자극에 초점을 맞춘 followup 질문으로 전환한다.",
+      "acknowledgment": "학생이 '그냥 좋았어요'라고 답했으나 구체적으로 떠올리기 어려워하는 것 같아요.",
+      "question": "그때 눈에 들어온 풍경이나 들린 소리 중에서 지금도 기억에 남는 게 있으신가요?"
+    },
+    {
+      "at": "2026-06-15T16:23:39.927Z",
+      "exchangeIdx": 3,
+      "userInput": "괜찮았어요.",
+      "activeElementBefore": "feelings",
+      "intent": "skip",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalGap": null,
+      "evalFallback": false,
+      "evalReasoning": "학생은 '괜찮았어요'라고만 대답해 구체적인 풍경, 소리, 감정, 개인적 연결 등이 전혀 제시되지 않았으며, 이전 질문에서 요구된 기억력이나 세부 사항을 회피하거나 무시한 것으로 보임",
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:0 F:0 E:0 T:0",
+      "threshold": 60,
+      "completedElements": [
+        "orientation",
+        "feelings"
+      ],
+      "skippedElements": [
+        "orientation",
+        "feelings"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": "evaluation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "skip",
+      "genReasoning": "학생이 '괜찮았어요'라는 일반적인 표현만 반복하여 구체성이 부족하다고 판단됨. 외적 사실 요소에서 여행 계획이나 준비 과정 등 구체적인 계기를 더 끌어내야 함.",
+      "acknowledgment": "학생이 '괜찮았어요'라고 답변하며 구체적인 상황 묘사에 어려움을 보이는 것 같아요.",
+      "question": "제주도에서 사흘을 보내기로 마음먹은 구체적인 이유나, 여행을 계획하게 된 계기는 무엇인가요?"
+    },
+    {
+      "at": "2026-06-15T16:23:43.049Z",
+      "exchangeIdx": 4,
+      "userInput": "특별한 건 없었어요.",
+      "activeElementBefore": "evaluation",
+      "intent": "skip",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalGap": null,
+      "evalFallback": false,
+      "evalReasoning": "학생의 답변은 '특별한 건 없었어요'라는 진부한 표현으로 구체적 상황 묘사와 깊이가 전혀 없으며, 질문에 대한 회피성 답변에 가깝다.",
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:0 F:0 E:0 T:0",
+      "threshold": 60,
+      "completedElements": [
+        "orientation",
+        "feelings",
+        "evaluation"
+      ],
+      "skippedElements": [
+        "orientation",
+        "feelings",
+        "evaluation"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": "takeaway",
+      "ending": false,
+      "endReason": null,
+      "questionType": "skip",
+      "genReasoning": "학생이 '특별한 건 없었어요'라고 답변하며 외적 사실 요소에 대한 구체성이 부족함을 보였다. 이 요소를 처음 여는 메인 질문이므로, 같은 요소에 대한 다른 각도로 접근하여 여행 계기 관련 구체적 상황이나 감정 연결고리를 끌어내야 한다.",
+      "acknowledgment": "학생은 '특별한 건 없었다'고 답하며 구체적인 계기 묘사에 어려움을 보이고 있어요.",
+      "question": "여행을 떠나기로 한 구체적인 이유나, 제주도에서 사흘을 보내고 싶었던 특정한 마음이 있었다면 어떤 것이었나요?"
+    },
+    {
+      "at": "2026-06-15T16:23:47.795Z",
+      "exchangeIdx": 5,
+      "userInput": "재밌었어요.",
+      "activeElementBefore": "takeaway",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 10
+      },
+      "evalGap": "여행 떠나기 전의 구체적인 동기나 제주도에서 사흘을 보내고 싶었던 특정한 마음을 언급하지 않음",
+      "evalFallback": false,
+      "evalReasoning": "학생의 답변은 '재밌었어요'라는 일반적 서술로, 특별한 이유로 여행을 떠나거나 제주도에서 사흘을 보낸 구체적 계기 및 마음에 대한 설명이 없으며, 글 재료로 쓰기에도 부족한 수준을 보인다.",
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 10
+      },
+      "progressSummary": "O:0 F:0 E:0 T:10",
+      "threshold": 60,
+      "completedElements": [
+        "orientation",
+        "feelings",
+        "evaluation"
+      ],
+      "skippedElements": [
+        "orientation",
+        "feelings",
+        "evaluation"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": "takeaway",
+      "ending": false,
+      "endReason": null,
+      "questionType": "followup",
+      "genReasoning": "학생이 '재밌었어요'라고 대답했지만, 구체적인 여행 동기나 제주도에서 특별히 보내고 싶었던 마음이 드러나지 않아 요소에 대한 깊이가 부족한 상황입니다. 직전 답변에 등장한 '재밌었다'는 감정 표현을 바탕으로 그 순간의 구체적 동기나 마음을 더 끌어내기 위해 followup 질문을 구성해야 합니다.",
+      "acknowledgment": "학생이 '재밌었어요'라고 답해 주셔서, 그때의 기분이나 동기 중 구체적인 부분이 있었어요",
+      "question": "제주도에서 보낸 사흘을 재밌게 느끼게 해준 특별한 동기나, 그 시간을 보내고 싶었던 구체적인 마음이 있었다면 어떤 것이었나요?"
+    },
+    {
+      "at": "2026-06-15T16:23:49.639Z",
+      "exchangeIdx": 6,
+      "userInput": "그랬어요.",
+      "activeElementBefore": "takeaway",
+      "intent": "skip",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalGap": null,
+      "evalFallback": false,
+      "evalReasoning": "학생이 '그랬어요.'라고 짧게 답하여 구체적인 동기나 마음에 대한 내용이 전혀 포함되지 않았으며, 이전 대화를 회피하거나 간단히 인정하는 수준의 답변이다.",
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 10
+      },
+      "progressSummary": "O:0 F:0 E:0 T:10",
+      "threshold": 60,
+      "completedElements": [
+        "orientation",
+        "feelings",
+        "evaluation",
+        "takeaway"
+      ],
+      "skippedElements": [
+        "orientation",
+        "feelings",
+        "evaluation",
+        "takeaway"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": null,
+      "ending": true,
+      "endReason": "all-done",
+      "questionType": "closing",
+      "genReasoning": null,
+      "acknowledgment": null,
+      "question": "잘 들어주셔서 고마워요. 좋은 추억이 되길 바라고, 또 만나요."
+    }
+  ],
+  "transcript": [
+    {
+      "id": "39f5cc1b-0a05-4546-94a4-c0010296e99f",
+      "role": "assistant",
+      "content": "제주도 여행을 어떻게 알게 되셨고, 어떤 계기로 이 글을 쓰고 싶으셨는지 이야기해 주실 수 있을까요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "648fa188-4158-4c8e-aa2a-e739bb72dc8f",
+      "role": "user",
+      "content": "그냥 좋았어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "005461ad-c770-4c2f-a58b-49501519bd31",
+      "role": "assistant",
+      "content": "학생이 '그냥 좋았어요'라고 답했습니다.\n\n그 순간 어떤 소리나 향기, 혹은 주변 풍경이 마음에 와닿았나요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "1dd7d2e7-8f89-4f8f-9717-810a06d73f0e",
+      "role": "user",
+      "content": "음 잘 모르겠어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "803ea0a9-5325-417d-ba93-9da7e174f605",
+      "role": "assistant",
+      "content": "학생이 '그냥 좋았어요'라고 답했으나 구체적으로 떠올리기 어려워하는 것 같아요.\n\n그때 눈에 들어온 풍경이나 들린 소리 중에서 지금도 기억에 남는 게 있으신가요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "7623ff67-0a6c-454b-a76b-6455b4913188",
+      "role": "user",
+      "content": "괜찮았어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "83fd2f87-364b-4190-b98a-0639f1af8640",
+      "role": "assistant",
+      "content": "학생이 '괜찮았어요'라고 답변하며 구체적인 상황 묘사에 어려움을 보이는 것 같아요.\n\n제주도에서 사흘을 보내기로 마음먹은 구체적인 이유나, 여행을 계획하게 된 계기는 무엇인가요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "9b74500e-6aa7-45be-959d-e3f53a971000",
+      "role": "user",
+      "content": "특별한 건 없었어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "de984b1e-09b0-4ea3-84be-ef25f087a8fd",
+      "role": "assistant",
+      "content": "학생은 '특별한 건 없었다'고 답하며 구체적인 계기 묘사에 어려움을 보이고 있어요.\n\n여행을 떠나기로 한 구체적인 이유나, 제주도에서 사흘을 보내고 싶었던 특정한 마음이 있었다면 어떤 것이었나요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "59bf3189-7c13-45c1-83b6-70936ec94734",
+      "role": "user",
+      "content": "재밌었어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "b803c33d-00ae-4d82-b86f-513e482b3885",
+      "role": "assistant",
+      "content": "학생이 '재밌었어요'라고 답해 주셔서, 그때의 기분이나 동기 중 구체적인 부분이 있었어요\n\n제주도에서 보낸 사흘을 재밌게 느끼게 해준 특별한 동기나, 그 시간을 보내고 싶었던 구체적인 마음이 있었다면 어떤 것이었나요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "0f05e6b4-220e-4056-b4fb-0cff93120605",
+      "role": "user",
+      "content": "그랬어요.",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "role": "assistant",
+      "type": "closing",
+      "question": "잘 들어주셔서 고마워요. 좋은 추억이 되길 바라고, 또 만나요.",
+      "intent": "skip",
+      "questionType": "closing",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 10
+      },
+      "completedElements": [
+        "orientation",
+        "feelings",
+        "evaluation",
+        "takeaway"
+      ],
+      "skippedElements": [
+        "orientation",
+        "feelings",
+        "evaluation",
+        "takeaway"
+      ],
+      "currentElement": null,
+      "ending": true,
+      "endReason": "all-done"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "genre": "여행기",
+    "topic": "제주도에서 보낸 사흘",
+    "writingFrequency": "한 달에 한두 번 씀",
+    "interventionLevel": null,
+    "interventionLabel": null,
+    "completionThreshold": 60,
+    "followupThreshold": "low",
+    "updatedAt": "2026-06-15T16:23:34.492Z"
+  },
+  "debugLog": [
+    {
+      "at": "2026-06-15T16:23:34.492Z",
+      "exchangeIdx": 0,
+      "userInput": null,
+      "activeElementBefore": "orientation",
+      "intent": "answer",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalGap": null,
+      "evalFallback": false,
+      "evalReasoning": null,
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:0 F:0 E:0 T:0",
+      "threshold": 60,
+      "completedElements": [],
+      "skippedElements": [],
+      "clarifyStreak": 0,
+      "transitionedTo": "orientation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "main",
+      "genReasoning": "첫 턴이라 직전 답변이 없으므로 acknowledgment를 빈 문자열로 두고, 외적 사실(Orientation)을 여는 메인 질문을 던진다. 사용자의 막연함을 해소하기 위해 '어떻게 접하게 되었는지', '어떤 계기로 글을 쓰게 되었는지' 구체적으로 물어보는 것이 소크라테스식 발문법의 핵심이다.",
+      "acknowledgment": null,
+      "question": "제주도 여행을 어떻게 알게 되셨고, 어떤 계기로 이 글을 쓰고 싶으셨는지 이야기해 주실 수 있을까요?"
+    }
+  ],
+  "transcript": [
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "question": "제주도 여행을 어떻게 알게 되셨고, 어떤 계기로 이 글을 쓰고 싶으셨는지 이야기해 주실 수 있을까요?",
+      "intent": "answer",
+      "questionType": "main",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressAfter": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "completedElements": [],
+      "skippedElements": [],
+      "currentElement": "orientation",
+      "ending": false,
+      "endReason": null
+    }
+  ]
+}

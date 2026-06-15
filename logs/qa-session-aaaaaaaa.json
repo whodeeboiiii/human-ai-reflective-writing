@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "genre": "여행기",
+    "topic": "제주도에서 보낸 사흘",
+    "writingFrequency": "한 달에 한두 번 씀",
+    "interventionLevel": null,
+    "interventionLabel": null,
+    "completionThreshold": 60,
+    "followupThreshold": "low",
+    "updatedAt": "2026-06-15T16:42:03.391Z"
+  },
+  "debugLog": [
+    {
+      "at": "2026-06-15T16:26:03.988Z",
+      "exchangeIdx": 1,
+      "userInput": "음 잘 모르겠어요",
+      "activeElementBefore": "feelings",
+      "intent": "skip",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalGap": null,
+      "evalFallback": false,
+      "evalReasoning": "명시적 skip 버튼 (결정론적 감지).",
+      "progressAfter": {
+        "orientation": 80,
+        "feelings": 20,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:80 F:20 E:0 T:0",
+      "threshold": 60,
+      "completedElements": [
+        "orientation",
+        "feelings"
+      ],
+      "skippedElements": [
+        "feelings"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": "evaluation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "skip",
+      "genReasoning": "학생이 '잘 모르겠어요'라고 답해 감정·반응 요소에 대한 구체적 묘사가 부족하다는 신호이므로, 같은 요소 내에서 평가 측면으로 각도를 전환해 내적 의미를 탐색하도록 유도한다.",
+      "acknowledgment": "잘 모르겠다는 말씀에 너무 답답한 마음이 들 수 있어요.",
+      "question": "그 낯선 냄새가 마음에 어땠는지, 왜 그렇게 느꼈는지 한 번 생각해 볼 수 있을까요?"
+    },
+    {
+      "at": "2026-06-15T16:42:03.391Z",
+      "exchangeIdx": 1,
+      "userInput": "음 잘 모르겠어요",
+      "activeElementBefore": "feelings",
+      "intent": "skip",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "evalGap": null,
+      "evalFallback": false,
+      "evalReasoning": "명시적 skip 버튼 (결정론적 감지).",
+      "progressAfter": {
+        "orientation": 80,
+        "feelings": 20,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressSummary": "O:80 F:20 E:0 T:0",
+      "threshold": 60,
+      "completedElements": [
+        "orientation",
+        "feelings"
+      ],
+      "skippedElements": [
+        "feelings"
+      ],
+      "clarifyStreak": 0,
+      "transitionedTo": "evaluation",
+      "ending": false,
+      "endReason": null,
+      "questionType": "skip",
+      "genReasoning": "학생의 답변 '음 잘 모르겠어요'가 해당 요소에 대한 구체성이 부족함을 나타낸다.",
+      "acknowledgment": "학생이 '음 잘 모르겠어요'라고 답한 것을 확인했다.",
+      "question": "제주도의 아침 해변에 서서 처음 마주한 풍경이나 소리에 대해 구체적으로 떠오르는 것이 있나요?"
+    }
+  ],
+  "transcript": [
+    {
+      "id": "aaaaaaaa-1111-1111-1111-111111111111",
+      "role": "assistant",
+      "content": "그 낯선 냄새가 어떤 느낌이었나요?",
+      "type": "llm-generated",
+      "timestamp": "00:00"
+    },
+    {
+      "id": "bbbbbbbb-2222-2222-2222-222222222222",
+      "role": "user",
+      "content": "음 잘 모르겠어요",
+      "type": "predefined",
+      "timestamp": "00:00"
+    },
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "content": "학생이 '음 잘 모르겠어요'라고 답한 것을 확인했다.",
+      "question": "제주도의 아침 해변에 서서 처음 마주한 풍경이나 소리에 대해 구체적으로 떠오르는 것이 있나요?",
+      "intent": "skip",
+      "questionType": "skip",
+      "evalDelta": {
+        "orientation": 0,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "progressAfter": {
+        "orientation": 80,
+        "feelings": 20,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "completedElements": [
+        "orientation",
+        "feelings"
+      ],
+      "skippedElements": [
+        "feelings"
+      ],
+      "currentElement": "evaluation",
+      "ending": false,
+      "endReason": null
+    }
+  ]
+}

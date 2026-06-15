@@ -11,7 +11,7 @@ interface MaterialCardProps {
   onUpdate: (content: string) => void;
   onDelete: () => void;
   canDelete: boolean;
-  /** When set, renders an ordinal badge (used in the writing-order column). */
+  /** Ordinal badge shown at the top-left of the card. */
   orderNumber?: number;
   /** aria-label for the remove button. */
   deleteAriaLabel?: string;
@@ -40,6 +40,8 @@ export function MaterialCard({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    // Cursor reflects whether a drag is active; otherwise signal the card is draggable
+    cursor: isDragging ? 'grabbing' : 'grab',
   };
 
   function handleBlur() {
@@ -54,6 +56,11 @@ export function MaterialCard({
       ref={setNodeRef}
       style={style}
       className={`${styles.card} ${isDragging ? styles.cardDragging : ''}`}
+      // Spread drag attributes + listeners on the whole card so any non-textarea
+      // area acts as a drag handle.  The textarea and delete button each call
+      // stopPropagation on pointerdown so they never initiate a drag.
+      {...attributes}
+      {...listeners}
     >
       <div className={styles.cardTop}>
         <div className={styles.cardTopLeft}>
@@ -62,20 +69,13 @@ export function MaterialCard({
               {orderNumber}
             </span>
           )}
-          <button
-            type="button"
-            className={styles.dragHandle}
-            aria-label="드래그하여 이동"
-            {...attributes}
-            {...listeners}
-          >
-            ⠿
-          </button>
         </div>
         {canDelete && (
           <button
             type="button"
             className={styles.deleteBtn}
+            // Prevent card-level drag from firing when tapping the delete button
+            onPointerDown={(e) => e.stopPropagation()}
             onClick={onDelete}
             aria-label={deleteAriaLabel}
           >
@@ -89,9 +89,12 @@ export function MaterialCard({
         value={draft}
         onChange={(e) => setDraft(e.target.value)}
         onBlur={handleBlur}
+        // Prevent card-level drag from firing when the user clicks or selects text
+        onPointerDown={(e) => e.stopPropagation()}
         rows={3}
         aria-label="카드 내용"
         placeholder="내용을 입력하세요"
+        style={{ cursor: 'text' }}
       />
     </div>
   );

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import Placeholder from '@tiptap/extension-placeholder';
 import { useStructuredInputStore } from '@/store/structuredInputStore';
 import { useIdeationStore } from '@/store/ideationStore';
 import { useWritingStore } from '@/store/writingStore';
@@ -12,6 +13,7 @@ import { GENRE_LABEL } from '@/types/community';
 import { publishPost } from '@/lib/community';
 import { PublishModal } from '@/components/community/PublishModal';
 import { PublishSuccess } from '@/components/community/PublishSuccess';
+import { StageIntroToast } from '@/components/common/StageIntroToast';
 import { OutlineSidebar } from './OutlineSidebar';
 import { AnswersSidebar } from './AnswersSidebar';
 import { EditorArea } from './EditorArea';
@@ -82,7 +84,7 @@ export default function WritingView({ sessionId }: { sessionId: string }) {
       .map((c) => c.content)
       .filter(Boolean)
       .join('\n')
-      .slice(0, 300);
+      .slice(0, 800);
   }, [orderedCards]);
 
   // ── Publish ──
@@ -132,10 +134,13 @@ export default function WritingView({ sessionId }: { sessionId: string }) {
   const [correctedText, setCorrectedText] = useState<string | null>(null);
   const [originalSel, setOriginalSel] = useState('');
 
-  const triggerSuggestRef = useRef<() => void>(() => {});
+  const triggerSuggestRef = useRef<() => void>(() => { });
 
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      Placeholder.configure({ placeholder: '여기서 글을 시작해 보세요…' }),
+    ],
     content: typeof window !== 'undefined' ? useWritingStore.getState().draft : '',
     immediatelyRender: false,
     editorProps: {
@@ -328,6 +333,14 @@ export default function WritingView({ sessionId }: { sessionId: string }) {
 
   return (
     <div className={styles.page}>
+      {/* Stage intro toast */}
+      <StageIntroToast
+        eyebrow="Writing · 안내"
+        title="이제 직접 써볼 시간이에요"
+        body="왼쪽 아웃라인을 참고하며 자유롭게 써보세요. Tab 키 또는 우클릭으로 AI 도움을 받을 수 있어요."
+        durationMs={5000}
+      />
+
       {/* Top bar — visual continuity with Ideation, but a distinct phase badge */}
       <header className={styles.top}>
         <Link
@@ -373,9 +386,8 @@ export default function WritingView({ sessionId }: { sessionId: string }) {
 
       {/* Three-column layout: outline (left) · editor · answers (right) */}
       <div
-        className={`${styles.layout} ${sidebarOpen ? '' : styles.layoutCollapsed} ${
-          answersOpen ? '' : styles.layoutRightCollapsed
-        }`}
+        className={`${styles.layout} ${sidebarOpen ? '' : styles.layoutCollapsed} ${answersOpen ? '' : styles.layoutRightCollapsed
+          }`}
       >
         <OutlineSidebar
           cards={orderedCards}

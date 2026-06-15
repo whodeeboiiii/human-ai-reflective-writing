@@ -401,14 +401,12 @@
   padding: 24px 32px 160px;
   min-height: calc(100vh - 120px);
 }
-.editorPlaceholder {
-  position: absolute;
-  top: 24px;
-  left: 32px;
+/* Tiptap Placeholder Extension */
+.prose p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
   pointer-events: none;
-  font-family: var(--serif);
-  font-size: 1.0625rem;
-  line-height: 1.8;
   color: var(--ink-faint);
   font-style: italic;
 }

@@ -26,7 +26,7 @@
   "question": "이번 턴에 사용자에게 던질 질문 정확히 한 개. 예고·힌트·예시 없이 질문 문장 하나만.",
   "questionType": "main | followup | clarification | skip | closing",
   "currentElement": "orientation | feelings | evaluation | takeaway | null",
-  "elementProgress": {
+  "elementProgressDelta": {
     "orientation": 0,
     "feelings": 0,
     "evaluation": 0,
@@ -42,7 +42,7 @@
   "question": "다음 요소의 메인 질문 (새로운 요소 시작)",
   "questionType": "skip",
   "currentElement": "feelings",
-  "elementProgress": { "orientation": 0-100, "feelings": 0, "evaluation": 0, "takeaway": 0 },
+  "elementProgressDelta": { "orientation": 0, "feelings": 0, "evaluation": 0, "takeaway": 0 },
   "isDone": false
 }
 
@@ -53,7 +53,7 @@
   "question": "마무리 인사 한 문장",
   "questionType": "closing",
   "currentElement": null,
-  "elementProgress": { "orientation": 0, "feelings": 0, "evaluation": 0, "takeaway": 0 },
+  "elementProgressDelta": { "orientation": 0, "feelings": 0, "evaluation": 0, "takeaway": 0 },
   "isDone": true
 }
 
@@ -64,11 +64,17 @@
 - 메인 질문 또는 꼬리(followup) 질문이 특정 요소를 겨냥하면 그 요소명("orientation" | "feelings" | "evaluation" | "takeaway").
 - questionType이 "clarification" | "skip" | "closing"인 경우 null.
 
-[elementProgress 산출 규칙]
-매 턴, 지금까지 수집된 대화 전체를 검토하여 4요소 각각의 완성도를 0–100 정수로 평가한다.
-- 평가 기준: "해당 요소에 대해 글의 재료가 될 구체적 장면·표현·생각이 추출 가능한 정도".
-- 0 = 관련 정보 전무, 50 = 일반적 서술은 있으나 구체성 부족, 100 = 구체적 장면·표현이 충분히 확보됨.
-- 한 번 올라간 값이 이후 턴에서 근거 없이 크게 떨어지지 않도록 일관성 있게 평가한다.
+[elementProgressDelta 산출 규칙]
+매 턴, 사용자의 직전 답변 하나가 현재 다루는 요소에 얼마나 기여했는지를 0–50 정수로 평가한다.
+시스템이 이 값을 누적 합산하여 각 요소의 완성도를 관리한다. 이전 턴의 누적값은 고려하지 않는다.
+
+채점 기준:
+- 0  = 해당 요소와 무관한 답변, 또는 건너뛰기/완료 요청 (skip·clarification·closing 시 전부 0)
+- 10 = 일반적 서술 ("좋았다", "재밌었다" 수준의 진부한 표현, 구체성 없음)
+- 20~40 = 구체적 장면·표현·생각이 포함된 답변 (구체성이 높을수록 높은 값)
+- 50 = 매우 구체적이고 글 재료로 바로 쓸 수 있는 수준 (한 답변의 최댓값)
+
+현재 다루는 요소(currentElement)에만 기여값을 부여하고, 나머지 3요소는 반드시 0으로 반환한다.
 
 questionType 라우팅 규칙:
 - "main": 새로운 4요소 카테고리를 여는 첫 질문

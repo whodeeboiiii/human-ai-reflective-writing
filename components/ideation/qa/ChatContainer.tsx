@@ -18,6 +18,7 @@ import {
   INTERVENTION_PARAMS,
   INTERVENTION_LABEL,
 } from '@/lib/intervention';
+import { StageIntroToast } from '@/components/common/StageIntroToast';
 import { AIMessage } from './AIMessage';
 import { UserMessage } from './UserMessage';
 import { ThinkingIndicator } from './ThinkingIndicator';
@@ -46,13 +47,6 @@ function nowStamp(): string {
   return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 }
 
-// Fixed order the session walks through. The client owns this pointer so the LLM
-// can't re-infer (and drift back to) an earlier element each turn.
-const ELEMENT_ORDER: ElementKey[] = ['orientation', 'feelings', 'evaluation', 'takeaway'];
-
-function nextUncompletedElement(completed: ElementKey[]): ElementKey | null {
-  return ELEMENT_ORDER.find((e) => !completed.includes(e)) ?? null;
-}
 
 export default function ChatContainer({ sessionId }: { sessionId: string }) {
   const router = useRouter();
@@ -61,7 +55,7 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
   const setTurns = useIdeationStore((s) => s.setTurns);
   // Reactive subscriptions — side panel must re-render as turns/progress change
   const turns = useIdeationStore((s) => s.turns);
-  const elementProgressMax = useIdeationStore((s) => s.elementProgressMax);
+  const elementProgress = useIdeationStore((s) => s.elementProgress);
   const answerSummaries = useIdeationStore((s) => s.answerSummaries);
 
   const genreLabel = answers.genre ? (GENRE_LABELS[answers.genre] ?? MOCK_CONTEXT.genreLabel) : MOCK_CONTEXT.genreLabel;
@@ -274,8 +268,10 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
             turns: useIdeationStore.getState().turns,
             bookContext: useIdeationStore.getState().bookContext,
             interventionLevel: useIdeationStore.getState().interventionLevel,
+            // Echo back the server-owned state machine values from the previous turn.
             currentElement: currentElementRef.current,
             completedElements: completedElementsRef.current,
+            elementProgress: useIdeationStore.getState().elementProgress,
           }),
         });
       } catch (err) {
@@ -288,49 +284,24 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
         console.error('questions API error', res.status);
         return;
       }
-      const { content, type, questionType, isDone, elementProgress } = (await res.json()) as {
-        content: string;
-        type: QATurnType;
-        questionType?: 'main' | 'followup' | 'supplementary' | 'clarification' | 'skip' | 'closing';
-        isDone: boolean;
-        elementProgress?: ElementProgress;
-        currentElement?: ElementKey | null;
-      };
-      if (elementProgress) {
-        useIdeationStore.getState().updateElementProgressMax(elementProgress);
-      }
+      const { content, type, questionType, isDone, currentElement, completedElements, elementProgress } =
+        (await res.json()) as {
+          content: string;
+          type: QATurnType;
+          questionType?: 'main' | 'followup' | 'clarification' | 'skip' | 'closing';
+          isDone: boolean;
+          currentElement: ElementKey | null;
+          completedElements: ElementKey[];
+          elementProgress: ElementProgress;
+        };
 
-      // ── Deterministic element state machine (client-owned) ──
-      // Decide the gauge element for THIS question and advance the pointer for the
-      // NEXT call. The LLM's own currentElement is intentionally ignored here.
-      const threshold =
-        INTERVENTION_PARAMS[useIdeationStore.getState().interventionLevel ?? 2].completionThreshold;
-      const progressMax = useIdeationStore.getState().elementProgressMax;
-      const P = currentElementRef.current;
-      const C = completedElementsRef.current;
-      let gaugeElement: ElementKey | null;
-      if (questionType === 'skip' && P) {
-        // User skipped the current element → this turn's question targets the next one.
-        const newCompleted = [...C, P];
-        const nextEl = nextUncompletedElement(newCompleted);
-        completedElementsRef.current = newCompleted;
-        currentElementRef.current = nextEl;
-        gaugeElement = nextEl;
-      } else {
-        // This question is about the current element; advance only for the next call,
-        // once the element's (monotonic) completeness reaches the threshold.
-        gaugeElement = P;
-        if (P) {
-          let cur: ElementKey | null = P;
-          let comp = C;
-          while (cur && progressMax[cur] >= threshold) {
-            comp = [...comp, cur];
-            cur = nextUncompletedElement(comp);
-          }
-          completedElementsRef.current = comp;
-          currentElementRef.current = cur;
-        }
-      }
+      // ── Server owns the state machine — just store what it returned. ──
+      useIdeationStore.getState().setElementProgress(elementProgress);
+      currentElementRef.current = currentElement;
+      completedElementsRef.current = completedElements;
+      // Side-panel highlight: the element this turn's question targets.
+      const gaugeElement: ElementKey | null = currentElement;
+
       // Summarize the just-answered user turn ONLY if it led to a real question
       // (main/followup). skip/clarification answers get no side-panel summary.
       const pendingAnswer = lastUserAnswerRef.current;
@@ -442,6 +413,14 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
 
   return (
     <div className={styles.qaRoot}>
+      {/* Stage intro toast */}
+      <StageIntroToast
+        eyebrow="Q&A Session · 안내"
+        title="편하게 대화하듯 답해주세요"
+        body="질문에 정답은 없어요. 경험이나 생각이 떠오르는 대로 이야기해 주시면 돼요. 건너뛰고 싶으면 그렇게 말해줘도 괜찮아요."
+        durationMs={5000}
+      />
+
       {/* Top Bar */}
       <header className={styles.qaTop}>
         <button
@@ -571,7 +550,7 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
         <SidePanel
           turns={turns}
           answerSummaries={answerSummaries}
-          elementProgressMax={elementProgressMax}
+          elementProgressMax={elementProgress}
           currentElement={currentElement}
           completionThreshold={
             INTERVENTION_PARAMS[useIdeationStore.getState().interventionLevel ?? 2].completionThreshold

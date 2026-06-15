@@ -1,0 +1,87 @@
+/* ==========================================================================
+   Flect — StageIntroToast  (shared across Q&A / Outline / Writing)
+   ========================================================================== */
+
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  /* translateX comes from Framer Motion's x, so we set the base here */
+  z-index: 60;
+  width: min(420px, calc(100vw - 48px));
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow:
+    0 4px 16px rgba(45, 37, 32, 0.08),
+    0 1px 4px rgba(45, 37, 32, 0.05);
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.inner {
+  position: relative;
+  padding: 18px 44px 20px 22px;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 8px;
+}
+
+.title {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--ink);
+  margin-bottom: 0;
+}
+
+.body {
+  margin-top: 6px;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--ink-faint);
+  font-size: 18px;
+  line-height: 1;
+  border-radius: 4px;
+  transition: color 180ms var(--ease), background 180ms var(--ease);
+}
+
+.closeBtn:hover {
+  color: var(--ink-soft);
+  background: var(--accent-soft);
+}
+
+/* Thin auto-dismiss progress bar */
+.progressTrack {
+  height: 2px;
+  background: var(--line-soft);
+}
+
+.progressBar {
+  height: 100%;
+  background: var(--accent-deep);
+  transform-origin: left center;
+  opacity: 0.6;
+}

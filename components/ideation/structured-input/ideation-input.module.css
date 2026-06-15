@@ -204,6 +204,8 @@
   color: var(--ink);
   margin-bottom: 28px;
   text-wrap: balance;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 .ixHeadingMid {
   font-size: clamp(1.85rem, 4.2vw, 2.875rem);
@@ -219,6 +221,8 @@
   margin-bottom: 14px;
   max-width: 22ch;
   text-wrap: balance;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 .ixQSub {
   font-family: var(--sans);
@@ -227,6 +231,8 @@
   line-height: 1.7;
   max-width: 48ch;
   margin-bottom: 38px;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .ixSub {
@@ -235,6 +241,8 @@
   line-height: 1.85;
   max-width: 48ch;
   margin-bottom: 48px;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 /* ==========================================================================
@@ -475,7 +483,12 @@
   border-color: var(--accent-deep);
 }
 
-.ixChoiceText { flex: 1; line-height: 1.5; }
+.ixChoiceText { 
+  flex: 1; 
+  line-height: 1.5; 
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
 
 /* ==========================================================================
    Open input (topic question)

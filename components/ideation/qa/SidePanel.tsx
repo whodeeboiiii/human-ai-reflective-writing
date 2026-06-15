@@ -6,7 +6,7 @@ import type { QATurn, ElementProgress, ElementKey } from '@/types/ideation';
 interface SidePanelProps {
   turns: QATurn[];
   answerSummaries: Record<string, string>;
-  elementProgressMax: ElementProgress;
+  elementProgressMax: ElementProgress;  // server-owned cumulative completeness (store.elementProgress)
   currentElement: ElementKey | null;
   completionThreshold: number;
 }

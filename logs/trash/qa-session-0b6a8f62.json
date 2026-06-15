@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "독서모임에서 읽은 <오프먼트>라는 책",
+    "writingExperience": "가끔 씀",
+    "updatedAt": "2026-05-19T08:27:22.999Z"
+  },
+  "transcript": [
+    {
+      "id": "32009395-e0f5-4470-a05c-cb94bc5ba1ca",
+      "role": "assistant",
+      "content": "먼저, 독서모임에서 읽은 <오프먼트>라는 책을 어떻게 만나게 되셨고, 어떤 상황에서 경험하셨는지 자유롭게 들려주세요.",
+      "type": "llm-generated",
+      "isCont": true,
+      "timestamp": "17:26"
+    },
+    {
+      "id": "5a970893-26a4-4e75-8fec-9c13bce6d708",
+      "role": "user",
+      "content": "독서모임에서 조장이 추천해 줘서 책을 읽게 되었어.\n\"번아웃이 온 현대인들을 위한 쉬는 방법 가이드\"라는 캐치프레이즈가 인상깊었어. 나는 '쉰다'는 행위를 잘 하기는 하지만, 의미 있게 쉬는 방법을 잘 모르겠거든. 쉴 때 유튜브를 보면서 시간을 낭비하기도 하고.",
+      "type": "predefined",
+      "isCont": false,
+      "skipped": false,
+      "timestamp": "17:26"
+    },
+    {
+      "id": "5c86a62d-f37b-4065-b9c0-d7375dfc7a71",
+      "role": "assistant",
+      "content": "조장이 추천해 주셔서 책을 읽게 되었고, ‘번아웃이 온 현대인들을 위한 쉬는 방법 가이드’라는 캐치프레이즈가 인상 깊으셨군요.\n\n그 책을 읽으면서 마음이 가장 크게 움직였던 순간이나 부분은 어디였나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "17:26"
+    },
+    {
+      "id": "b70fb111-9b41-4cb7-b4ab-fa0ff76050bd",
+      "role": "user",
+      "content": "잘 모르겠어... 질문을 더 구체적으로 해 줘.",
+      "type": "predefined",
+      "isCont": false,
+      "skipped": false,
+      "timestamp": "17:26"
+    },
+    {
+      "id": "64303965-a265-4e23-aecc-ec0b801958f3",
+      "role": "assistant",
+      "content": "조장이 추천해 주셔서 책을 읽게 되었고, ‘번아웃이 온 현대인들을 위한 쉬는 방법 가이드’라는 문구가 인상 깊었으며, 의미 있게 쉬는 방법을 잘 모르겠다는 고민이 있다고 하셨군요.\n\n그 캐치프레이즈를 처음 보셨을 때의 상황과 그때 어떤 생각이 드셨는지 구체적으로 말씀해 주시겠어요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "17:26"
+    },
+    {
+      "id": "dba88447-18a1-4844-810d-76d726170d78",
+      "role": "user",
+      "content": "어린 아들이 있음에도 매일 10시간 이상 일하면서 쉬지 못하는 어머니에 대한 내용이 인상깊었어. 나는 미래에 가정을 꾸리고 그렇게 살기 싫다...라고 생각했거든.",
+      "type": "predefined",
+      "isCont": false,
+      "skipped": false,
+      "timestamp": "17:27"
+    },
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "question": "reasoning: 사용자가 메인 질문 2에 대한 구체적인 답변을 제공하지 않고 질문의 명확성을 요구했으므로, 동일 질문 의도를 유지하면서 구체성을 높인 clarification 프롬프트를 발동함  \nacknowledgment: \"질문을 더 구체적으로 해 달라\"는 요청에 응답하여, 더 구체적인 답변을 유도하고자 함  \nquestion: \"책을 읽으면서 특히 기억에 남는 구체적인 장면이나 표현이 있었나요? 예를 들어, 어떤 부분에서 마음이 흔들리거나 생각이 깊어졌을 때요?\"  \nquestionType: \"clarification\"",
+      "reasoning": "plain-text fallback: single block",
+      "questionType": "main",
+      "isDone": false
+    }
+  ]
+}

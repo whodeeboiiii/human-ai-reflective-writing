@@ -1,6 +1,12 @@
 import type { WritingFrequency, UserInterventionWant } from './intervention';
 
-export type GenreValue = 'critique' | 'book-report' | 'review' | 'travelogue';
+export type GenreValue =
+  | 'book-review'
+  | 'place-review'
+  | 'movie-review'
+  | 'product-review'
+  | 'travelogue'
+  | 'reflection';
 
 export type IdeaReadiness = 'none' | 'little' | 'some' | 'much' | 'almost_complete';
 export type AudienceValue =

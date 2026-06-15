@@ -1,0 +1,125 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "밤의 피크닉(2005)-온다 리쿠",
+    "writingFrequency": "주에 두세 번 씀",
+    "interventionLevel": 3,
+    "interventionLabel": "중간",
+    "completionThreshold": 70,
+    "updatedAt": "2026-06-06T10:26:47.114Z"
+  },
+  "transcript": [
+    {
+      "id": "a5641bf5-f410-4c23-9468-8f8b6a71cdb0",
+      "role": "assistant",
+      "content": "먼저, 밤의 피크닉(2005)-온다 리쿠에 대해 좀 더 이야기 나눠볼게요. 그 책을 어떻게 만나게 되셨고, 어떤 계기로 읽게 되셨는지 자유롭게 들려주세요.",
+      "type": "llm-generated",
+      "isCont": true,
+      "timestamp": "19:11"
+    },
+    {
+      "id": "24c55ae1-3bbb-4a7d-9971-1fb86655640c",
+      "role": "user",
+      "content": "중학교 시절 도서관에서 심심해서 아무 책이나 골라읽던 시절에 우연히.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "19:12"
+    },
+    {
+      "id": "03f8eb45-d1a5-48bc-9c36-b97d704d26c3",
+      "role": "assistant",
+      "content": "중학교 시절 도서관에서 심심해서 아무 책이나 골라읽던 시절에 우연히 읽으셨군요.\n\n그 당시에는 어떤 이유로 도서관까지 가게 되셨나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "19:13"
+    },
+    {
+      "id": "4d88889a-25c1-4fda-a541-1af55ad36847",
+      "role": "user",
+      "content": "친한 친구가 별로 없었어서 심심한걸 해소하기 위해 추가로 책을 읽는다는게 폼나는 것 같아서.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "19:14"
+    },
+    {
+      "id": "51ea670a-0e4a-4fcb-b56e-63cbb25b4f23",
+      "role": "assistant",
+      "content": "친한 친구가 별로 없었어서 심심한걸 해소하기 위해 추가로 책을 읽는다는게 폼나는 것 같아서, 라는 이야기를 하셨어요.\n\n그럼 그 때 도서관에 가서 책을 고를 때, 특히 밤의 피크닉이라는 제목이 눈에 띈 이유는 무엇이었나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "19:14"
+    },
+    {
+      "id": "309aa19e-bdd5-4619-9589-9c13bf0fd0dc",
+      "role": "user",
+      "content": "밤에 산책을 한다는게 중학생 특유의 감성을 자극했음. 일상 탈출을 꿈꾸는 중학생의 마음",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "19:16"
+    },
+    {
+      "id": "f3fa775c-50ee-4392-a200-311b6459b178",
+      "role": "assistant",
+      "content": "중학교 시절 도서관에서 심심해서 읽게 된 배경과 밤의 피크닉이라는 제목이 중학생 감성을 자극했다는 이야기를 들려주셨군요.\n\n밤의 피크닉이라는 제목이 특히 마음에 들었던 이유는 무엇이었을까요? 중학생 시절의 어떤 욕구나 감정을 떠올리게 했나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "19:16"
+    },
+    {
+      "id": "8f6750f8-5bda-426c-adc7-e172ace0d192",
+      "role": "user",
+      "content": "성장기니까. 감정적으로나 육체적으로나 불안정한 시절이고 일상이 불만족스럽게 느껴졌던 것 같아.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "19:17"
+    },
+    {
+      "id": "ba7da59f-4e06-4406-b12e-f0fa45bca60e",
+      "role": "assistant",
+      "content": "중학교 시절 야간 산책이 성장기의 불안정한 감정과 일상 불만족을 떠올리게 했다.\n\n그 책 속에서 그런 불안정한 마음과 연결되는 구체적인 장면이나 문장이 있었나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "19:17"
+    },
+    {
+      "id": "07d4ce3b-7cf2-4810-89fd-f87bb9843286",
+      "role": "user",
+      "content": "책의 내용은 고등학교 3학년의 학생들이 졸업 활동으로 학교의 행사인 80키로미터 걷기 행사에 참여하는 내용이야. 밤새도록 걸으며 등장인물들이 각자가 가지고 있는 미래에 대한 고민이나 학생 특유의 불안정한 감정들을 서로에게 털어놓지. 졸업생들이니 사회에 대한 불안함도 있었을 테고.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "19:20"
+    },
+    {
+      "id": "63f65f9b-e8e5-4476-85f6-b2f61e2534ed",
+      "role": "assistant",
+      "content": "중학교 시절 도서관에서 읽은 밤의 피크닉이 성장기의 불안정한 감정과 일상 불만족을 떠올리게 했다는 이야기를 들려주셨어요.\n\n그 책에서 등장인물들이 밤새 걷던 중에 털어놓은 고민이나 감정 중에서, 가장 마음이 찡하게 다가왔던 구체적인 장면이나 대사가 있었나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "19:20"
+    },
+    {
+      "id": "0445f894-e50f-40a8-8fe7-5dd0f1deebc3",
+      "role": "user",
+      "content": "특정한 하나의 고민이 마음에 다가온건 아니고 틍장인물들이 품고 있는 고민들이 전부 마음에 다가왔던 것 같아. 그래도 하나를 꼽자면 주인공 둘의 가정사에 대한 고민이 재밌게 느껴지긴 했네. 책은 두명의 주인공을 보여줘. 도오루와 타카코, 둘 사이 관계는 복잡해. 배다른 남매였지만 주변에는 그게 알려지지 않았거든. 사실상 서로를 무시하면서 지낸거지. 그 관계에서 오가는 미묘한 긴장감과 반전이 재밌게 느껴졌네.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "19:26"
+    },
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "content": "중학교 시절 도서관에서 밤의 피크닉을 만난 계기와 밤이라는 제목이 중학생 감성을 자극했다는 이야기, 그리고 도오루와 타카코의 가정사 관계와 그 관계의 복잡성이 흥미로웠다는 구체적인 이야기를 해주셨어요.",
+      "question": "도오루와 타카코의 배다른 남매 관계가 복잡하다는 점과 그 관계에서 오가는 미묘한 긴장감과 반전이 흥미롭게 느껴졌던 이유는 무엇인가요?",
+      "reasoning": "학생이 중학교 시절 도서관에서 밤의 피크닉을 만난 계기와 밤이라는 제목이 중학생 감성을 자극했다는 이야기를 들었습니다. 이제 감정·반응(Feelings) 요소에 집중해야 합니다. 학생이 특정 고민보다는 등장인물들의 고민 전체가 마음에 다가왔고, 특히 도오루와 타카코의 가정사 관계와 미묘한 긴장감이 흥미로웠다고 구체적으로 언급했습니다. 이 구체적인 장면과 감정을 바탕으로 감정·반응 요소의 완성도(80%)를 높이기 위해, 그 미묘한 긴장감과 반전이 왜 흥미롭게 느껴졌는지, 그리고 왜 주인공들의 가정사 관계가 더 인상적이었는지를 파고드는 followup 질문을 준비해야 합니다.",
+      "questionType": "followup",
+      "isDone": false,
+      "elementProgress": {
+        "orientation": 50,
+        "feelings": 80,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "currentElement": "feelings"
+    }
+  ]
+}

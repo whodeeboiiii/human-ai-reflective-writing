@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html data-src-ver="a99a8b27" lang="ko">
+<script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/extend-native-history-api.js"></script>
+<script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js"></script>
+
+<head>
+  <script bis_use="true" type="text/javascript" charset="utf-8"
+    data-bis-config="{&quot;blacklistIframeSrc&quot;:[&quot;facebook.com/&quot;,&quot;twitter.com/&quot;,&quot;youtube-nocookie.com/embed/&quot;,&quot;//vk.com/&quot;,&quot;//www.vk.com/&quot;,&quot;linkedin.com/&quot;,&quot;//www.linkedin.com/&quot;,&quot;//instagram.com/&quot;,&quot;//www.instagram.com/&quot;,&quot;//www.google.com/recaptcha/api2/&quot;,&quot;//www.google.com/recaptcha/enterprise/anchor&quot;,&quot;//hangouts.google.com/webchat/&quot;,&quot;//www.google.com/calendar/&quot;,&quot;//www.google.com/maps/embed&quot;,&quot;spotify.com/&quot;,&quot;soundcloud.com/&quot;,&quot;//player.vimeo.com/&quot;,&quot;//disqus.com/&quot;,&quot;//tgwidget.com/&quot;,&quot;//js.driftt.com/&quot;,&quot;friends2follow.com&quot;,&quot;/widget&quot;,&quot;login&quot;,&quot;//video.bigmir.net/&quot;,&quot;blogger.com&quot;,&quot;//smartlock.google.com/&quot;,&quot;//keep.google.com/&quot;,&quot;/web.tolstoycomments.com/&quot;,&quot;moz-extension://&quot;,&quot;chrome-extension://&quot;,&quot;/auth/&quot;,&quot;//analytics.google.com/&quot;,&quot;adclarity.com&quot;,&quot;paddle.com/checkout&quot;,&quot;hcaptcha.com&quot;,&quot;recaptcha.net&quot;,&quot;2captcha.com&quot;,&quot;accounts.google.com&quot;,&quot;www.google.com/shopping/customerreviews&quot;,&quot;buy.tinypass.com&quot;,&quot;gstatic.com&quot;,&quot;secureir.ebaystatic.com&quot;,&quot;docs.google.com&quot;,&quot;contacts.google.com&quot;,&quot;github.com&quot;,&quot;mail.google.com&quot;,&quot;chat.google.com&quot;,&quot;audio.xpleer.com&quot;,&quot;keepa.com&quot;,&quot;static.xx.fbcdn.net&quot;,&quot;sas.selleramp.com&quot;,&quot;1plus1.video&quot;,&quot;console.googletagservices.com&quot;,&quot;//lnkd.demdex.net/&quot;,&quot;//radar.cedexis.com/&quot;,&quot;//li.protechts.net/&quot;,&quot;challenges.cloudflare.com/&quot;,&quot;ogs.google.com&quot;,&quot;//www.ukrnafta.com/data/map/&quot;,&quot;//maps.google.com/maps&quot;,&quot;//www.openstreetmap.org/export/embed.html&quot;,&quot;//www.google.com/maps/d/u/3/embed&quot;,&quot;//itm.ebaydesc.com/itmdesc&quot;,&quot;//books.google.com/books&quot;,&quot;//embed.podcasts.apple.com&quot;,&quot;//www.paypal.com/smartchat&quot;,&quot;//www.centurylink.com/assets/includes/common/sfChatiFrame.html&quot;,&quot;//macmillan-prod-gen.ada.support/embed&quot;,&quot;//macmillan-prod-gen.ada.support/chat&quot;,&quot;//ctl-consumer.my.site.com/&quot;],&quot;whitelistDomainsForPostBody&quot;:[&quot;youtube.com&quot;]}"
+    data-dynamic-id="a229b5e1-56a0-41aa-bdc9-de452e999934"
+    src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/200.js"></script>
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flect — 당신의 이야기, 당신의 목소리로</title>
+  <meta name="description" content="Flect은 AI와 함께 생각을 정리하고, 당신만의 목소리로 글을 완성할 수 있도록 도와주는 단계별 AI 글쓰기 파트너입니다.">
+
+  <!-- Fonts: Pretendard (body) + Gowun Batang (heading) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+    rel="stylesheet">
+
+  <!-- Project-requested libraries (reserved for GAS integration step) -->
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+
+<body __processed_c39af4c2-60a0-4c0b-bfeb-d87ee31b3e65__="true" bis_status="ok" bis_frame_id="315"
+  style="cursor: crosshair; background-color: rgb(251, 250, 247); font-family: Pretendard;" data-cc-id="cc-1">
+
+  <!-- ==========================================================================
+     HERO
+     ========================================================================== -->
+  <section class="hero" id="top">
+    <div class="hero-mark">Flect</div>
+    <a href="user.html" class="hero-login">로그인</a>
+
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="eyebrow hero-eyebrow reveal is-visible">Human-AI Co-Writing&nbsp;·&nbsp;Ideation to Draft</div>
+
+        <h1 class="reveal is-visible" data-delay="1">
+          당신의 이야기,<br>
+          <span class="emph">당신의 목소리</span>로
+        </h1>
+
+        <p class="hero-sub reveal is-visible" data-delay="2">백지 앞에서 막막했던 적, 있으신가요?
+          Flect은 AI와 함께 생각을 정리하고, 당신만의 목소리로 글을 완성할 수 있도록 도와줍니다.</p>
+
+        <div class="reveal is-visible" data-delay="3">
+          <a href="#waitlist" class="btn btn--primary" data-scroll-to="#waitlist">
+            Flect 시작하기 <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Abstract: scattered thoughts converging into one quiet line.
+         Original composition — nodes resolve into a single horizontal thread. -->
+      <div class="hero-visual reveal is-visible" data-delay="2" aria-hidden="true">
+        <svg viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#E8C468" stop-opacity="0.12"></stop>
+              <stop offset="60%" stop-color="#E8C468" stop-opacity="0.03"></stop>
+              <stop offset="100%" stop-color="#E8C468" stop-opacity="0"></stop>
+            </radialGradient>
+            <linearGradient id="thread" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%" stop-color="#E8C468" stop-opacity="0"></stop>
+              <stop offset="22%" stop-color="#E8C468" stop-opacity="0.9"></stop>
+              <stop offset="78%" stop-color="#9A7A1E" stop-opacity="0.9"></stop>
+              <stop offset="100%" stop-color="#9A7A1E" stop-opacity="0"></stop>
+            </linearGradient>
+          </defs>
+
+          <!-- soft halo -->
+          <circle cx="260" cy="260" r="240" fill="url(#halo)"></circle>
+
+          <!-- Concentric quiet arcs (paper-like) -->
+          <g stroke="#2D2520" stroke-opacity="0.07" fill="none">
+            <circle cx="260" cy="260" r="200"></circle>
+            <circle cx="260" cy="260" r="150"></circle>
+            <circle cx="260" cy="260" r="100"></circle>
+          </g>
+
+          <!-- Scattered thought nodes (upper half) -->
+          <g fill="#2D2520" fill-opacity="0.45">
+            <circle cx="90" cy="110" r="2.5"></circle>
+            <circle cx="160" cy="70" r="1.8"></circle>
+            <circle cx="230" cy="120" r="2.2"></circle>
+            <circle cx="310" cy="60" r="1.6"></circle>
+            <circle cx="380" cy="110" r="2.4"></circle>
+            <circle cx="430" cy="180" r="1.8"></circle>
+            <circle cx="120" cy="180" r="1.8"></circle>
+            <circle cx="280" cy="180" r="1.6"></circle>
+            <circle cx="200" cy="220" r="2.0"></circle>
+            <circle cx="350" cy="200" r="2.0"></circle>
+          </g>
+
+          <!-- Tangled threads resolving toward the center line -->
+          <g stroke="#2D2520" stroke-opacity="0.22" fill="none" stroke-linecap="round">
+            <path d="M90,110  C140,180 180,220 240,260" stroke-width="0.8"></path>
+            <path d="M160,70  C200,160 220,220 250,258" stroke-width="0.8"></path>
+            <path d="M230,120 C240,180 250,230 255,258" stroke-width="0.8"></path>
+            <path d="M310,60  C290,140 275,220 265,258" stroke-width="0.8"></path>
+            <path d="M380,110 C340,180 300,230 275,260" stroke-width="0.8"></path>
+            <path d="M430,180 C370,220 320,250 285,260" stroke-width="0.8"></path>
+            <path d="M120,180 C180,220 220,240 245,260" stroke-width="0.8"></path>
+            <path d="M280,180 C270,220 265,240 262,258" stroke-width="0.8"></path>
+            <path d="M200,220 C230,240 240,250 250,260" stroke-width="0.8"></path>
+            <path d="M350,200 C320,230 290,250 272,260" stroke-width="0.8"></path>
+          </g>
+
+          <!-- The resolved single line -->
+          <line x1="50" y1="260" x2="470" y2="260" stroke="url(#thread)" stroke-width="2" stroke-linecap="round"></line>
+
+          <!-- Anchor dot on the line -->
+          <circle cx="260" cy="260" r="4.5" fill="#E8C468"></circle>
+          <circle cx="260" cy="260" r="10" fill="none" stroke="#E8C468" stroke-opacity="0.35"></circle>
+
+          <!-- Tiny measurement ticks below — quietly editorial -->
+          <g stroke="#2D2520" stroke-opacity="0.18">
+            <line x1="50" y1="300" x2="50" y2="306"></line>
+            <line x1="155" y1="300" x2="155" y2="306"></line>
+            <line x1="260" y1="300" x2="260" y2="306"></line>
+            <line x1="365" y1="300" x2="365" y2="306"></line>
+            <line x1="470" y1="300" x2="470" y2="306"></line>
+          </g>
+          <text x="50" y="324" font-family="JetBrains Mono, monospace" font-size="9" fill="#8A7A6D"
+            letter-spacing="1.2">idea</text>
+          <text x="240" y="324" font-family="JetBrains Mono, monospace" font-size="9" fill="#8A7A6D"
+            letter-spacing="1.2">draft</text>
+          <text x="438" y="324" font-family="JetBrains Mono, monospace" font-size="9" fill="#8A7A6D"
+            letter-spacing="1.2">voice</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="hero-meta">
+      <span>Beta · 2026</span>
+      <span><span class="dot"></span>Now gathering early readers</span>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     PROBLEM STATEMENT
+     ========================================================================== -->
+  <section class="problem">
+    <div class="wrap">
+      <div class="problem-grid">
+        <div class="problem-side reveal is-visible">
+          <div class="eyebrow" style="margin-bottom: 24px;">The Problem</div>
+          <h2>글쓰기는 왜<br>이렇게 어려울까요?</h2>
+        </div>
+
+        <div class="problem-body reveal is-visible" data-delay="1">
+          <p>머릿속에는 분명 하고 싶은 이야기가 있는데, 막상 쓰려고 하면 흰 화면만 멍하니 바라보게 됩니다.</p>
+          <p>그렇다고 AI에게 전부 맡기자니, 어딘가 <span class="highlight">내 글 같지 않은 AI의 글</span>이 되어버립니다.</p>
+          <p>Flect은 <span class="highlight">머릿속의 이야기</span>와 완성된 문장 사이, 그 <span class="highlight">균형</span>을 찾아 드립니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     FEATURES
+     ========================================================================== -->
+  <section class="features">
+    <div class="wrap">
+
+      <header class="features-header reveal is-visible">
+        <div class="eyebrow" style="margin-bottom: 20px;">How Flect works</div>
+        <h2>대신 써주지 않습니다.<br>더 잘 쓸 수 있게, 옆에서 함께합니다.</h2>
+      </header>
+
+      <!-- Feature 1 — Q&A / Ideation -->
+      <article class="feature">
+        <div class="feature-grid">
+          <div class="feature-text reveal is-visible">
+            <span class="feature-num"><span class="accent">01</span> <span class="slash">/</span> 05 &nbsp;&nbsp;Q&amp;A
+              Session</span>
+            <h3>생각을 끌어내는 대화</h3>
+            <p class="feature-desc">AI가 당신의 경험과 감정을 하나씩 물어봅니다. 답하다 보면 흩어져 있던 생각들이 자연스럽게 정리됩니다.</p>
+            <div class="tags">
+              <span class="tag">Q&amp;A Session</span>
+              <span class="tag">Ideation</span>
+            </div>
+          </div>
+
+          <div class="feature-visual reveal is-visible" data-delay="1" aria-hidden="true">
+            <span class="visual-corner">Fig. 01</span>
+            <span class="visual-corner-r">dialogue</span>
+            <svg viewBox="0 0 560 420">
+              <!-- Conversation bubbles, abstracted as stacked lines -->
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#8A7A6D" letter-spacing="1.4">
+                <text x="60" y="86">Q</text>
+                <text x="60" y="188">A</text>
+                <text x="60" y="290">Q</text>
+              </g>
+
+              <!-- Q bubble 1 -->
+              <g transform="translate(100, 60)">
+                <rect width="340" height="56" rx="6" fill="#FAF7F2" stroke="#2D2520" stroke-opacity="0.12"></rect>
+                <line x1="18" y1="22" x2="300" y2="22" stroke="#2D2520" stroke-opacity="0.35" stroke-width="1.2"></line>
+                <line x1="18" y1="36" x2="240" y2="36" stroke="#2D2520" stroke-opacity="0.2" stroke-width="1.2"></line>
+              </g>
+
+              <!-- A bubble (user, accent) -->
+              <g transform="translate(140, 160)">
+                <rect width="360" height="60" rx="6" fill="#E8C468" fill-opacity="0.08" stroke="#E8C468"
+                  stroke-opacity="0.4"></rect>
+                <line x1="18" y1="22" x2="320" y2="22" stroke="#9A7A1E" stroke-opacity="0.75" stroke-width="1.2"></line>
+                <line x1="18" y1="36" x2="260" y2="36" stroke="#9A7A1E" stroke-opacity="0.55" stroke-width="1.2"></line>
+                <line x1="18" y1="48" x2="180" y2="48" stroke="#9A7A1E" stroke-opacity="0.4" stroke-width="1.2"></line>
+              </g>
+
+              <!-- Q bubble 2 -->
+              <g transform="translate(100, 264)">
+                <rect width="300" height="56" rx="6" fill="#FAF7F2" stroke="#2D2520" stroke-opacity="0.12"></rect>
+                <line x1="18" y1="22" x2="260" y2="22" stroke="#2D2520" stroke-opacity="0.35" stroke-width="1.2"></line>
+                <line x1="18" y1="36" x2="200" y2="36" stroke="#2D2520" stroke-opacity="0.2" stroke-width="1.2"></line>
+              </g>
+
+              <!-- typing indicator -->
+              <g transform="translate(100, 344)" fill="#E8C468">
+                <circle cx="0" cy="0" r="3">
+                  <animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" repeatCount="indefinite" begin="0s">
+                  </animate>
+                </circle>
+                <circle cx="12" cy="0" r="3">
+                  <animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" repeatCount="indefinite" begin="0.2s">
+                  </animate>
+                </circle>
+                <circle cx="24" cy="0" r="3">
+                  <animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" repeatCount="indefinite" begin="0.4s">
+                  </animate>
+                </circle>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- Feature 2 — Your Voice (reverse) -->
+      <article class="feature reverse">
+        <div class="feature-grid">
+          <div class="feature-visual reveal is-visible" aria-hidden="true">
+            <span class="visual-corner">Fig. 02</span>
+            <span class="visual-corner-r">author-driven</span>
+            <svg viewBox="0 0 560 420">
+              <!-- AI suggests, user accepts/rejects — represented as two columns of marks -->
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#8A7A6D" letter-spacing="1.4">
+                <text x="90" y="58">AI · suggests</text>
+                <text x="330" y="58">You · decide</text>
+              </g>
+
+              <!-- AI column -->
+              <g transform="translate(90, 80)" stroke="#2D2520" stroke-opacity="0.25" fill="none">
+                <rect width="160" height="22" rx="4"></rect>
+                <rect y="34" width="160" height="22" rx="4"></rect>
+                <rect y="68" width="160" height="22" rx="4"></rect>
+                <rect y="102" width="160" height="22" rx="4"></rect>
+                <rect y="136" width="160" height="22" rx="4"></rect>
+                <rect y="170" width="160" height="22" rx="4"></rect>
+                <rect y="204" width="160" height="22" rx="4"></rect>
+              </g>
+              <g transform="translate(90, 80)" fill="#2D2520" fill-opacity="0.32">
+                <rect x="12" y="8" width="100" height="6" rx="2"></rect>
+                <rect x="12" y="42" width="130" height="6" rx="2"></rect>
+                <rect x="12" y="76" width="80" height="6" rx="2"></rect>
+                <rect x="12" y="110" width="118" height="6" rx="2"></rect>
+                <rect x="12" y="144" width="96" height="6" rx="2"></rect>
+                <rect x="12" y="178" width="126" height="6" rx="2"></rect>
+                <rect x="12" y="212" width="74" height="6" rx="2"></rect>
+              </g>
+
+              <!-- flow arrows -->
+              <g stroke="#8A7A6D" stroke-opacity="0.45" fill="none">
+                <path d="M258 93 L322 93" stroke-width="1" stroke-dasharray="2 3"></path>
+                <path d="M258 127 L322 127" stroke-width="1" stroke-dasharray="2 3"></path>
+                <path d="M258 161 L322 161" stroke-width="1" stroke-dasharray="2 3"></path>
+                <path d="M258 195 L322 195" stroke-width="1" stroke-dasharray="2 3"></path>
+                <path d="M258 229 L322 229" stroke-width="1" stroke-dasharray="2 3"></path>
+                <path d="M258 263 L322 263" stroke-width="1" stroke-dasharray="2 3"></path>
+                <path d="M258 297 L322 297" stroke-width="1" stroke-dasharray="2 3"></path>
+              </g>
+
+              <!-- You column — some accepted (filled terracotta), some rejected (×) -->
+              <g transform="translate(330, 80)">
+                <!-- accepted -->
+                <rect width="24" height="22" rx="4" fill="#E8C468"></rect>
+                <text x="8" y="16" font-family="JetBrains Mono, monospace" font-size="13" fill="#FAF7F2">✓</text>
+
+                <rect y="34" width="24" height="22" rx="4" fill="none" stroke="#2D2520" stroke-opacity="0.28"></rect>
+                <text x="7" y="50" font-family="JetBrains Mono, monospace" font-size="13" fill="#8A7A6D">×</text>
+
+                <rect y="68" width="24" height="22" rx="4" fill="#E8C468"></rect>
+                <text x="8" y="84" font-family="JetBrains Mono, monospace" font-size="13" fill="#FAF7F2">✓</text>
+
+                <rect y="102" width="24" height="22" rx="4" fill="#E8C468"></rect>
+                <text x="8" y="118" font-family="JetBrains Mono, monospace" font-size="13" fill="#FAF7F2">✓</text>
+
+                <rect y="136" width="24" height="22" rx="4" fill="none" stroke="#2D2520" stroke-opacity="0.28"></rect>
+                <text x="7" y="152" font-family="JetBrains Mono, monospace" font-size="13" fill="#8A7A6D">×</text>
+
+                <rect y="170" width="24" height="22" rx="4" fill="#E8C468"></rect>
+                <text x="8" y="186" font-family="JetBrains Mono, monospace" font-size="13" fill="#FAF7F2">✓</text>
+
+                <rect y="204" width="24" height="22" rx="4" fill="none" stroke="#2D2520" stroke-opacity="0.28"></rect>
+                <text x="7" y="220" font-family="JetBrains Mono, monospace" font-size="13" fill="#8A7A6D">×</text>
+              </g>
+
+              <!-- Final voice signature at bottom right -->
+              <g transform="translate(370, 330)">
+                <text font-family="Gowun Batang, serif" font-size="14" fill="#2D2520" font-style="italic">— your
+                  voice</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="feature-text reveal is-visible" data-delay="1">
+            <span class="feature-num"><span class="accent">02</span> <span class="slash">/</span> 05 &nbsp;&nbsp;Content
+              Gatekeeping</span>
+            <h3>당신의 목소리를 지킵니다</h3>
+            <p class="feature-desc">Flect은 대신 써주지 않습니다. 제안은 드리지만, 받아들일지는 언제나 당신이 정합니다. 글의 주도권은 당신에게 있습니다.</p>
+            <div class="tags">
+              <span class="tag">Content Gatekeeping</span>
+              <span class="tag">Your Voice</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Feature 3 — Genres -->
+      <article class="feature">
+        <div class="feature-grid">
+          <div class="feature-text reveal is-visible">
+            <span class="feature-num"><span class="accent">03</span> <span class="slash">/</span> 05
+              &nbsp;&nbsp;Formats</span>
+            <h3>당신의 생각을 표현하는<br>다양한 글들</h3>
+            <p class="feature-desc">논평, 비평, 독후감, 리뷰, 여행기, 성찰 일지까지. 당신이 담고 싶은 생각의 종류에 맞춰 Flect이 함께합니다.</p>
+            <div class="tags">
+              <span class="tag">논평</span>
+              <span class="tag">비평</span>
+              <span class="tag">독후감</span>
+              <span class="tag">리뷰</span>
+              <span class="tag">여행기</span>
+              <span class="tag">성찰 일지</span>
+            </div>
+          </div>
+
+          <div class="feature-visual reveal is-visible" data-delay="1" aria-hidden="true">
+            <span class="visual-corner">Fig. 03</span>
+            <span class="visual-corner-r">formats</span>
+            <svg viewBox="0 0 560 420">
+              <!-- Six stacked "paper" cards fanning out -->
+              <defs>
+                <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="0.4"></feGaussianBlur>
+                </filter>
+              </defs>
+
+              <g transform="translate(280 210)">
+                <!-- Each card rotated at different angles -->
+                <g transform="rotate(-14) translate(-90 -130)">
+                  <rect width="180" height="240" rx="4" fill="#FAF7F2" stroke="#2D2520" stroke-opacity="0.14"></rect>
+                  <text x="16" y="32" font-family="Gowun Batang, serif" font-size="13" fill="#2D2520"
+                    font-style="italic">성찰 일지</text>
+                  <g stroke="#2D2520" stroke-opacity="0.18" stroke-width="1">
+                    <line x1="16" y1="54" x2="164" y2="54"></line>
+                    <line x1="16" y1="72" x2="150" y2="72"></line>
+                    <line x1="16" y1="90" x2="160" y2="90"></line>
+                    <line x1="16" y1="108" x2="130" y2="108"></line>
+                  </g>
+                </g>
+
+                <g transform="rotate(-7) translate(-90 -130)">
+                  <rect width="180" height="240" rx="4" fill="#FAF7F2" stroke="#2D2520" stroke-opacity="0.14"></rect>
+                  <text x="16" y="32" font-family="Gowun Batang, serif" font-size="13" fill="#2D2520"
+                    font-style="italic">여행기</text>
+                  <g stroke="#2D2520" stroke-opacity="0.2" stroke-width="1">
+                    <line x1="16" y1="54" x2="160" y2="54"></line>
+                    <line x1="16" y1="72" x2="140" y2="72"></line>
+                    <line x1="16" y1="90" x2="158" y2="90"></line>
+                    <line x1="16" y1="108" x2="128" y2="108"></line>
+                    <line x1="16" y1="126" x2="152" y2="126"></line>
+                  </g>
+                </g>
+
+                <g transform="rotate(0) translate(-90 -130)">
+                  <rect width="180" height="240" rx="4" fill="#FAF7F2" stroke="#2D2520" stroke-opacity="0.14"></rect>
+                  <text x="16" y="32" font-family="Gowun Batang, serif" font-size="13" fill="#2D2520"
+                    font-style="italic">리뷰</text>
+                  <g stroke="#2D2520" stroke-opacity="0.22" stroke-width="1">
+                    <line x1="16" y1="54" x2="162" y2="54"></line>
+                    <line x1="16" y1="72" x2="146" y2="72"></line>
+                    <line x1="16" y1="90" x2="158" y2="90"></line>
+                    <line x1="16" y1="108" x2="132" y2="108"></line>
+                  </g>
+                </g>
+
+                <g transform="rotate(7) translate(-90 -130)">
+                  <rect width="180" height="240" rx="4" fill="#FAF7F2" stroke="#2D2520" stroke-opacity="0.16"></rect>
+                  <text x="16" y="32" font-family="Gowun Batang, serif" font-size="13" fill="#2D2520"
+                    font-style="italic">독후감</text>
+                  <g stroke="#2D2520" stroke-opacity="0.24" stroke-width="1">
+                    <line x1="16" y1="54" x2="160" y2="54"></line>
+                    <line x1="16" y1="72" x2="134" y2="72"></line>
+                    <line x1="16" y1="90" x2="156" y2="90"></line>
+                    <line x1="16" y1="108" x2="120" y2="108"></line>
+                    <line x1="16" y1="126" x2="148" y2="126"></line>
+                  </g>
+                </g>
+
+                <g transform="rotate(14) translate(-90 -130)">
+                  <rect width="180" height="240" rx="4" fill="#FFFDF9" stroke="#E8C468" stroke-opacity="0.6"></rect>
+                  <text x="16" y="32" font-family="Gowun Batang, serif" font-size="13" fill="#9A7A1E"
+                    font-style="italic">비평</text>
+                  <g stroke="#9A7A1E" stroke-opacity="0.5" stroke-width="1">
+                    <line x1="16" y1="54" x2="162" y2="54"></line>
+                    <line x1="16" y1="72" x2="142" y2="72"></line>
+                    <line x1="16" y1="90" x2="158" y2="90"></line>
+                    <line x1="16" y1="108" x2="126" y2="108"></line>
+                    <line x1="16" y1="126" x2="150" y2="126"></line>
+                    <line x1="16" y1="144" x2="134" y2="144"></line>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- Feature 4 — Editing / Critical Review (reverse) -->
+      <article class="feature reverse">
+        <div class="feature-grid">
+          <div class="feature-visual reveal is-visible" aria-hidden="true">
+            <span class="visual-corner">Fig. 04</span>
+            <span class="visual-corner-r">margin notes</span>
+            <svg viewBox="0 0 560 420">
+              <!-- A paper with editor's margin marks -->
+              <rect x="80" y="40" width="320" height="340" rx="3" fill="#FAF7F2" stroke="#2D2520" stroke-opacity="0.14">
+              </rect>
+
+              <!-- Text lines -->
+              <g stroke="#2D2520" stroke-opacity="0.32" stroke-width="1.2">
+                <line x1="104" y1="80" x2="376" y2="80"></line>
+                <line x1="104" y1="100" x2="360" y2="100"></line>
+                <line x1="104" y1="120" x2="372" y2="120"></line>
+                <line x1="104" y1="140" x2="340" y2="140"></line>
+
+                <line x1="104" y1="180" x2="376" y2="180"></line>
+                <line x1="104" y1="200" x2="352" y2="200"></line>
+                <line x1="104" y1="220" x2="368" y2="220"></line>
+
+                <line x1="104" y1="260" x2="376" y2="260"></line>
+                <line x1="104" y1="280" x2="320" y2="280"></line>
+                <line x1="104" y1="300" x2="362" y2="300"></line>
+                <line x1="104" y1="320" x2="348" y2="320"></line>
+                <line x1="104" y1="340" x2="300" y2="340"></line>
+              </g>
+
+              <!-- Editor's strikethrough on one line -->
+              <line x1="104" y1="100" x2="260" y2="100" stroke="#E8C468" stroke-width="2" opacity="0.9"></line>
+
+              <!-- Margin notes -->
+              <g font-family="Gowun Batang, serif" font-style="italic" font-size="13" fill="#9A7A1E">
+                <text x="416" y="106">흐름 끊김</text>
+              </g>
+              <g stroke="#E8C468" stroke-opacity="0.7" fill="none" stroke-width="1">
+                <path d="M408 100 L392 100"></path>
+                <circle cx="408" cy="100" r="2.5" fill="#E8C468"></circle>
+              </g>
+
+              <g font-family="Gowun Batang, serif" font-style="italic" font-size="13" fill="#9A7A1E">
+                <text x="416" y="206">근거 보강</text>
+              </g>
+              <g stroke="#E8C468" stroke-opacity="0.7" fill="none" stroke-width="1">
+                <path d="M408 200 L392 200"></path>
+                <circle cx="408" cy="200" r="2.5" fill="#E8C468"></circle>
+              </g>
+
+              <g font-family="Gowun Batang, serif" font-style="italic" font-size="13" fill="#9A7A1E">
+                <text x="416" y="306">좋은 표현</text>
+              </g>
+              <g stroke="#E8C468" stroke-opacity="0.7" fill="none" stroke-width="1">
+                <path d="M408 300 L392 300"></path>
+                <circle cx="408" cy="300" r="2.5" fill="#E8C468"></circle>
+              </g>
+
+              <!-- Editor's tick mark at bottom -->
+              <text x="104" y="372" font-family="JetBrains Mono, monospace" font-size="10" fill="#8A7A6D"
+                letter-spacing="1.4">§ revision · 02</text>
+            </svg>
+          </div>
+
+          <div class="feature-text reveal is-visible" data-delay="1">
+            <span class="feature-num"><span class="accent">04</span> <span class="slash">/</span> 05
+              &nbsp;&nbsp;Editing</span>
+            <h3>꼼꼼한 피드백 파트너</h3>
+            <p class="feature-desc">문법부터 논리 흐름까지, 글의 완성도를 높이는 AI의 비평을 받아보세요. 날카롭지만 다정한 친구처럼.</p>
+            <div class="tags">
+              <span class="tag">Editing</span>
+              <span class="tag">Critical Review</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Feature 5 — Community -->
+      <article class="feature">
+        <div class="feature-grid">
+          <div class="feature-text reveal is-visible">
+            <span class="feature-num"><span class="accent">05</span> <span class="slash">/</span> 05
+              &nbsp;&nbsp;Community</span>
+            <h3>글로 세상과<br>연결되기</h3>
+            <p class="feature-desc">잘 쓴 글 한 편이 누군가에게는 깊은 영감이 되곤 합니다. 원한다면, 완성한 글을 익명으로 커뮤니티에 공유해 보세요.</p>
+            <div class="tags">
+              <span class="tag">Community</span>
+              <span class="tag">Anonymous Sharing</span>
+            </div>
+          </div>
+
+          <div class="feature-visual reveal is-visible" data-delay="1" aria-hidden="true">
+            <span class="visual-corner">Fig. 05</span>
+            <span class="visual-corner-r">anonymous</span>
+            <svg viewBox="0 0 560 420">
+              <!-- One essay at center, ripples of readers connecting out -->
+              <defs>
+                <radialGradient id="ripple" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#E8C468" stop-opacity="0.2"></stop>
+                  <stop offset="100%" stop-color="#E8C468" stop-opacity="0"></stop>
+                </radialGradient>
+              </defs>
+
+              <!-- Ripples -->
+              <g fill="none" stroke="#E8C468">
+                <circle cx="280" cy="210" r="70" stroke-opacity="0.3"></circle>
+                <circle cx="280" cy="210" r="120" stroke-opacity="0.2"></circle>
+                <circle cx="280" cy="210" r="170" stroke-opacity="0.12"></circle>
+              </g>
+
+              <!-- Central essay card -->
+              <g transform="translate(220 160)">
+                <rect width="120" height="100" rx="3" fill="#FAF7F2" stroke="#2D2520" stroke-opacity="0.22"></rect>
+                <g stroke="#2D2520" stroke-opacity="0.4" stroke-width="1">
+                  <line x1="14" y1="24" x2="106" y2="24"></line>
+                  <line x1="14" y1="38" x2="92" y2="38"></line>
+                  <line x1="14" y1="52" x2="102" y2="52"></line>
+                  <line x1="14" y1="66" x2="78" y2="66"></line>
+                  <line x1="14" y1="80" x2="96" y2="80"></line>
+                </g>
+              </g>
+
+              <!-- Reader nodes (anonymous, just circles) -->
+              <g fill="#2D2520" fill-opacity="0.55">
+                <circle cx="130" cy="140" r="5"></circle>
+                <circle cx="90" cy="230" r="4"></circle>
+                <circle cx="150" cy="310" r="5"></circle>
+                <circle cx="280" cy="330" r="5"></circle>
+                <circle cx="410" cy="300" r="4"></circle>
+                <circle cx="460" cy="210" r="5"></circle>
+                <circle cx="420" cy="120" r="4"></circle>
+                <circle cx="310" cy="80" r="5"></circle>
+                <circle cx="200" cy="80" r="4"></circle>
+              </g>
+              <!-- Subtle connecting threads -->
+              <g stroke="#2D2520" stroke-opacity="0.14" fill="none">
+                <path d="M280 210 Q200 160 130 140"></path>
+                <path d="M280 210 Q180 200 90 230"></path>
+                <path d="M280 210 Q210 270 150 310"></path>
+                <path d="M280 210 Q280 290 280 330"></path>
+                <path d="M280 210 Q350 270 410 300"></path>
+                <path d="M280 210 Q380 200 460 210"></path>
+                <path d="M280 210 Q360 160 420 120"></path>
+                <path d="M280 210 Q300 130 310 80"></path>
+                <path d="M280 210 Q230 130 200 80"></path>
+              </g>
+
+              <text x="280" y="380" font-family="JetBrains Mono, monospace" font-size="10" fill="#8A7A6D"
+                letter-spacing="1.4" text-anchor="middle">— anonymous · optional —</text>
+            </svg>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     WAITLIST
+     ========================================================================== -->
+  <section class="waitlist" id="waitlist">
+    <div class="wrap">
+      <div class="waitlist-inner">
+        <div class="eyebrow reveal is-visible">Waitlist</div>
+        <h2 class="reveal is-visible" data-delay="1">Flect, 곧 만나요</h2>
+        <p class="waitlist-desc reveal is-visible" data-delay="2">Flect은 아직 정식으로 출시되지 않았습니다.
+          서비스가 준비되면 가장 먼저 알려드릴게요.
+          여러분의 의견이 Flect을 더 따뜻하게 만듭니다.</p>
+
+        <form class="form reveal is-visible" data-delay="3" autocomplete="off" onsubmit="return false;">
+          <div class="form-field">
+            <label for="submit-email" class="sr-only" style="position:absolute; left:-9999px;">이메일</label>
+            <input type="email" id="submit-email" placeholder="알림을 받으실 이메일" required="">
+          </div>
+          <div class="form-field">
+            <label for="submit-advice" class="sr-only" style="position:absolute; left:-9999px;">조언 또는 의견</label>
+            <textarea id="submit-advice" placeholder="Flect이 이렇게 되었으면 좋겠다는 생각을 남겨주세요"></textarea>
+          </div>
+          <div class="form-submit">
+            <button type="button" id="submit" class="btn-submit">소식 받아볼게요</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     FOOTER
+     ========================================================================== -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-brand">Flect</div>
+        <div class="footer-meta">
+          <span>Contact · <a href="/cdn-cgi/l/email-protection#9af2fff6f6f5dafcf6fff9eeb4fbeaea"><span
+                class="__cf_email__"
+                data-cfemail="e088858c8c8fa0868c858394ce819090">[email&#160;protected]</span></a></span>
+          <span>© <span id="year">2026</span> Flect.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Thank-you popup (triggered by window.flectOpenThankYou() after GAS success) -->
+  <div class="popup-backdrop" id="thank-you" role="dialog" aria-modal="true" aria-labelledby="ty-title"
+    aria-hidden="true">
+    <div class="popup">
+      <div class="popup-mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12l4 4 10-10"></path>
+        </svg>
+      </div>
+      <h3 id="ty-title">고마워요!</h3>
+      <p>Flect이 준비되면 가장 먼저 소식 전해드릴게요.<br>당신의 글이 기대됩니다.</p>
+      <button type="button" class="popup-close" data-close="">닫기</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+
+</body>
+
+</html>

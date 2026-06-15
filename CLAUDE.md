@@ -5,6 +5,15 @@
 
 ---
 
+## 0. Reference Documents
+
+Before writing any code, read:
+
+- `docs/specs.md` §14 — Design tokens
+Follow the design guidelines on this code.
+
+---
+
 ## 1. 프로젝트 컨텍스트
 
 Flect는 비전문 필자의 진정성 있는 글쓰기를 돕는 2단계 Human-AI 협업 글쓰기 시스템입니다.
@@ -125,18 +134,20 @@ export interface CommunityPost {
 export type SortOrder = 'latest' | 'popular';
 
 export type Genre =
+  | '논평'
+  | '비평/평론'
   | '독후감'
+  | '장소 리뷰'
   | '영화·공연 리뷰'
+  | '제품 리뷰'
   | '여행기'
-  | '성찰 일지'
-  | '에세이/칼럼';
+  | '성찰 일지';
 
 export const GENRES: Genre[] = [
-  '독후감', '영화·공연 리뷰', '여행기', '성찰 일지', '에세이/칼럼',
+  '논평', '비평/평론', '독후감', '장소 리뷰', '영화·공연 리뷰', '제품 리뷰', '여행기', '성찰 일지',
 ];
 ```
-> 실제 장르 값은 structuredInputStore에서 사용하는 장르 라벨과 일치시켜야 합니다.
-> 불일치 시 structuredInputStore를 단일 출처(source of truth)로 삼아 위 상수를 맞추세요.
+> 실제 장르 값은 structuredInputStore에서 사용하는 장르 라벨과 일치하되, structuredInputStore에서 genre = 'review'일 때, 배포 시 '장소 리뷰', '영화·공연 리뷰', '제품 리뷰', '여행기' 중 하나를 선택할 수 있도록 제작.
 
 ---
 
@@ -189,6 +200,23 @@ export function getReadingTime(content: string): string {
 - `author_ip`(서버 주입) + `author_device`(body의 device_id 그대로) 를 데이터에 추가해 `/api/gas`로 `action=insert` 전달.
 - 발행된 글의 `id`를 응답으로 반환 (성공 화면의 `/community/[id]` 링크 생성용).
 
+브라우저가 보내는 것:
+  { author_nickname, genre, title, content,
+    outline_json, tags, device_id }
+
+이 서버가 하는 일:
+  1. body에서 위 항목들 꺼내기
+  2. 요청 헤더에서 IP 읽기
+       x-nf-client-connection-ip (Netlify가 넣어줌)
+       없으면 x-forwarded-for 첫 번째 값
+       그것도 없으면 'unknown'
+  3. { ...위 항목들, author_ip: 읽은IP, author_device: device_id } 조합
+  4. /api/gas로 전달 (action=insert, table=community_posts)
+  5. GAS가 돌려준 글 id를 브라우저에 반환
+
+브라우저가 받는 것:
+  { success: true, id: "AB1234" }
+
 #### 2-B. `/api/community/posts/route.ts`
 - `?id=` 있으면 단건, 없으면 전체 read.
 - `?scope=mine`이면:
@@ -211,9 +239,10 @@ export function getReadingTime(content: string): string {
 - `app/app/write/[id]/page.tsx`에 **"발행(Publish)" 버튼** 추가. 글이 비어있지 않을 때만 활성화.
 - 클릭 시 `PublishModal` 오픈:
   - 닉네임 입력 (필수), 태그 입력 (콤마 구분, 선택).
-  - genre는 structuredInputStore에서 자동으로 가져와 표시.
+  - genre는 structuredInputStore에서 자동으로 가져와 표시. 
+  - structuredInputStore에서 genre = 'review'일 때, 배포 시 '장소 리뷰', '영화·공연 리뷰', '제품 리뷰', '여행기' 중 하나를 선택할 수 있도록 제작.
   - "발행" 확정 시 `publishPost()` 호출. content/outline은 writingStore·ideationStore에서 수집, outline은 `JSON.stringify`. `device_id`는 `getDeviceId()`로 가져옴.
-- 발행 성공 시 `PublishSuccess` 화면 전환 + **Framer Motion 애니메이션** (체크마크 페이드인 등).
+- 발행 성공 시 `PublishSuccess` 화면 전환 + **Framer Motion 애니메이션** (체크마크 페이드인 등). 
   - "내 글 보기" (→ `/app`) 버튼
   - "커뮤니티에서 보기" (→ `/community/[id]`) 버튼
   - **"링크 복사" 버튼**: `navigator.clipboard.writeText(window.location.origin + '/community/' + id)` 호출. 복사 성공 시 버튼 텍스트를 "복사됨 ✓"로 일시 변경.
@@ -227,7 +256,7 @@ export function getReadingTime(content: string): string {
 - `app/app/page.tsx`에서 **기존 dummy 글 예시 하드코딩을 완전히 제거**.
 - `fetchPosts('mine')`으로 글 목록 불러오기. (내부적으로 `device_id` 쿼리 파라미터 자동 포함)
 - `PostCard` 리스트로 렌더.
-- 로딩 스켈레톤 / 빈 상태("아직 발행한 글이 없어요. 첫 글을 써볼까요?") 처리.
+- 로딩 스켈레톤 / 빈 상태("아직 발행한 글이 없어요. 첫 글을 써볼까요?") 처리. '새 글' 버튼 누르면 새로운 글이 생성되고 세션 `uuid`가 부여되며 writing 파이프라인 시작.
 - 상단에 **"커뮤니티" 버튼** 추가 → `/community`로 이동.
 
 **완료 조건:** 발행한 글이 User Page에 즉시 보이고, dummy가 사라짐.
@@ -237,7 +266,7 @@ export function getReadingTime(content: string): string {
 ### T5 — Seed Data (커뮤니티 초기 글 10개)
 
 - 다양한 장르/닉네임/태그/좋아요 수를 가진 **seed data 10건**을 `community_posts`에 삽입.
-- 방법: `scripts/seedCommunity.ts` 일회성 스크립트 또는 `/api/community/publish`를 10회 호출하는 임시 라우트.
+- 방법: `scripts/seedCommunity.ts` 일회성 스크립트.
 - `author_ip`는 `"seed"`, `author_device`는 `"seed-device"` 고정값으로 채워 User Page에 섞이지 않게 함.
 - 본문은 Flect의 타깃 장르(독후감/여행기/리뷰/성찰)에 맞는 현실적인 한국어 예시로 작성. 좋아요 수는 `likes` 컬럼에 직접 입력.
 

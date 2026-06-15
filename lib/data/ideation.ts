@@ -80,10 +80,12 @@ export const SCREENS_DATA: Partial<Record<ScreenName, QuestionScreenData>> = {
     answerKey: 'genre',
     layout: 'list',
     choices: [
-      { value: 'critique',    label: '비평 / 평론', hint: '작품·현상에 대한 분석과 평가' },
-      { value: 'book-report', label: '독후감',      hint: '읽은 책에 대한 감상과 생각' },
-      { value: 'review',      label: '리뷰',        hint: '경험한 것에 대한 솔직한 후기' },
-      { value: 'travelogue',  label: '여행기',      hint: '다녀온 곳에 대한 경험과 인상' },
+      { value: 'book-review',    label: '독후감',         hint: '읽은 책에 대한 감상과 생각' },
+      { value: 'place-review',   label: '장소 리뷰',      hint: '다녀온 장소에 대한 솔직한 후기' },
+      { value: 'movie-review',   label: '영화·공연 리뷰', hint: '본 영화나 공연에 대한 감상' },
+      { value: 'product-review', label: '제품 리뷰',      hint: '써본 제품에 대한 평가' },
+      { value: 'travelogue',     label: '여행기',         hint: '다녀온 곳에 대한 경험과 인상' },
+      { value: 'reflection',     label: '성찰 일지',      hint: '일상과 경험을 돌아보는 글' },
     ],
   },
 

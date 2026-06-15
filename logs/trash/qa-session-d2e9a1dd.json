@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "지난 주 읽은 <오프먼트>라는 책",
+    "writingFrequency": "주에 두세 번 씀",
+    "updatedAt": "2026-06-06T00:56:45.728Z"
+  },
+  "transcript": [
+    {
+      "id": "0e424516-c201-4fb0-a1ee-fea0ed163bcf",
+      "role": "assistant",
+      "content": "시작했어요, 반갑습니다.\n\n먼저, 지난 주 읽은 <오프먼트>라는 책에 대해 좀 더 이야기 나눠볼게요. 먼저 그 책을 어떻게 만나게 되셨고, 어떤 상황에서 경험하셨는지 자유롭게 들려주세요.",
+      "type": "llm-generated",
+      "isCont": true,
+      "timestamp": "09:55"
+    },
+    {
+      "id": "263a6889-6905-40d7-a045-2500afbb5405",
+      "role": "user",
+      "content": "잘 모르겠어",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "09:56"
+    },
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "content": "첫 질문에 대해 아직 이야기하기 어려우신가요?",
+      "question": "그 책을 경험하면서 마음이 가장 크게 움직였던 순간이나 부분이 있었다면 어떤 것이었나요?",
+      "reasoning": "학생이 첫 번째 메인 질문에 답변을 제공하지 않아 스킵했으므로, 다음 메인 질문인 감정 질문으로 넘어갑니다.",
+      "questionType": "skip",
+      "isDone": false
+    }
+  ]
+}

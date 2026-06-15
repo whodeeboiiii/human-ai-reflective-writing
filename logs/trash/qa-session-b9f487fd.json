@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "독서모임에서 읽은 <오프먼트>라는 책",
+    "writingExperience": "가끔 씀",
+    "updatedAt": "2026-05-21T00:23:26.286Z"
+  },
+  "transcript": [
+    {
+      "id": "b7876545-50bf-4421-90f1-56af007491e7",
+      "role": "assistant",
+      "content": "먼저, 독서모임에서 읽은 책에 대해 좀 더 이야기 나눠볼게요. 그때 그 책을 어떻게 만나게 되셨고, 어떤 상황에서 경험하셨는지 자유롭게 들려주세요.",
+      "type": "llm-generated",
+      "isCont": true,
+      "timestamp": "09:20"
+    },
+    {
+      "id": "ff6ff3ad-d536-4866-9a28-f60a6b778346",
+      "role": "user",
+      "content": "독서모임에서 조원이 추천했어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "09:23"
+    },
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "content": "조원이 추천했다는 이야기를 들었어요.",
+      "question": "그때 조원이 왜 그 책을 추천했는지, 어떤 구체적인 상황이었는지 조금 더 말씀해 주실 수 있나요?",
+      "reasoning": "학생의 답변이 30자 이하라서 구체성을 높이기 위해 clarification 질문을 삽입",
+      "questionType": "clarification",
+      "isDone": false
+    }
+  ]
+}

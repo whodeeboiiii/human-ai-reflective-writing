@@ -13,9 +13,30 @@ import {
   type ScreenName,
 } from '@/lib/data/ideation';
 import type { StructuredInput } from '@/types/structured-input';
+import type { BookContext } from '@/types/ideation';
 import { ProgressDots } from './ProgressDots';
 import { QuestionScreen } from './QuestionScreen';
+import { BookSearchPanel } from './BookSearchPanel';
 import styles from './ideation-input.module.css';
+
+function extractBookTitle(sentence: string): string {
+  const patterns = [
+    /<(.+?)>/,
+    /『(.+?)』/,
+    /「(.+?)」/,
+    /《(.+?)》/,
+    /"(.+?)"/,
+    /“(.+?)”/,
+  ];
+  for (const p of patterns) {
+    const m = sentence.match(p);
+    if (m?.[1]) return m[1].trim();
+  }
+  // "XX라는 책/소설/에세이" pattern — grab the word just before "라는"
+  const laMatch = sentence.match(/(\S+)라는\s*(?:책|소설|에세이|작품|도서)/);
+  if (laMatch?.[1]) return laMatch[1].trim();
+  return sentence.slice(0, 40).trim();
+}
 
 const variants = {
   hidden: { opacity: 0, y: 10 },
@@ -28,6 +49,8 @@ export default function SurveyFlow({ sessionId }: { sessionId: string }) {
   const [current, setCurrent] = useState<ScreenName>('intro');
   const [optionalActivated, setOptionalActivated] = useState(false);
   const [firingValue, setFiringValue] = useState<string | null>(null);
+  const [bookSearchVisible, setBookSearchVisible] = useState(false);
+  const [submittedTopicValue, setSubmittedTopicValue] = useState('');
 
   const hasResetRef = useRef(false);
   useEffect(() => {
@@ -48,6 +71,11 @@ export default function SurveyFlow({ sessionId }: { sessionId: string }) {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLInputElement) return;
       if (e.key !== 'ArrowLeft') return;
+      if (bookSearchVisible) {
+        e.preventDefault();
+        setBookSearchVisible(false);
+        return;
+      }
       if (current === 'genre' || current === 'intro' || current === 'complete') return;
       e.preventDefault();
       setHistory((h) => {
@@ -60,7 +88,7 @@ export default function SurveyFlow({ sessionId }: { sessionId: string }) {
     };
     document.addEventListener('keydown', onKeyDown);
     return () => document.removeEventListener('keydown', onKeyDown);
-  }, [current]);
+  }, [current, bookSearchVisible]);
 
   const [history, setHistory] = useState<ScreenName[]>([]);
 
@@ -73,6 +101,10 @@ export default function SurveyFlow({ sessionId }: { sessionId: string }) {
   }
 
   function handleBack() {
+    if (bookSearchVisible) {
+      setBookSearchVisible(false);
+      return;
+    }
     if (current === 'genre' || current === 'intro' || current === 'complete') return;
     setHistory((h) => {
       const prev = h[h.length - 1];
@@ -98,11 +130,29 @@ export default function SurveyFlow({ sessionId }: { sessionId: string }) {
 
   function handleOpenSubmit(value: string) {
     setAnswer({ topicSentence: value });
+    const genre = useStructuredInputStore.getState().answers.genre;
+    if (genre === 'book-review') {
+      setSubmittedTopicValue(value);
+      setBookSearchVisible(true);
+    } else {
+      advance();
+    }
+  }
+
+  function handleBookConfirm(ctx: BookContext) {
+    useStructuredInputStore.getState().setSelectedBookContext(ctx);
+    setBookSearchVisible(false);
+    advance();
+  }
+
+  function handleBookSkip() {
+    useStructuredInputStore.getState().setSelectedBookContext(null);
+    setBookSearchVisible(false);
     advance();
   }
 
   const isBackHidden = current === 'intro' || current === 'complete';
-  const isBackDisabled = current === 'genre';
+  const isBackDisabled = current === 'genre' && !bookSearchVisible;
 
   function renderScreen() {
     if (current === 'intro') {
@@ -238,6 +288,39 @@ export default function SurveyFlow({ sessionId }: { sessionId: string }) {
                 </span>
               </Link>
             </div>
+          </div>
+        </motion.section>
+      );
+    }
+
+    // Book-report genre: after topic is submitted, show book search below
+    if (current === 'topic' && bookSearchVisible) {
+      return (
+        <motion.section
+          key="topic-book-search"
+          className={`${styles.ixScreen} ${styles.ixScreenScroll}`}
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          <div className={styles.ixScreenInner}>
+            <p className={styles.ixEyebrow}>Question 2 of 5</p>
+            <div className={styles.ixSubmittedTopic}>
+              <p className={styles.ixSubmittedTopicText}>&ldquo;{submittedTopicValue}&rdquo;</p>
+              <button
+                type="button"
+                className={styles.ixSubmittedTopicEdit}
+                onClick={() => setBookSearchVisible(false)}
+              >
+                ← 수정하기
+              </button>
+            </div>
+            <BookSearchPanel
+              initialQuery={extractBookTitle(submittedTopicValue)}
+              onConfirm={handleBookConfirm}
+              onSkip={handleBookSkip}
+            />
           </div>
         </motion.section>
       );

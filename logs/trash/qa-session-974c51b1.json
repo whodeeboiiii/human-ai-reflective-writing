@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "지난 주에 읽은 '돈의 심리학'이라는 책",
+    "writingFrequency": "주에 한 번 씀",
+    "interventionLevel": 3,
+    "interventionLabel": "중간",
+    "completionThreshold": 70,
+    "updatedAt": "2026-06-06T01:32:54.301Z"
+  },
+  "transcript": [
+    {
+      "id": "524e3d57-ed01-4a3b-b2eb-b4c3d9b8e80f",
+      "role": "assistant",
+      "content": "시작해요.\n\n먼저, 지난 주에 읽은 '돈의 심리학'이라는 책에 대해 좀 더 이야기 나눠볼게요. 먼저 그 책을 어떻게 만나게 되셨고, 어떤 상황에서 경험하셨는지 자유롭게 들려주세요.",
+      "type": "llm-generated",
+      "isCont": true,
+      "timestamp": "10:16"
+    },
+    {
+      "id": "79cd7738-078a-4e6d-9f0b-058b40106ec5",
+      "role": "user",
+      "content": "독서모임에서 읽었어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "10:21"
+    },
+    {
+      "id": "0ce5a445-8e2c-4c69-b826-909a293e806b",
+      "role": "assistant",
+      "content": "독서모임에서 읽으셨군요.\n\n그 독서모임은 언제, 어디서 열렸고, 어떤 분위기였는지 조금 더 들려주실 수 있을까요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "10:21"
+    },
+    {
+      "id": "3734e2ae-b6d4-4bb8-93ac-e29857f227a4",
+      "role": "user",
+      "content": "독서모임은 저번주에 사당에서 했어. 책을 읽고 책에 대해 이야기하는 독서모임이었는데, 사실 생각보다 모임원들이 책 자체에 대한 깊은 대화를 못 해서 아쉬워. 그렇지만 나는 책을 엄청 재미있게 읽었어!",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "10:31"
+    },
+    {
+      "id": "156c65d7-24fd-4f38-bd50-030f1c342333",
+      "role": "assistant",
+      "content": "독서모임에서 책을 읽었고, 생각보다 깊은 대화가 안 되어서 아쉬워하셨지만, 책을 정말 재미있게 읽으셨군요.\n\n그 책을 읽는 동안 특히 인상 깊었던 순간이나 장면이 있었나요? 그 순간이 어떻게 다가왔는지 말씀해 주세요.",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "10:32"
+    },
+    {
+      "id": "686443ce-0fcc-436f-ba08-fbd926df2ead",
+      "role": "user",
+      "content": "정확히 무슨 뜻이야? 인상 깊었던 순간?",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "10:32"
+    },
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "content": "학생이 '인상 깊은 순간'이 정확히 어떤 건지 궁금해 하셨어요.",
+      "question": "그때 책 속에서 어떤 대목이나 상황이었는지, 구체적으로 어떤 부분이 마음에 남았는지 알려주실 수 있을까요?",
+      "reasoning": "학생이 인상 깊은 순간을 구체화하지 못해 질문을 재해석하고 있다.",
+      "questionType": "clarification",
+      "isDone": false
+    }
+  ]
+}

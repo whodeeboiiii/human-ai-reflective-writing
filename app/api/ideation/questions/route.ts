@@ -16,10 +16,12 @@ const WRITING_FREQUENCY_MAP: Record<string, string> = {
 };
 
 const GENRE_MAP: Record<string, string> = {
-  critique: '비평/평론',
-  'book-report': '독후감',
-  review: '리뷰',
+  'book-review': '독후감',
+  'place-review': '장소 리뷰',
+  'movie-review': '영화·공연 리뷰',
+  'product-review': '제품 리뷰',
   travelogue: '여행기',
+  reflection: '성찰 일지',
 };
 
 const IDEA_READINESS_MAP: Record<string, string> = {
@@ -128,7 +130,7 @@ export async function POST(req: Request): Promise<NextResponse> {
 
   const { structuredInput, turns, bookContext, interventionLevel, currentElement: clientElement, completedElements } = body;
 
-  const genre = structuredInput.genre ?? 'book-report';
+  const genre = structuredInput.genre ?? 'book-review';
   const topicSentence = structuredInput.topicSentence ?? '교토에서의 사흘';
   const ideaReadiness = structuredInput.ideaReadiness ?? 'some';
   const writingFrequency = structuredInput.writingFrequency ?? 'few_per_month';

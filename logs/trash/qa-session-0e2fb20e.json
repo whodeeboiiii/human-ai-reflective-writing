@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "독서모임에서 읽은 <오프먼트>라는 책",
+    "writingExperience": "가끔 씀",
+    "updatedAt": "2026-05-19T08:13:27.024Z"
+  },
+  "transcript": [
+    {
+      "id": "c1b56893-8fe3-4e8b-bbeb-5fab13cc9df6",
+      "role": "assistant",
+      "content": "먼저, 독서모임에서 읽은 <오프먼트>라는 책에 대해 좀 더 이야기 나눠볼게요. 먼저 그 책을 어떻게 만나게 되셨고, 어떤 상황에서 경험하셨는지 자유롭게 들려주세요.",
+      "type": "llm-generated",
+      "isCont": true,
+      "timestamp": "16:53"
+    },
+    {
+      "id": "a1d3c1a0-78d4-4c9a-be93-b5cd6caaa6f4",
+      "role": "user",
+      "content": "독서모임에서 조장이 추천해 줘서 책을 읽게 되었어.\n\"번아웃이 온 현대인들을 위한 쉬는 방법 가이드\"라는 캐치프레이즈가 인상깊었어. 나는 '쉰다'는 행위를 잘 하기는 하지만, 의미 있게 쉬는 방법을 잘 모르겠거든. 쉴 때 유튜브를 보면서 시간을 낭비하기도 하고.",
+      "type": "predefined",
+      "isCont": false,
+      "skipped": false,
+      "timestamp": "16:54"
+    },
+    {
+      "id": "e2704861-3bfe-49da-ae9b-4760c2d77480",
+      "role": "assistant",
+      "content": "조장이 추천해 주셔서 독서모임에서 읽게 됐고, ‘번아웃이 온 현대인들을 위한 쉬는 방법 가이드’라는 문구가 인상 깊었다고요.\n\n그 책을 읽으면서 마음이 가장 크게 움직였던 순간이나 부분이 있었다면 어떤 것이었나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "16:54"
+    },
+    {
+      "id": "fa534c3e-669f-40ba-93ea-550dc884ff7a",
+      "role": "user",
+      "content": "잘 모르겠는데... 더 구체적으로 얘기해줘",
+      "type": "predefined",
+      "isCont": false,
+      "skipped": false,
+      "timestamp": "16:54"
+    },
+    {
+      "id": "ed27b1ba-7341-4c26-bbb5-a17044fd1f39",
+      "role": "assistant",
+      "content": "조장이 추천해 주셔서 독서모임에서 읽은 책이라니, 그 책도 좋은 선택이었을 것 같아요.\n\n그 책에서 ‘의미 있게 쉬는 방법’에 대한 아이디어가 특히 눈에 띈 부분이 있었다면, 어떤 장면이나 표현이 떠올랐는지 조금 더 들려줄 수 있을까요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "16:54"
+    },
+    {
+      "id": "5ce3449f-8ebf-4f8d-9ea9-c4565b7b7c04",
+      "role": "user",
+      "content": "쉬는 방법을 되게 구체적으로 적었더라고? 하루 중에 쉬는 '시간'을 정해서 스케줄에 넣으라든지, 쉬는 '장소'를 구체화하라든지, '이 장소에 가면 쉬어라'라는 생각을 한다든지...",
+      "type": "predefined",
+      "isCont": false,
+      "skipped": false,
+      "timestamp": "16:55"
+    },
+    {
+      "id": "4229d19b-ac31-4fbd-9bc5-11baf81cde77",
+      "role": "assistant",
+      "content": "시간표에 쉬는 시간을 정하고, 특정 장소에서 쉬는 방법을 구체적으로 제시한 부분이 기억에 남는군요.\n\n그 부분이 특별히 다가왔던 이유는 무엇이었을까요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "16:55"
+    },
+    {
+      "id": "d146e71c-66af-4ec3-8c44-0ffe684ee523",
+      "role": "user",
+      "content": "애초에 나는 \"쉬는 시간은 쉬는 시간이지..\"라고만 생각하고, 무엇을 하면서 쉬는지 크게 생각이 들지 않았거든.",
+      "type": "predefined",
+      "isCont": false,
+      "skipped": false,
+      "timestamp": "17:13"
+    },
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "question": "그 경험을 하고 시간이 지난 지금, 무엇이 가장 또렷이 남아있나요? 또는 무엇이 달라졌다고 느끼시나요?",
+      "reasoning": "plain-text fallback: single block",
+      "questionType": "main",
+      "isDone": false
+    }
+  ]
+}

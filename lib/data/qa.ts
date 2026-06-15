@@ -4,10 +4,12 @@ export interface QAScript {
 }
 
 export const GENRE_LABELS: Record<string, string> = {
-  critique: '비평 / 평론',
-  'book-report': '독후감',
-  review: '리뷰',
+  'book-review': '독후감',
+  'place-review': '장소 리뷰',
+  'movie-review': '영화·공연 리뷰',
+  'product-review': '제품 리뷰',
   travelogue: '여행기',
+  reflection: '성찰 일지',
 };
 
 // First INTRO message is static; second is generated in ChatContainer using store answers.

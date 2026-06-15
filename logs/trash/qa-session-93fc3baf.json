@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "지난 주 읽은 <오프먼트>라는 책",
+    "writingFrequency": "주에 두세 번 씀",
+    "updatedAt": "2026-06-06T00:54:10.944Z"
+  },
+  "transcript": [
+    {
+      "id": "c6b0ac21-acc5-4980-84d1-95372237f85e",
+      "role": "assistant",
+      "content": "먼저, 지난 주 읽은 오프먼트라는 책에 대해 좀 더 이야기 나눠볼게요. 먼저 그 책을 어떻게 만나게 되셨고, 어떤 상황에서 경험하셨는지 자유롭게 들려주세요.",
+      "type": "llm-generated",
+      "isCont": true,
+      "timestamp": "09:31"
+    },
+    {
+      "id": "67dee55f-dae4-44a3-b1ee-87ef03efadfc",
+      "role": "user",
+      "content": "저번주 독서모임에서 읽게되었어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "09:34"
+    },
+    {
+      "id": "c31c53ff-a0ed-4860-b364-758d4e049f59",
+      "role": "assistant",
+      "content": "독서모임에서 읽게 되었다는 이야기를 해주셨군요.\n\n그 독서모임은 언제, 어디에서, 어떤 분위기였는지 구체적으로 알려줄 수 있을까요? 그때 책을 처음 펼쳤을 때의 상황이나 사람들과의 대화가 떠오르면 함께 이야기해 주세요.",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "09:34"
+    },
+    {
+      "id": "552d67be-6678-40f9-b3ed-a89c1dc79ee0",
+      "role": "user",
+      "content": "\"쉼\"이라는 개념에 대해 파고드는 책이었어서 궁금해서 신청했어. 읽고 독서모임 사람들이랑 토의했어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "09:36"
+    },
+    {
+      "id": "bb24644a-77c3-4679-81c0-73d1dcbe7fc7",
+      "role": "assistant",
+      "content": "쉼이라는 주제에 끌려서 독서모임에 신청했다는 이유가 흥미롭네요.\n\n그 책을 읽으면서 마음이 가장 크게 움직였던 순간이나 부분이 있었다면 어떤 것이었나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "09:36"
+    },
+    {
+      "id": "86883a6b-a0a0-4806-a05e-4f96281707c6",
+      "role": "user",
+      "content": "잘 모르겠어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "09:53"
+    },
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "content": "독서모임에서 읽게 되었다는 이야기가 인상적이었네요.",
+      "question": "잘 모르겠어라고 생각하신 이유가 무엇인가요? 혹시라도 생각나는 구체적인 부분이나 장면이 있다면 함께 말씀해 주세요.",
+      "reasoning": "학생의 답변이 30자 이내로 짧고 구체적이지 않아 즉각 구체화를 통해 구체적 기억을 유도합니다.",
+      "questionType": "followup",
+      "isDone": false
+    }
+  ]
+}

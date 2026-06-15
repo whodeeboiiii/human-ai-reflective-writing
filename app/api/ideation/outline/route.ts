@@ -9,10 +9,12 @@ import type { StructuredInput } from '@/types/structured-input';
 const PROMPT_TEMPLATE = readFileSync(join(process.cwd(), 'OUTLINE_MAT_PROMPT.md'), 'utf-8');
 
 const GENRE_MAP: Record<string, string> = {
-  critique: '비평/평론',
-  'book-report': '독후감',
-  review: '리뷰',
+  'book-review': '독후감',
+  'place-review': '장소 리뷰',
+  'movie-review': '영화·공연 리뷰',
+  'product-review': '제품 리뷰',
   travelogue: '여행기',
+  reflection: '성찰 일지',
 };
 
 const LENGTH_MAP: Record<string, string> = {

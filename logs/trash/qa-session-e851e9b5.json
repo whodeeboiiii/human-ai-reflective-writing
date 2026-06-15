@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "히가시노 게이고의 \"신참자\"를 읽고 독후감을 작성하고 싶어.",
+    "writingExperience": "거의 안 씀",
+    "updatedAt": "2026-05-21T00:49:09.594Z"
+  },
+  "transcript": [
+    {
+      "id": "071a8993-7005-4a9b-b728-4518d49125e6",
+      "role": "assistant",
+      "content": "먼저, 히가시노 게이고의 \"신참자\"를 읽고 독후감을 작성하고 싶어.에 대해 좀 더 이야기 나눠볼게요. 먼저 그 책을 어떻게 만나게 되셨고, 어떤 상황에서 경험하셨는지 자유롭게 들려주세요.",
+      "type": "llm-generated",
+      "isCont": true,
+      "timestamp": "09:47"
+    },
+    {
+      "id": "68b11581-8e17-4d35-ab48-6e6833ef90ea",
+      "role": "user",
+      "content": "모르곘는뎨?",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "09:49"
+    },
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "content": "학생이 아직 책에 대해 구체적인 경험을 말씀하지 않으셨네요.",
+      "question": "책을 언제, 어디서, 어떤 계기로 처음 알게 되셨는지 궁금해요.",
+      "reasoning": "학생이 Orientation 질문에 직접적인 답변을 하지 않아, 이해 수준을 확인하고 구체적인 외적 사실을 이끌어내기 위해 clarification 질문을 진행합니다.",
+      "questionType": "clarification",
+      "isDone": false
+    }
+  ]
+}

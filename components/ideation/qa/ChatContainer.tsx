@@ -358,7 +358,16 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
 
     async function fetchBookContext(): Promise<void> {
       const answers = useStructuredInputStore.getState().answers;
-      if (answers.genre !== 'book-report' || !answers.topicSentence) return;
+      if (answers.genre !== 'book-review' || !answers.topicSentence) return;
+
+      // Use book selected during structured input if available
+      const selectedBook = useStructuredInputStore.getState().selectedBookContext;
+      if (selectedBook) {
+        useIdeationStore.getState().setBookContext(selectedBook);
+        return;
+      }
+
+      // Fallback: auto-fetch from topicSentence
       try {
         const res = await fetch(
           `/api/book-search?query=${encodeURIComponent(answers.topicSentence)}`

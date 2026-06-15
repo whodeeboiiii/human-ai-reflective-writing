@@ -8,6 +8,10 @@ import { useStructuredInputStore } from '@/store/structuredInputStore';
 import { useIdeationStore } from '@/store/ideationStore';
 import { useWritingStore } from '@/store/writingStore';
 import type { MaterialCard } from '@/types/ideation';
+import { GENRE_LABEL } from '@/types/community';
+import { publishPost } from '@/lib/community';
+import { PublishModal } from '@/components/community/PublishModal';
+import { PublishSuccess } from '@/components/community/PublishSuccess';
 import { OutlineSidebar } from './OutlineSidebar';
 import { AnswersSidebar } from './AnswersSidebar';
 import { EditorArea } from './EditorArea';
@@ -15,12 +19,15 @@ import { AIContextMenu, type ContextMenuMode } from './AIContextMenu';
 import { SuggestionPanel } from './SuggestionPanel';
 import { DiffPreview } from './DiffPreview';
 import styles from './writing.module.css';
+import communityStyles from '@/components/community/community.module.css';
 
 const GENRE_LABELS: Record<string, string> = {
-  critique: '비평/평론',
-  'book-report': '독후감',
-  review: '리뷰',
+  'book-review': '독후감',
+  'place-review': '장소 리뷰',
+  'movie-review': '영화·공연 리뷰',
+  'product-review': '제품 리뷰',
   travelogue: '여행기',
+  reflection: '성찰 일지',
 };
 
 const AUDIENCE_LABELS: Record<string, string> = {
@@ -77,6 +84,31 @@ export default function WritingView({ sessionId }: { sessionId: string }) {
       .join('\n')
       .slice(0, 300);
   }, [orderedCards]);
+
+  // ── Publish ──
+  const [publishModalOpen, setPublishModalOpen] = useState(false);
+  const [publishedId, setPublishedId] = useState<string | null>(null);
+
+  const handlePublishConfirm = useCallback(
+    async (nickname: string, tags: string) => {
+      const draft = useWritingStore.getState().draft;
+      const currentOutline = useIdeationStore.getState().outline;
+      const genreValue = answers.genre;
+      const genre = genreValue ? GENRE_LABEL[genreValue] : '독후감';
+
+      const { id } = await publishPost({
+        author_nickname: nickname,
+        genre,
+        title: answers.topicSentence ?? '무제',
+        content: draft,
+        outline_json: currentOutline ? JSON.stringify(currentOutline) : '',
+        tags,
+      });
+      setPublishedId(id);
+      setPublishModalOpen(false);
+    },
+    [answers]
+  );
 
   // ── Layout ──
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -287,6 +319,13 @@ export default function WritingView({ sessionId }: { sessionId: string }) {
     else triggerFix();
   }, [contextMenu, triggerSuggest, triggerFix]);
 
+  // 발행 성공 화면
+  if (publishedId) {
+    return <PublishSuccess postId={publishedId} />;
+  }
+
+  const isDraftEmpty = !editor || editor.isEmpty;
+
   return (
     <div className={styles.page}>
       {/* Top bar — visual continuity with Ideation, but a distinct phase badge */}
@@ -318,10 +357,18 @@ export default function WritingView({ sessionId }: { sessionId: string }) {
           <span className={styles.phaseName}>Writing</span>
         </div>
 
-        <Link href="/app" className={styles.mark} aria-label="Flect 홈">
-          <span className={styles.markGlyph} aria-hidden="true" />
-          <span>Flect</span>
-        </Link>
+        <button
+          className={communityStyles.headerPublishBtn}
+          onClick={() => setPublishModalOpen(true)}
+          disabled={isDraftEmpty}
+          aria-label="글 발행하기"
+        >
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M14 2L8 8M14 2H9M14 2V7" />
+            <path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9" />
+          </svg>
+          발행
+        </button>
       </header>
 
       {/* Three-column layout: outline (left) · editor · answers (right) */}
@@ -400,6 +447,14 @@ export default function WritingView({ sessionId }: { sessionId: string }) {
           onApply={handleApplyFix}
           onCancel={handleCancelFix}
           onRetry={triggerFix}
+        />
+      )}
+
+      {publishModalOpen && answers.genre && (
+        <PublishModal
+          genre={GENRE_LABEL[answers.genre]}
+          onConfirm={handlePublishConfirm}
+          onClose={() => setPublishModalOpen(false)}
         />
       )}
     </div>

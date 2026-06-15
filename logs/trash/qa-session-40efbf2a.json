@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "지난 주에 읽은 '돈의 심리학'이라는 책",
+    "writingFrequency": "주에 한 번 씀",
+    "interventionLevel": 3,
+    "interventionLabel": "중간",
+    "completionThreshold": 70,
+    "updatedAt": "2026-06-06T01:42:08.294Z"
+  },
+  "transcript": [
+    {
+      "id": "b5b667a2-c12a-4b2c-996b-9035f1177a92",
+      "role": "assistant",
+      "content": "먼저, 지난 주에 읽은 '돈의 심리학'이라는 책에 대해 좀 더 이야기 나눠볼게요. 먼저 그 책을 어떻게 만나게 되셨고, 어떤 상황에서 경험하셨는지 자유롭게 들려주세요.",
+      "type": "llm-generated",
+      "isCont": true,
+      "timestamp": "10:39"
+    },
+    {
+      "id": "a5278479-ddb3-4001-a5ae-40778d8e6b29",
+      "role": "user",
+      "content": "독서모임에서 읽었어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "10:39"
+    },
+    {
+      "id": "837da6cd-d5ef-4613-a9eb-dcdf61c28641",
+      "role": "assistant",
+      "content": "독서모임에서 읽었다는 점은 알게 되었어요.\n\n그 독서모임은 언제, 어디서 열렸고, 몇 명이 참여했나요? 독서모임에 참여하게 된 계기는 무엇이었나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "10:40"
+    },
+    {
+      "id": "7f544000-c303-43d0-bae8-8fb08de83d9f",
+      "role": "user",
+      "content": "독서모임은 저번주에 사당에서 했어. 책을 읽고 책에 대해 이야기하는 독서모임이었는데, 사실 생각보다 모임원들이 책 자체에 대한 깊은 대화를 못 해서 아쉬워. 그렇지만 나는 책을 엄청 재미있게 읽었어!",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "10:40"
+    },
+    {
+      "id": "0464da64-3d58-47c5-b814-a84be2da92b1",
+      "role": "assistant",
+      "content": "독서모임은 저번주에 사당에서 했고, 책과 함께한 독서모임이었다고 알려줬어요.\n\n그때 모임 분위기는 어땠고, 어떤 점이 가장 인상적이었나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "10:40"
+    },
+    {
+      "id": "b870da46-e93e-44b6-a18f-07d86fdd2362",
+      "role": "user",
+      "content": "모임 분위기는 좋았어. 책에 대해서 이야기하는 모임 분위기였어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "10:41"
+    },
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "content": "지난 주에 사당에서 열린 독서모임에서 책을 읽은 이야기를 들려주셨네요.",
+      "question": "그 독서모임에서 구체적으로 어떤 대화가 오갔는지, 혹은 어떤 대목이 가장 많이 언급됐는지 기억나는 대로 말해 주세요.",
+      "reasoning": "독서모임에 대한 구체적인 장면과 분위기를 더 파악하기 위해 followup 질문을 합니다.",
+      "questionType": "followup",
+      "isDone": false
+    }
+  ]
+}

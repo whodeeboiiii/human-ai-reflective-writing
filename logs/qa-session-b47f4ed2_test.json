@@ -1,0 +1,262 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "지난 주에 읽은 '돈의 심리학'이라는 책",
+    "writingFrequency": "주에 한 번 씀",
+    "interventionLevel": 3,
+    "interventionLabel": "중간",
+    "completionThreshold": 70,
+    "updatedAt": "2026-06-06T02:09:51.967Z"
+  },
+  "transcript": [
+    {
+      "id": "466455a9-9c2b-4e12-9667-44b0fe82ebd9",
+      "role": "assistant",
+      "content": "먼저, 지난 주에 읽은 '돈의 심리학'이라는 책에 대해 좀 더 이야기 나눠볼게요. 그 책을 어떻게 만나게 되셨고, 어떤 계기로 읽게 되셨는지 자유롭게 들려주세요.",
+      "type": "llm-generated",
+      "isCont": true,
+      "timestamp": "10:50"
+    },
+    {
+      "id": "4f4691a9-cb66-4247-897c-8d8a8d74df54",
+      "role": "user",
+      "content": "독서모임에서 추천받아서 읽은 책이야. 여자친구가 먼저 읽어 보고, 추천해 주기도 했고.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "10:51"
+    },
+    {
+      "id": "b0af71b7-9283-45d6-9c13-2b81909193bc",
+      "role": "assistant",
+      "content": "독서모임에서 추천받아서 읽고, 여자친구가 먼저 추천해 줬다고 하셨네요.\n\n그 독서모임은 어떤 분위기로 진행됐나요? 그리고 책을 읽기 전에 어떤 기대를 가지고 있었는지도 궁금해요.",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "10:51"
+    },
+    {
+      "id": "d9ab5541-04d9-40b9-8474-9c9ed9449f62",
+      "role": "user",
+      "content": "독서모임은 나와 비슷하게 주식을 잘 모르는 학생들이 많았고, 그래서 초보자의 입장에서 잘 이야기헀던 것 같아. 근데 금융 전문가들이 없어서 오가는 대화들이 조금 라이트한 느낌이 있어서 아쉬웠어.\n책을 읽기 전에는 내가 돈을 다룰 때의 스탠스를 발전시킬 수 있겠다는 기대가 있었어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "10:52"
+    },
+    {
+      "id": "36683fe4-68af-4054-ac07-1930ba9e88e7",
+      "role": "assistant",
+      "content": "독서모임 분위기와 기대에 대해 얘기해 주셔서 고마워요.\n\n독서모임에서 책을 읽은 장소는 어디였나요? 그리고 처음 책을 손에 들었을 때 가장 먼저 떠오른 생각이 뭐였는지도 궁금해요.",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "10:53"
+    },
+    {
+      "id": "18e402ce-a206-43d9-90e9-a336aa0d1189",
+      "role": "user",
+      "content": "책은 각자 집에서 읽고 왔는데?",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "10:53"
+    },
+    {
+      "id": "99ed0ad7-7151-4e70-83c0-31cec2d6efec",
+      "role": "assistant",
+      "content": "독서모임은 초보자 위주의 분위기였고, 집에서 각자 읽었다고 하셨네요.\n\n집에서 읽을 때 어떤 장소에서 읽었는지, 책상이나 소파 같은 구체적인 장소가 기억에 남나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "10:54"
+    },
+    {
+      "id": "22c42476-2dc8-4693-994c-d0295ef34f15",
+      "role": "user",
+      "content": "기억이 안나",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "10:54"
+    },
+    {
+      "id": "532da700-673e-4d30-8592-11da1121ee5e",
+      "role": "assistant",
+      "content": "기억이 안 나신다니 아쉽네요.\n\n그 책을 읽으면서 마음이 가장 크게 움직였던 장면이나 구절이 있었다면 어떤 것이었나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "10:54"
+    },
+    {
+      "id": "55b727aa-ba13-45ab-82e3-5445180935a6",
+      "role": "user",
+      "content": "\"저축을 왜 해야 하는가\"에 대해서 이야기한 게 좋았어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "10:56"
+    },
+    {
+      "id": "bc87e5a2-73a0-4784-b53d-25a79bebe720",
+      "role": "assistant",
+      "content": "저축을 왜 해야 하는지에 대한 부분이 인상적이라고 하셨네요.\n\n그 부분에서 구체적으로 어떤 문장이 가장 기억에 남았고, 어떤 감정이 떠올랐는지 이야기해 주실 수 있나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "10:56"
+    },
+    {
+      "id": "9d71cafc-60eb-417d-9943-42e1e1d30cd3",
+      "role": "user",
+      "content": "저축을 한다는 생각을 전에 안 했는데, 저축이 \"개인의 소비 습관을 더 검소하게 만든다\"라는 의미가 있다는 게 신기했어. 저축을 해서 수중에 있는 돈이 없으면 소비를 덜 하게 되는데, 이게 미래의 돈 축적에 더욱 도움되는 선순환이 벌어지는거지.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "10:58"
+    },
+    {
+      "id": "e12d765a-437d-4f25-8612-32b7b248c983",
+      "role": "assistant",
+      "content": "그 부분을 읽으며 신기하고 선순환이 떠오른다고 하셨군요.\n\n그 문장을 읽은 순간 가장 크게 든 감정은 무엇인가요? 혹은 몸에서 어떤 반응이 있었는지 궁금해요.",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "10:58"
+    },
+    {
+      "id": "bd9cf3cb-edc9-4e36-9977-be45b204463e",
+      "role": "user",
+      "content": "내가 왜 저축을 안 하고 있었지? 를 깨달았어. 그래서 좀 슬펐지.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "10:59"
+    },
+    {
+      "id": "84628341-1f4d-4044-a442-02f855c0a824",
+      "role": "assistant",
+      "content": "저축에 대한 인상적이고 뜻 깊은 경험을 공유해 주셔서 고마워요. 그 부분에서 느낀 감정과 깨달음이 확실히 전해졌어요.\n\n그 부분을 읽으며 특별히 다가온 이유는 무엇이었나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "10:59"
+    },
+    {
+      "id": "b1d80bbc-64f1-4ffb-8f9a-2b7acf61549a",
+      "role": "user",
+      "content": "뭔 말이야? 더 자세히 설명해 줘.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "11:00"
+    },
+    {
+      "id": "e36ed8d5-f9f5-4a02-bb27-2d9b98f347a9",
+      "role": "assistant",
+      "content": "그 부분이 왜 특별히 와닿았는지 궁금한데요.\n\n그 장면이 특히 마음에 남은 이유가 뭐였는지, 그때 떠오른 구체적인 상황이나 생각이 있다면 말씀해 주실 수 있나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "11:00"
+    },
+    {
+      "id": "7345f9e2-cb12-4188-9176-5d64fa3c823c",
+      "role": "user",
+      "content": "내가 가계부를 적는데, 그래도 저축이 잘 안되더라고. 마인드를 잡지 않아서 가계부를 적음에도 돈을 아끼지 못했다는 것을 꺠달았어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "11:02"
+    },
+    {
+      "id": "8a28152c-3916-4286-9c92-5ddb20ae3c28",
+      "role": "assistant",
+      "content": "저축을 왜 해야 하는지에 대한 부분과 가계부를 보며 느낀 깨달음이 인상적이라고 말씀해 주셨어요.\n\n그 깨달음이 실제로 저축 습관을 바꾸게 만든 구체적인 행동 변화나 시도가 있다면 알려 주실 수 있나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "11:02"
+    },
+    {
+      "id": "848137c4-7d3f-47c7-a944-d5ed56bf269a",
+      "role": "user",
+      "content": "아직 행동 변화는 없었는데, 앞으로 월급의 일정 수준(일정 퍼센티지)는 항상 저축을 해야겠다고 다짐했어.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "11:03"
+    },
+    {
+      "id": "1d211de2-4d14-4830-a8e3-3202cf982d96",
+      "role": "assistant",
+      "content": "저축을 왜 해야 하는지 깨달은 게 인상적이었다고 말씀해 주셨어요.\n\n급여를 어느 정도 비율로 저축하기로 마음먹으셨나요? 그리고 그 비율을 정하게 된 구체적인 기준이 있다면 어떤 게 있을까요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "11:03"
+    },
+    {
+      "id": "a92f0351-7e68-4b3f-838a-48434fbdc9b4",
+      "role": "user",
+      "content": "150만원 중 30만원 (20%)는 항상 주식에 넣기로!\n비율에 대한 이유는 딱히 없는데, 독서모임 사람들이 들으니까 좋다고 했어 ㅎㅎ",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "11:04"
+    },
+    {
+      "id": "4ce8b6ef-4bbd-4917-99ea-37572e51ffcf",
+      "role": "assistant",
+      "content": "그 부분이 마음에 남은 이유를 좀 더 구체적으로 말씀해 주세요.\n\n그 저축에 대한 이야기가 왜 특히 인상 깊게 다가왔는지, 구체적인 생각이나 상황을 더 자세히 알려주실 수 있나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "11:04"
+    },
+    {
+      "id": "5676a1c2-cf7a-4aba-92aa-1df7cc36b35b",
+      "role": "user",
+      "content": "아까 얘기했는데",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "11:05"
+    },
+    {
+      "id": "605723a6-7324-4d36-a41a-890fe9969540",
+      "role": "assistant",
+      "content": "저축에 대한 이야기가 마음에 남은 이유와 관련된 구체적인 고민을 더 알려 달라고 요청\n\n그 이야기를 들었을 때 머릿속에 떠오른 구체적인 고민이나 의문이 있으면 말씀해 주실 수 있나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "11:06"
+    },
+    {
+      "id": "01ab3f5c-8251-4e17-96b4-20906dbe2411",
+      "role": "user",
+      "content": "잘 모르겠네",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "11:06"
+    },
+    {
+      "id": "358717ae-dad6-4b4b-b98b-ce6320c80148",
+      "role": "assistant",
+      "content": "저축에 대한 이야기가 마음에 남는다고 하셨는데, 그때 떠오른 구체적인 감정이나 고민이 아직 떠오르지 않으신 것 같아요.\n\n그 부분을 읽으며 머릿속에 떠오른 구체적인 감정이나 고민이 아직 떠오르지 않으시나요? 그때 어떤 상황이나 생각이 머릿속에 스쳐 지나가던 순간을 떠올려 볼 수 있을까요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "11:06"
+    },
+    {
+      "id": "f40b6ad5-37a6-4e83-9bd6-2df5e38f1984",
+      "role": "user",
+      "content": "패스",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "11:07"
+    },
+    {
+      "id": "eb80952c-f022-40b6-a610-20c48ce4b3b3",
+      "role": "assistant",
+      "content": "패스라고 답해 주셨네요.\n\n방금 말씀하신 그 부분이 특별히 다가왔던 이유는 무엇이었을까요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "11:07"
+    },
+    {
+      "id": "60b756a1-b4aa-4c01-b7cf-a49a5a28bc73",
+      "role": "user",
+      "content": "세션 종료",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "11:09"
+    },
+    {
+      "role": "assistant",
+      "type": "closing",
+      "content": "저축을 왜 해야 하는지에 대한 깨달음과 가계부를 쓰며 느낀 감정, 그리고 앞으로의 저축 계획도 말씀해 주셔서 인상 깊었어요.",
+      "question": "오늘도 좋은 시간이었어요, 다음에 또 도움이 필요하면 언제든 찾아 주세요.",
+      "reasoning": "사용자가 세션을 종료하겠다고 명시적으로 요청했으므로, 지금까지의 대화를 마무리하고 세션을 종료합니다.",
+      "questionType": "closing",
+      "isDone": true
+    }
+  ]
+}

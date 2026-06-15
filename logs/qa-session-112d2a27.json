@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "지난주 독서모임에서 읽은 <오프먼트>라는 책",
+    "writingFrequency": "한 달에 한두 번 씀",
+    "interventionLevel": 5,
+    "interventionLabel": "매우 높음",
+    "completionThreshold": 100,
+    "updatedAt": "2026-06-08T06:33:33.849Z"
+  },
+  "transcript": [
+    {
+      "id": "e48cd2c3-100f-41f5-862c-c1f2b778dac2",
+      "role": "assistant",
+      "content": "먼저, 지난주 독서모임에서 읽은 <오프먼트>라는 책에 대해 좀 더 이야기 나눠볼게요. 그 책을 어떻게 만나게 되셨고, 어떤 계기로 읽게 되셨는지 자유롭게 들려주세요.",
+      "type": "llm-generated",
+      "isCont": true,
+      "timestamp": "15:32"
+    },
+    {
+      "id": "06e84ea0-8bcb-4892-beb5-a01355680381",
+      "role": "user",
+      "content": "독서모임에서 추천받아서 읽은 책이야. 여자친구가 먼저 읽어 보고, 추천해 주기도 했고.",
+      "type": "predefined",
+      "isCont": false,
+      "timestamp": "15:33"
+    },
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "content": "독서모임에서 여자친구의 추천으로 처음 알게 되셨군요, 그 만남의 구체적인 상황을 더 들려주시겠어요?",
+      "question": "여자친구가 어떤 계기로 독서모임에서 그 책을 추천하게 되었는지 구체적으로 알고 계신 게 있을까요?",
+      "reasoning": "학생이 '독서모임에서 추천받아서 읽었다'고 외적 사실을 제시했고, 현재 요소는 외적 사실(Orientation)이다.",
+      "questionType": "followup",
+      "isDone": false,
+      "elementProgress": {
+        "orientation": 80,
+        "feelings": 0,
+        "evaluation": 0,
+        "takeaway": 0
+      },
+      "currentElement": "orientation"
+    }
+  ]
+}

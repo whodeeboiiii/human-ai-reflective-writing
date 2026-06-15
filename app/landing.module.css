@@ -1,0 +1,358 @@
+/* ==========================================================================
+   Flect — Landing Page scoped styles
+   Tokens from globals.css. Layout & component styles here.
+   ========================================================================== */
+
+/* ── Nav ───────────────────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  height: 64px;
+  background: rgba(250, 247, 242, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.navCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  transition: background 220ms var(--ease), color 220ms var(--ease);
+  text-decoration: none;
+}
+.navCta:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 0 80px;
+  position: relative;
+}
+
+.heroInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (max-width: 800px) {
+  .heroInner { grid-template-columns: 1fr; }
+  .heroVisual { display: none; }
+}
+
+.heroEyebrow {
+  margin-bottom: 24px;
+}
+
+.heroH1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+.heroSub {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  max-width: 44ch;
+  margin-bottom: 40px;
+}
+
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease), background 260ms var(--ease);
+  box-shadow: 0 2px 12px rgba(45, 37, 32, 0.18);
+}
+.heroCta:hover {
+  background: var(--accent-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(45, 37, 32, 0.2);
+}
+
+.heroCtaArrow {
+  transition: transform 240ms var(--ease);
+}
+.heroCta:hover .heroCtaArrow {
+  transform: translateX(3px);
+}
+
+.heroSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 16px;
+  padding: 16px 24px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 200ms, border-color 200ms, background 200ms;
+}
+.heroSecondary:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+  background: var(--bg-deep);
+}
+
+.heroVisual {
+  opacity: 0.9;
+}
+
+.heroMeta {
+  display: flex;
+  gap: 24px;
+  margin-top: 56px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.heroDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 6px;
+  vertical-align: middle;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* ── Problem ───────────────────────────────────────────────────────────── */
+.problem {
+  padding: 100px 0;
+  border-top: 1px solid var(--line-soft);
+}
+
+.problemGrid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 64px;
+  align-items: start;
+}
+
+@media (max-width: 700px) {
+  .problemGrid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+.problemH2 {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-top: 20px;
+}
+
+.problemBody {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  padding-top: 40px;
+}
+
+.highlight {
+  background: linear-gradient(0deg, rgba(232, 196, 104, 0.35) 0%, rgba(232, 196, 104, 0.35) 100%);
+  color: var(--ink);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* ── Features ──────────────────────────────────────────────────────────── */
+.features {
+  padding: 80px 0 60px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.featuresHeader {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.featuresH2 {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-top: 16px;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 64px 0;
+  border-top: 1px solid var(--line-soft);
+}
+
+.featureGrid:last-child { border-bottom: 1px solid var(--line-soft); }
+
+.featureReverse { direction: rtl; }
+.featureReverse > * { direction: ltr; }
+
+@media (max-width: 700px) {
+  .featureGrid, .featureReverse { grid-template-columns: 1fr; direction: ltr; }
+  .featureVisual { display: none; }
+}
+
+.featureNum {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  display: block;
+  margin-bottom: 16px;
+}
+
+.featureAccent {
+  color: var(--accent-deep);
+  font-weight: 500;
+}
+
+.featureH3 {
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+}
+
+.featureDesc {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+
+.featureTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.featureTag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+
+.featureVisual {
+  position: relative;
+  background: var(--bg-warm);
+  border: 1px solid var(--line-soft);
+  border-radius: 12px;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.visualCorner {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.visualCornerR {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ── CTA Banner ────────────────────────────────────────────────────────── */
+.ctaBanner {
+  padding: 100px 0;
+  text-align: center;
+  border-top: 1px solid var(--line-soft);
+}
+
+.ctaH2 {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.ctaSub {
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin-bottom: 40px;
+}
+
+.ctaFree {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-top: 16px;
+}

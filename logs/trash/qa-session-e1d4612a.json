@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "독서모임에서 읽은 <오프먼트>라는 책",
+    "writingExperience": "가끔 씀",
+    "updatedAt": "2026-05-19T08:50:55.024Z"
+  },
+  "transcript": [
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "question": "먼저, 독서모임에서 읽은 오프먼트라는 책에 대해 좀 더 이야기 나눠볼게요. 먼저 그 책을 어떻게 만나게 되셨고, 어떤 상황에서 경험하셨는지 자유롭게 들려주세요.",
+      "reasoning": "첫 턴이라서 학생의 직전 답변을 받지 못했고, 세션 시작을 위해 첫 메인 질문을 제시한다.",
+      "questionType": "main",
+      "isDone": false
+    }
+  ]
+}

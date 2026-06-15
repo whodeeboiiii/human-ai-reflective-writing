@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "독서모임에서 읽은 <오프먼트>라는 책",
+    "writingExperience": "가끔 씀",
+    "updatedAt": "2026-05-19T08:32:53.991Z"
+  },
+  "transcript": [
+    {
+      "id": "50e60519-9702-45a4-93da-436b25e44b81",
+      "role": "assistant",
+      "content": "먼저, 독서모임에서 읽은 <오프먼트>라는 책에 대해 좀 더 이야기 나눠볼게요. 먼저 그 책을 어떻게 만나게 되셨고, 어떤 상황에서 경험하셨는지 자유롭게 들려주세요.",
+      "type": "llm-generated",
+      "isCont": true,
+      "timestamp": "17:28"
+    },
+    {
+      "id": "70aab39f-a24d-441b-b5bd-5b8c4b5344b4",
+      "role": "user",
+      "content": "독서모임에서 조장이 추천해 줘서 책을 읽게 되었어.\n\"번아웃이 온 현대인들을 위한 쉬는 방법 가이드\"라는 캐치프레이즈가 인상깊었어. 나는 '쉰다'는 행위를 잘 하기는 하지만, 의미 있게 쉬는 방법을 잘 모르겠거든. 쉴 때 유튜브를 보면서 시간을 낭비하기도 하고.",
+      "type": "predefined",
+      "isCont": false,
+      "skipped": false,
+      "timestamp": "17:28"
+    },
+    {
+      "id": "f0082d22-03ec-47d0-aef3-0b7d4cc53f2b",
+      "role": "assistant",
+      "content": "조장이 추천해 준 책을 읽게 되었고, 번아웃을 위한 쉬는 방법 가이드라는 문구가 인상 깊었다고 기억나요.\n\n그 책을 읽으면서 특히 마음에 와닿았던 순간이나 부분이 있었나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "17:28"
+    },
+    {
+      "id": "5ec5aef9-6d01-460b-a569-e3c735e572b4",
+      "role": "user",
+      "content": "잘 모르겠어... 질문을 더 구체적으로 해 줘.",
+      "type": "predefined",
+      "isCont": false,
+      "skipped": false,
+      "timestamp": "17:29"
+    },
+    {
+      "id": "41b717b8-88ad-41cc-bedd-11865e3f3094",
+      "role": "assistant",
+      "content": "'잘 모르겠어'라고 하셨네요.\n\n그 책을 읽으면서 특히 마음에 와닿았던 장면이나 표현이 있다면 구체적으로 어떤 부분이 떠오르나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "17:29"
+    },
+    {
+      "id": "adf77473-9f3d-4acc-9a7d-94a5c8273e23",
+      "role": "user",
+      "content": "잘 모르겠어... 질문을 더 구체적으로 해 줘.",
+      "type": "predefined",
+      "isCont": false,
+      "skipped": false,
+      "timestamp": "17:32"
+    },
+    {
+      "id": "d3bb3ed8-bb2a-49b1-b299-e3d989fe2ae1",
+      "role": "assistant",
+      "content": "그 책에서 읽은 내용 중에서, 번아웃이 온 현대인들을 위한 쉬는 방법 가이드라는 문구와 관련해 특별히 마음에 남았던 부분이 있다면 구체적으로 어떤 장면이나 표현이 떠오르시나요?",
+      "type": "llm-generated",
+      "isCont": false,
+      "timestamp": "17:32"
+    },
+    {
+      "id": "e62d0b8e-7fc6-42ea-a310-cbe3d80ce7ba",
+      "role": "user",
+      "content": "POST /api/ideation/questions 200 in 4.5s (next.js: 14ms, application-code: 4.4s)\n[QA raw LLM output] \"그 책에서 읽은 내용 중에서, 번아웃이 온 현대인들을 위한 쉬는 방법 가이드라는 문구와 관련해 특별히 마음에 남았던 부분이 있다면 구체적으로 어떤 장면이나 표현이 떠오르시나요?\"\n[QA plain-text fallback] model ignored JSON format\n[QA reasoning] type=main | plain-text fallback: single block\n POST /api/ideation/questions 200 in 3.3s (next.js: 11ms, application-code: 3.2s)",
+      "type": "predefined",
+      "isCont": false,
+      "skipped": false,
+      "timestamp": "17:32"
+    },
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "content": "그 책을 읽으면서 구체적인 느낌을 아직 떠올리기 어려우신 것 같아요.",
+      "question": "그 책에서 번아웃을 다루는 부분 중, 특히 눈에 띈 구체적인 상황이나 묘사가 있나요?",
+      "reasoning": "사용자가 직전 질문에 직접적인 답변을 주지 않아 비답변 처리 규칙에 따라 clarification 프롬프트를 발동, 질문을 다른 표현으로 재구성해 구체적인 느낌을 이끌어내려고 한다.",
+      "questionType": "clarification",
+      "isDone": false
+    }
+  ]
+}

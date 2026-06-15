@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "genre": "독후감",
+    "topic": "지난 주 읽은 <오프먼트>라는 책",
+    "writingFrequency": "주에 두세 번 씀",
+    "updatedAt": "2026-06-06T00:57:54.875Z"
+  },
+  "transcript": [
+    {
+      "role": "assistant",
+      "type": "llm-generated",
+      "question": "먼저, 지난 주 읽은 <오프먼트>라는 책에 대해 좀 더 이야기 나눠볼게요. 먼저 그 책을 어떻게 만나게 되셨고, 어떤 상황에서 경험하셨는지 자유롭게 들려주세요.",
+      "reasoning": "학생의 글에 담을 외적 사실을 확보하기 위해 Orientation 질문을 제시한다.",
+      "questionType": "main",
+      "isDone": false
+    }
+  ]
+}

@@ -630,6 +630,17 @@
   font-size: 13px;
   color: var(--ink-mute);
 }
+/* Quick Mode: 아웃라인 통째 스킵 링크 (작게, 남용 방지) */
+.skipLink {
+  font-size: 13px;
+  color: var(--ink-mute);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.skipLink:hover { color: var(--ink-soft); }
 
 .nextBtn {
   display: inline-flex;

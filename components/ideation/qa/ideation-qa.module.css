@@ -910,9 +910,9 @@
    Responsive: Collapse side panel on smaller screens
    ========================================================================== */
 
-@media (max-width: 1200px) {
-  /* Narrow screens revert to normal page flow: the whole page scrolls and the
-     input drops to the end of the document instead of a fixed bottom strip. */
+/* Tablets (769–1200px): revert to normal page flow so the side panel doesn't
+   crowd the chat on mid-size screens. */
+@media (min-width: 769px) and (max-width: 1200px) {
   .qaStageWrapper {
     position: static;
     margin: var(--qa-top-h) auto 0;
@@ -947,18 +947,62 @@
   }
 }
 
+/* Phones (≤768px): keep the three-zone fixed layout (no side panel).
+   This prevents new messages from hiding behind the virtual keyboard / input bar. */
 @media (max-width: 768px) {
+  .qaRoot {
+    --qa-top-h: 70px;
+    --qa-input-h: 210px;
+  }
+
   .qaStageWrapper {
-    padding: 0 16px;
-    gap: 12px;
+    position: fixed;
+    top: var(--qa-top-h);
+    bottom: var(--qa-input-h);
+    left: 0;
+    right: 0;
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .qaStage {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 12px 20px 24px;
   }
 
   .sidePanel {
-    gap: 16px;
-    padding: 16px;
+    display: none;
   }
 
-  .sidePanelAnswers {
-    max-height: 300px;
+  .qaComposer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--qa-input-h);
+    padding: 12px 16px max(16px, env(safe-area-inset-bottom, 16px));
+    margin-top: 0;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .qaComposerShell {
+    flex: 1;
+  }
+
+  /* Let the textarea fill available space; font-size 16px prevents iOS auto-zoom */
+  .qaInput {
+    flex: 1;
+    min-height: 0;
+    font-size: 16px;
+    padding: 12px 14px 8px;
+  }
+
+  .qaGhostTray {
+    bottom: calc(var(--qa-input-h) + 8px);
+    right: 16px;
   }
 }

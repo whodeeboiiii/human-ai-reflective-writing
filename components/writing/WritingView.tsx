@@ -11,6 +11,7 @@ import { useWritingStore } from '@/store/writingStore';
 import type { MaterialCard } from '@/types/ideation';
 import { GENRE_LABEL } from '@/types/community';
 import { publishPost } from '@/lib/community';
+import { logEvent } from '@/lib/events';
 import { PublishModal } from '@/components/community/PublishModal';
 import { PublishSuccess } from '@/components/community/PublishSuccess';
 import { StageIntroToast } from '@/components/common/StageIntroToast';
@@ -54,8 +55,9 @@ interface DiffState extends PanelPos {
   to: number;
 }
 
-export default function WritingView({ sessionId }: { sessionId: string }) {
+export default function WritingView({ sessionId, quick = false }: { sessionId: string; quick?: boolean }) {
   const answers = useStructuredInputStore((s) => s.answers);
+  const setAnswer = useStructuredInputStore((s) => s.setAnswer);
   const outline = useIdeationStore((s) => s.outline);
   const qaTurns = useIdeationStore((s) => s.turns);
   const setDraft = useWritingStore((s) => s.setDraft);
@@ -87,9 +89,24 @@ export default function WritingView({ sessionId }: { sessionId: string }) {
       .slice(0, 800);
   }, [orderedCards]);
 
+  // ── Writing 도달 로깅 (Quick 전용, H funnel은 quick 세션만 집계) ──
+  const loggedWritingRef = useRef(false);
+  useEffect(() => {
+    if (quick && !loggedWritingRef.current) {
+      loggedWritingRef.current = true;
+      logEvent('writing_reached');
+    }
+  }, [quick]);
+
   // ── Publish ──
   const [publishModalOpen, setPublishModalOpen] = useState(false);
   const [publishedId, setPublishedId] = useState<string | null>(null);
+
+  // 발행 모달 오픈 = "발행 화면 도달" (H2 분모). Quick 세션만 집계.
+  function openPublishModal() {
+    if (quick) logEvent('publish_opened');
+    setPublishModalOpen(true);
+  }
 
   const handlePublishConfirm = useCallback(
     async (nickname: string, tags: string) => {
@@ -106,14 +123,36 @@ export default function WritingView({ sessionId }: { sessionId: string }) {
         outline_json: currentOutline ? JSON.stringify(currentOutline) : '',
         tags,
       });
+      if (quick) logEvent('published'); // H2 분자
       setPublishedId(id);
       setPublishModalOpen(false);
     },
-    [answers]
+    [answers, quick]
   );
 
+  // ── Title inline edit ──
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [editedTitle, setEditedTitle] = useState('');
+
+  function startTitleEdit() {
+    setEditedTitle(topicSentence);
+    setIsEditingTitle(true);
+  }
+
+  function commitTitleEdit() {
+    const trimmed = editedTitle.trim();
+    if (trimmed && trimmed !== topicSentence) {
+      setAnswer({ topicSentence: trimmed });
+    }
+    setIsEditingTitle(false);
+  }
+
   // ── Layout ──
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  // Start collapsed; open the outline sidebar on desktop (≥860px) after mount.
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  useEffect(() => {
+    if (window.innerWidth >= 860) setSidebarOpen(true);
+  }, []);
   // Right-hand Q&A answers sidebar — collapsed by default.
   const [answersOpen, setAnswersOpen] = useState(false);
 
@@ -312,10 +351,12 @@ export default function WritingView({ sessionId }: { sessionId: string }) {
     (e: React.MouseEvent) => {
       if (!editor) return;
       e.preventDefault();
+      // Quick Mode: Fix 제외, Suggest만 (§6). full에서만 선택 시 fix 모드.
       const hasSelection = !editor.state.selection.empty;
-      setContextMenu({ x: e.clientX, y: e.clientY, mode: hasSelection ? 'fix' : 'suggest' });
+      const mode = !quick && hasSelection ? 'fix' : 'suggest';
+      setContextMenu({ x: e.clientX, y: e.clientY, mode });
     },
-    [editor]
+    [editor, quick]
   );
 
   const handleContextAction = useCallback(() => {
@@ -372,7 +413,7 @@ export default function WritingView({ sessionId }: { sessionId: string }) {
 
         <button
           className={communityStyles.headerPublishBtn}
-          onClick={() => setPublishModalOpen(true)}
+          onClick={openPublishModal}
           disabled={isDraftEmpty}
           aria-label="글 발행하기"
         >
@@ -403,7 +444,30 @@ export default function WritingView({ sessionId }: { sessionId: string }) {
             {topicSentence && (
               <h1 className={styles.contextTitle}>
                 <span className={styles.contextGenre}>{genreLabel}</span>
-                <span className={styles.contextTopic}>{topicSentence}</span>
+                {isEditingTitle ? (
+                  <input
+                    className={styles.contextTitleInput}
+                    value={editedTitle}
+                    onChange={(e) => setEditedTitle(e.target.value)}
+                    onBlur={commitTitleEdit}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') { e.preventDefault(); commitTitleEdit(); }
+                      if (e.key === 'Escape') setIsEditingTitle(false);
+                    }}
+                    autoFocus
+                    aria-label="글 제목 수정"
+                  />
+                ) : (
+                  <button
+                    type="button"
+                    className={styles.contextTopicEditBtn}
+                    onClick={startTitleEdit}
+                    title="클릭하여 제목 수정"
+                  >
+                    {topicSentence}
+                    <span className={styles.contextTopicEditIcon} aria-hidden="true">✎</span>
+                  </button>
+                )}
               </h1>
             )}
             <p className={styles.contextHint}>

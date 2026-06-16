@@ -209,12 +209,17 @@ device_id | stage | timestamp
 
 | 가설 | 분모 (denominator) | 분자 (numerator) | 목표 |
 |---|---|---|---|
-| H1 활성화 | `quick_start` 찍은 device | `outline_reached` 찍은 device | ≥40% |
+| H1 활성화 | `structured_first_input` 찍은 device | `outline_reached` 찍은 device | ≥40% |
 | H2 공유 | `publish_opened` 찍은 device | `published` 찍은 device | ≥50% |
 | H3 참여 | `community_visit` 찍은 device | `like` 찍은 device | ≥30% |
 
+- **H1 분모 = `structured_first_input`:** "Quick Mode로 글쓰기를 시작한 사용자" = 실제 첫 입력을 한 사용자.
+  `quick_start`(페이지 마운트)는 즉시 이탈(바운스)이 섞이므로 분모로 쓰지 않는다. `quick_start`는
+  top-of-funnel(유입) 지표로만 보고하고, 바운스율 = 1 − (`structured_first_input` / `quick_start`).
 - **H1 분자 정의:** Q&A를 통째 스킵해도 빈 카드로 `outline_reached`가 찍히므로, 스킵 경로 사용자도
   분자에 포함된다 — 의도된 정의(가치 경험 = 구조 화면 도달). 보고 시 스킵 경유 비율을 함께 명시.
+- **funnel-only 로깅:** `structured_first_input`~`published`(H1·H2 funnel)는 **Quick 세션만** 적재한다
+  (full pipeline/HAI 사용자 혼입 방지). `community_visit`·`like`(H3)는 공용 커뮤니티 지표라 무조건 적재.
 - **(선택) `session_id` 컬럼:** events 시트에 글 단위 식별자를 추가하면 한 기기가 여러 글을 쓴 경우도
   글 단위 funnel로 분해할 수 있다. 베타 1차에는 device 단위로 충분.
 

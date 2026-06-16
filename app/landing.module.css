@@ -110,6 +110,63 @@
   transform: translateX(3px);
 }
 
+/* Two-CTA group layout */
+.ctaGroup {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+.ctaGroupSub {
+  margin-top: 14px;
+}
+
+/* Outlined primary-size CTA (full pipeline) */
+.heroCtaOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease), background 260ms var(--ease), color 260ms var(--ease);
+}
+.heroCtaOutline:hover {
+  background: var(--ink);
+  color: var(--bg);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(45, 37, 32, 0.2);
+}
+.heroCtaOutline:hover .heroCtaArrow { transform: translateX(3px); }
+
+/* Smaller tertiary link (커뮤니티 보기) */
+.heroTertiaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  font-size: 13px;
+  color: var(--ink-mute);
+  text-decoration: none;
+  border-radius: 999px;
+  border: 1px solid var(--line-soft);
+  transition: color 200ms, border-color 200ms;
+}
+.heroTertiaryBtn:hover {
+  color: var(--ink-soft);
+  border-color: var(--line);
+}
+
+@media (max-width: 640px) {
+  .ctaGroup { flex-direction: column; }
+  .heroCta, .heroCtaOutline { justify-content: center; }
+}
+
 .heroSecondary {
   display: inline-flex;
   align-items: center;

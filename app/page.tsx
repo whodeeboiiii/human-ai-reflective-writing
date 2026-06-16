@@ -51,13 +51,21 @@ export default function LandingPage() {
               </p>
 
               <div className="reveal" ref={addRef}>
-                <Link href="/app" className={styles.heroCta}>
-                  여기를 클릭하여 무료로 체험하세요
-                  <span className={styles.heroCtaArrow}>→</span>
-                </Link>
-                <Link href="/community" className={styles.heroSecondary}>
-                  커뮤니티 보기
-                </Link>
+                <div className={styles.ctaGroup}>
+                  <Link href="/app/write/quick" className={styles.heroCta}>
+                    5분동안 무료로 체험해보세요.
+                    <span className={styles.heroCtaArrow}>→</span>
+                  </Link>
+                  <Link href="/app/write" className={styles.heroCtaOutline}>
+                    완벽한 글을 AI와 같이 작성해보세요.
+                    <span className={styles.heroCtaArrow}>→</span>
+                  </Link>
+                </div>
+                <div className={styles.ctaGroupSub}>
+                  <Link href="/community" className={styles.heroTertiaryBtn}>
+                    커뮤니티 보기
+                  </Link>
+                </div>
               </div>
 
               <div className={`${styles.heroMeta} reveal`} ref={addRef}>
@@ -297,10 +305,21 @@ export default function LandingPage() {
             설치나 회원가입 없이, 바로 시작할 수 있습니다.
           </p>
           <div className="reveal" ref={addRef}>
-            <Link href="/app" className={styles.heroCta}>
-              여기를 클릭하여 무료로 체험하세요
-              <span className={styles.heroCtaArrow}>→</span>
-            </Link>
+            <div className={`${styles.ctaGroup}`} style={{ justifyContent: 'center' }}>
+              <Link href="/app/write/quick" className={styles.heroCta}>
+                5분동안 무료로 체험해보세요.
+                <span className={styles.heroCtaArrow}>→</span>
+              </Link>
+              <Link href="/app/write" className={styles.heroCtaOutline}>
+                완벽한 글을 AI와 같이 작성해보세요.
+                <span className={styles.heroCtaArrow}>→</span>
+              </Link>
+            </div>
+            <div className={styles.ctaGroupSub} style={{ textAlign: 'center' }}>
+              <Link href="/community" className={styles.heroTertiaryBtn}>
+                커뮤니티 보기
+              </Link>
+            </div>
           </div>
           <p className={`${styles.ctaFree} reveal`} ref={addRef}>100% Free · No Sign-up Required</p>
         </div>

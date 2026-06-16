@@ -13,13 +13,20 @@ interface OutlineSidebarProps {
 
 export function OutlineSidebar({ cards, open, onToggle, sessionId }: OutlineSidebarProps) {
   return (
-    <aside className={`${styles.sidebar} ${open ? '' : styles.sidebarCollapsed}`}>
+    <aside
+      className={`${styles.sidebar} ${open ? '' : styles.sidebarCollapsed}`}
+      onClick={!open ? onToggle : undefined}
+      role={!open ? 'button' : undefined}
+      tabIndex={!open ? 0 : undefined}
+      onKeyDown={!open ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); } } : undefined}
+      aria-label={!open ? '아웃라인 열기' : undefined}
+    >
       <div className={styles.sidebarHeader}>
         {open && <span className={styles.sidebarTitle}>아웃라인</span>}
         <button
           type="button"
           className={styles.sidebarToggle}
-          onClick={onToggle}
+          onClick={(e) => { e.stopPropagation(); onToggle(); }}
           aria-label={open ? '사이드바 접기' : '사이드바 펼치기'}
           title={open ? '접기' : '펼치기'}
         >
@@ -39,6 +46,13 @@ export function OutlineSidebar({ cards, open, onToggle, sessionId }: OutlineSide
           </svg>
         </button>
       </div>
+
+      {/* Mobile collapsed tab label */}
+      {!open && (
+        <div className={styles.sidebarCollapsedLabel} aria-hidden="true">
+          <span>아웃라인</span>
+        </div>
+      )}
 
       {open && (
         <div className={styles.sidebarBody}>

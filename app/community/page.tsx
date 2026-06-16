@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { fetchPosts } from '@/lib/community';
+import { logEvent } from '@/lib/events';
 import type { CommunityPost, Genre, SortOrder } from '@/types/community';
 import { PostCard, PostCardSkeleton } from '@/components/community/PostCard';
 import { GenreTabs } from '@/components/community/GenreTabs';
@@ -31,6 +32,7 @@ export default function CommunityPage() {
   const year = new Date().getFullYear();
 
   useEffect(() => {
+    logEvent('community_visit'); // H3 분모
     setHiddenIds(getHiddenIds());
     fetchPosts('all')
       .then(setPosts)

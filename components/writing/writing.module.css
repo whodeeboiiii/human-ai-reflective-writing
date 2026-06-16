@@ -385,6 +385,49 @@
   color: var(--ink);
   font-style: italic;
 }
+
+/* Inline title edit */
+.contextTopicEditBtn {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--ink);
+  font-style: italic;
+  background: none;
+  border: none;
+  cursor: text;
+  padding: 0;
+  text-align: left;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.contextTopicEditBtn:hover { color: var(--accent-deep); }
+.contextTopicEditIcon {
+  font-size: 14px;
+  font-style: normal;
+  color: var(--ink-mute);
+  opacity: 0;
+  transition: opacity 200ms var(--ease);
+}
+.contextTopicEditBtn:hover .contextTopicEditIcon { opacity: 1; }
+.contextTitleInput {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--ink);
+  font-style: italic;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--accent);
+  outline: none;
+  width: min(480px, 80vw);
+  padding: 0 0 2px;
+}
 .contextHint {
   margin: 18px 0 0;
   font-size: 13px;
@@ -710,6 +753,26 @@
   .spinner { animation: spin 0.7s linear infinite; }
 }
 
+/* ── Collapsed sidebar tab label (mobile only) ───────────────────────────── */
+.sidebarCollapsedLabel {
+  flex: 1;
+  display: none; /* hidden on desktop; shown via @media below */
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 48px;
+}
+.sidebarCollapsedLabel span {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  user-select: none;
+}
+
 /* ── Responsive ──────────────────────────────────────────────────────── */
 @media (max-width: 860px) {
   .layout {
@@ -731,5 +794,14 @@
     bottom: 0;
     right: 0;
     width: 300px;
+  }
+  /* Show the vertical label and make the whole collapsed strip tappable */
+  .sidebarCollapsed,
+  .answersSidebarCollapsed {
+    cursor: pointer;
+    -webkit-tap-highlight-color: var(--accent-soft);
+  }
+  .sidebarCollapsedLabel {
+    display: flex;
   }
 }

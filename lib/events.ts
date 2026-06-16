@@ -6,8 +6,9 @@ import { getDeviceId } from './deviceId';
 //   H2 공유   = published / publish_opened
 //   H3 참여   = like / community_visit
 export type Stage =
-  | 'quick_start'      // Quick Mode 진입 (/app/write/quick 마운트)
-  | 'structured_done'  // Structured Input 완료
+  | 'quick_start'           // Quick Mode 진입 (/app/write/quick 마운트)
+  | 'structured_first_input' // 첫 구조화 입력(첫 질문 답변) — 실제 참여 시작 (H1 보조 분모)
+  | 'structured_done'       // Structured Input 완료
   | 'qa_skipped'       // Q&A 통째 스킵 클릭
   | 'qa_done'          // Q&A 세션 정상 종료 (또는 floor 경고 후 진행)
   | 'outline_reached'  // Outline Composition 화면 도달

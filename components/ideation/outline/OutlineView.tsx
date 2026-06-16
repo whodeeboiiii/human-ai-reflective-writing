@@ -23,10 +23,11 @@ import { useStructuredInputStore } from '@/store/structuredInputStore';
 import { useIdeationStore } from '@/store/ideationStore';
 import type { MaterialCard as MaterialCardType, Outline } from '@/types/ideation';
 import { StageIntroToast } from '@/components/common/StageIntroToast';
+import { logEvent } from '@/lib/events';
 import { MaterialCard } from './MaterialCard';
 import styles from './ideation-outline.module.css';
 
-export default function OutlineView({ sessionId }: { sessionId: string }) {
+export default function OutlineView({ sessionId, quick = false }: { sessionId: string; quick?: boolean }) {
   const router = useRouter();
 
   const [cards, setCards] = useState<MaterialCardType[]>([]);
@@ -51,12 +52,20 @@ export default function OutlineView({ sessionId }: { sessionId: string }) {
     if (hasBootedRef.current) return;
     hasBootedRef.current = true;
 
+    if (quick) logEvent('outline_reached'); // H1 분자
+
     const liveTurns = useIdeationStore.getState().turns;
     const liveAnswers = useStructuredInputStore.getState().answers;
 
     const nonIntroTurns = liveTurns.filter((t) => t.type !== 'intro');
     if (nonIntroTurns.length === 0) {
-      queueMicrotask(() => { setHasError(true); setIsLoading(false); });
+      // Quick: Q&A를 통째로 스킵했을 수 있다 → 에러 대신 빈 카드 상태로 진입(§5).
+      // Full: 기존대로 에러 처리.
+      queueMicrotask(() => {
+        if (quick) { setCards([]); setOrder([]); setHasError(false); }
+        else setHasError(true);
+        setIsLoading(false);
+      });
       return;
     }
 
@@ -75,8 +84,13 @@ export default function OutlineView({ sessionId }: { sessionId: string }) {
         setHasError(false);
         setIsLoading(false);
       })
-      .catch(() => { setHasError(true); setIsLoading(false); });
-  }, []);
+      // Quick: 생성 실패해도 빈 카드 상태로 graceful degradation.
+      .catch(() => {
+        if (quick) { setCards([]); setOrder([]); setHasError(false); }
+        else setHasError(true);
+        setIsLoading(false);
+      });
+  }, [quick]);
 
   // ── Card operations ──
   function handleCardUpdate(id: string, content: string) {
@@ -115,8 +129,14 @@ export default function OutlineView({ sessionId }: { sessionId: string }) {
     }
   }
 
+  // Outline 통째 스킵 (§5) — Quick 전용, 작게 배치. 바로 Writing으로.
+  function handleSkipOutline() {
+    logEvent('outline_skipped');
+    router.push(`/app/write/${sessionId}`);
+  }
+
   function handleNext() {
-    if (order.length === 0) return;
+    if (!quick && order.length === 0) return;
     const orderedCards = order
       .map((id) => cardById.get(id))
       .filter((c): c is MaterialCardType => Boolean(c));
@@ -223,8 +243,13 @@ export default function OutlineView({ sessionId }: { sessionId: string }) {
             </div>
           )}
 
-          {!isLoading && !hasError && cards.length > 0 && (
+          {!isLoading && !hasError && (cards.length > 0 || quick) && (
             <>
+              {quick && cards.length === 0 && (
+                <p className={styles.subhead}>
+                  아직 재료 카드가 없어요. 직접 추가하거나, 바로 글쓰기로 넘어갈 수 있어요.
+                </p>
+              )}
               <DndContext
                 sensors={sensors}
                 collisionDetection={closestCenter}
@@ -273,11 +298,16 @@ export default function OutlineView({ sessionId }: { sessionId: string }) {
                   type="button"
                   className={styles.nextBtn}
                   onClick={handleNext}
-                  disabled={order.length === 0}
+                  disabled={!quick && order.length === 0}
                 >
                   <span>다음 단계로</span>
                   <span className={styles.arrow} aria-hidden="true">→</span>
                 </button>
+                {quick && (
+                  <button type="button" className={styles.skipLink} onClick={handleSkipOutline}>
+                    아웃라인 없이 바로 글쓰기
+                  </button>
+                )}
               </div>
             </>
           )}

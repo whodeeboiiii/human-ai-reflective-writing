@@ -100,6 +100,14 @@ export default function QuickStructuredInput({ sessionId }: { sessionId: string 
     return () => document.body.classList.remove('ideation');
   }, []);
 
+  // structured_first_input 로깅 — 첫 질문에 실제로 답한 순간(실 참여 시작) 1회.
+  const loggedFirstRef = useRef(false);
+  function logFirstInputOnce() {
+    if (loggedFirstRef.current) return;
+    loggedFirstRef.current = true;
+    logEvent('structured_first_input');
+  }
+
   // structured_done 로깅 (H1 보조 분모). complete 화면 진입 시 1회.
   const loggedDoneRef = useRef(false);
   useEffect(() => {
@@ -138,12 +146,14 @@ export default function QuickStructuredInput({ sessionId }: { sessionId: string 
   }
 
   function handleChoiceSelect(answerKey: keyof StructuredInput, rawValue: string) {
+    logFirstInputOnce(); // 첫 질문(genre)이 choice라 보통 여기서 첫 입력이 잡힘
     setAnswer({ [answerKey]: rawValue } as unknown as Partial<StructuredInput>);
     setFiringValue(rawValue);
     setTimeout(() => advance(), 180);
   }
 
   function handleOpenSubmit(value: string) {
+    logFirstInputOnce();
     setAnswer({ topicSentence: value });
     if (useStructuredInputStore.getState().answers.genre === 'book-review') {
       setSubmittedTopicValue(value);

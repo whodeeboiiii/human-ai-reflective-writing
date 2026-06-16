@@ -49,12 +49,19 @@ export function AnswersSidebar({ turns, open, onToggle }: AnswersSidebarProps) {
   }
 
   return (
-    <aside className={`${styles.answersSidebar} ${open ? '' : styles.answersSidebarCollapsed}`}>
+    <aside
+      className={`${styles.answersSidebar} ${open ? '' : styles.answersSidebarCollapsed}`}
+      onClick={!open ? onToggle : undefined}
+      role={!open ? 'button' : undefined}
+      tabIndex={!open ? 0 : undefined}
+      onKeyDown={!open ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); } } : undefined}
+      aria-label={!open ? '대화 내용 열기' : undefined}
+    >
       <div className={styles.answersHeader}>
         <button
           type="button"
           className={styles.sidebarToggle}
-          onClick={onToggle}
+          onClick={(e) => { e.stopPropagation(); onToggle(); }}
           aria-label={open ? '답변 사이드바 접기' : '답변 사이드바 펼치기'}
           title={open ? '접기' : '펼치기'}
         >
@@ -75,6 +82,13 @@ export function AnswersSidebar({ turns, open, onToggle }: AnswersSidebarProps) {
         </button>
         {open && <span className={styles.answersTitle}>내 답변</span>}
       </div>
+
+      {/* Mobile collapsed tab label */}
+      {!open && (
+        <div className={styles.sidebarCollapsedLabel} aria-hidden="true">
+          <span>대화 내용</span>
+        </div>
+      )}
 
       {open && (
         <div className={styles.answersBody}>

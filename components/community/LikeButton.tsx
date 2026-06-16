@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { likePost } from '@/lib/community';
+import { logEvent } from '@/lib/events';
 import styles from './community.module.css';
 
 const LIKED_KEY = 'flect_liked_posts';
@@ -34,6 +35,8 @@ export function LikeButton({ postId, initialLikes }: Props) {
 
   const handleLike = async () => {
     if (liked || loading) return;
+
+    logEvent('like'); // H3 분자
 
     // 낙관적 업데이트
     setLikes((n) => n + 1);

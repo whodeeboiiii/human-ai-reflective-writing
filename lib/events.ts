@@ -29,23 +29,27 @@ export type Stage =
  */
 /**
  * 랜딩 페이지 방문을 visitors 시트에 기록한다. (fire-and-forget)
- * 시트 헤더: device_id | timestamp | referrer
+ * 시트 헤더: id | landingUrl | ip | referer | time_stamp | utm | device
+ * ip는 /api/visitors 서버에서 주입, id는 GAS 자동 생성.
  */
 export function logVisitor(): void {
   if (typeof window === 'undefined') return;
   try {
-    const device_id = getDeviceId();
-    void fetch('/api/gas', {
+    // utm_* 파라미터만 추출해 JSON 문자열로 직렬화
+    const searchParams = new URLSearchParams(window.location.search);
+    const utmMap: Record<string, string> = {};
+    searchParams.forEach((v, k) => { if (k.startsWith('utm_')) utmMap[k] = v; });
+    const utm = Object.keys(utmMap).length > 0 ? JSON.stringify(utmMap) : '';
+
+    void fetch('/api/visitors', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        action: 'insert',
-        table: 'visitors',
-        data: {
-          device_id,
-          timestamp: new Date().toISOString(),
-          referrer: document.referrer || 'direct',
-        },
+        landingUrl: window.location.href,
+        referer: document.referrer || 'direct',
+        time_stamp: new Date().toISOString(),
+        utm,
+        device: navigator.userAgent,
       }),
       keepalive: true,
     }).catch((err) => console.warn('[logVisitor] send failed', err));

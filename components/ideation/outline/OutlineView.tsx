@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { QuickOutlineModal } from '@/components/quick/QuickOutlineModal';
 import {
   DndContext,
   DragOverlay,
@@ -35,12 +36,14 @@ export default function OutlineView({ sessionId, quick = false }: { sessionId: s
   const [activeId, setActiveId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [showOutlineModal, setShowOutlineModal] = useState(false);
 
   const generatedAtRef = useRef<string>('');
   const originalCardCountRef = useRef<number>(0);
   const hasBootedRef = useRef(false);
 
   const cardById = useMemo(() => new Map(cards.map((c) => [c.id, c])), [cards]);
+  const topicSentence = useStructuredInputStore((s) => s.answers.topicSentence ?? '');
 
   // PointerSensor with delay — hold 200ms to initiate drag (quick clicks pass through)
   const sensors = useSensors(
@@ -135,8 +138,7 @@ export default function OutlineView({ sessionId, quick = false }: { sessionId: s
     router.push(`/app/write/${sessionId}`);
   }
 
-  function handleNext() {
-    if (!quick && order.length === 0) return;
+  function buildAndSaveOutline() {
     const orderedCards = order
       .map((id) => cardById.get(id))
       .filter((c): c is MaterialCardType => Boolean(c));
@@ -151,6 +153,23 @@ export default function OutlineView({ sessionId, quick = false }: { sessionId: s
       userEdited,
     };
     useIdeationStore.getState().setOutline(outline);
+    return orderedCards;
+  }
+
+  function handleNext() {
+    if (!quick && order.length === 0) return;
+    buildAndSaveOutline();
+    if (quick) {
+      // Ideation Phase 완료 이벤트 기록 후 모달 표시
+      logEvent('ideation_finished');
+      setShowOutlineModal(true);
+    } else {
+      router.push(`/app/write/${sessionId}`);
+    }
+  }
+
+  function handleProceedFromModal() {
+    setShowOutlineModal(false);
     router.push(`/app/write/${sessionId}`);
   }
 
@@ -158,6 +177,10 @@ export default function OutlineView({ sessionId, quick = false }: { sessionId: s
     .map((id) => cardById.get(id))
     .filter((c): c is MaterialCardType => Boolean(c));
   const activeCard = activeId ? cardById.get(activeId) : null;
+
+  const orderedCardsForModal = order
+    .map((id) => cardById.get(id))
+    .filter((c): c is MaterialCardType => Boolean(c));
 
   return (
     <div>
@@ -207,6 +230,15 @@ export default function OutlineView({ sessionId, quick = false }: { sessionId: s
           <span>Flect</span>
         </Link>
       </header>
+
+      {/* Quick Mode: Ideation 완료 모달 */}
+      {showOutlineModal && (
+        <QuickOutlineModal
+          topicSentence={topicSentence}
+          cards={orderedCardsForModal}
+          onProceed={handleProceedFromModal}
+        />
+      )}
 
       {/* Main */}
       <main className={styles.outlineStage}>

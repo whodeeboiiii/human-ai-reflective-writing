@@ -764,11 +764,9 @@
 .sidebarCollapsedLabel span {
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  transform: rotate(180deg);
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
   color: var(--ink-mute);
   user-select: none;
 }

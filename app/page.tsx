@@ -2,10 +2,13 @@
 
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
+import { logVisitor } from '@/lib/events';
 import styles from './landing.module.css';
 
 export default function LandingPage() {
   const year = new Date().getFullYear();
+
+  useEffect(() => { logVisitor(); }, []);
 
   // Scroll-reveal via IntersectionObserver
   const revealRefs = useRef<HTMLElement[]>([]);

@@ -20,11 +20,16 @@ export default function QuickQASession({ sessionId }: { sessionId: string }) {
   const [showFloor, setShowFloor] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const scrollAnchorRef = useRef<HTMLDivElement>(null);
+  const threadRef = useRef<HTMLDivElement>(null);
 
+  // Directly set scrollTop on the scroll container (not scrollIntoView which
+  // can mis-identify the container inside sticky layouts and jank during streaming).
   const scrollToBottom = useCallback(() => {
-    requestAnimationFrame(() =>
-      scrollAnchorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' }),
-    );
+    requestAnimationFrame(() => {
+      if (threadRef.current) {
+        threadRef.current.scrollTop = threadRef.current.scrollHeight;
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -96,7 +101,7 @@ export default function QuickQASession({ sessionId }: { sessionId: string }) {
       </header>
 
       {/* 채팅 스레드 */}
-      <main className={styles.quickThread}>
+      <main className={styles.quickThread} ref={threadRef}>
         <div className={styles.quickThreadInner}>
           {q.messages.map((m) =>
             m.role === 'assistant' ? (

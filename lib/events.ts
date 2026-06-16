@@ -11,9 +11,10 @@ export type Stage =
   | 'structured_done'       // Structured Input 완료
   | 'qa_skipped'       // Q&A 통째 스킵 클릭
   | 'qa_done'          // Q&A 세션 정상 종료 (또는 floor 경고 후 진행)
-  | 'outline_reached'  // Outline Composition 화면 도달
-  | 'outline_skipped'  // Outline 통째 스킵 클릭
-  | 'writing_reached'  // Writing Phase 도달
+  | 'outline_reached'     // Outline Composition 화면 도달
+  | 'outline_skipped'     // Outline 통째 스킵 클릭
+  | 'ideation_finished'   // Quick Mode: 개요 완성 후 복사 모달 노출 = Ideation Phase 완료 (H1 분자)
+  | 'writing_reached'     // Writing Phase 도달
   | 'publish_opened'   // 발행 모달 오픈 = "발행 화면 도달" (H2 분모)
   | 'published'        // 커뮤니티 발행 완료 (H2 분자)
   | 'community_visit'  // 커뮤니티 피드 방문
@@ -26,6 +27,33 @@ export type Stage =
  * device_id는 getDeviceId()(localStorage)에서 오므로 **클라이언트에서만** 호출한다.
  * keepalive: 페이지 이탈 중(예: community_visit 직후 네비게이션)에도 전송이 끊기지 않게 한다.
  */
+/**
+ * 랜딩 페이지 방문을 visitors 시트에 기록한다. (fire-and-forget)
+ * 시트 헤더: device_id | timestamp | referrer
+ */
+export function logVisitor(): void {
+  if (typeof window === 'undefined') return;
+  try {
+    const device_id = getDeviceId();
+    void fetch('/api/gas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'insert',
+        table: 'visitors',
+        data: {
+          device_id,
+          timestamp: new Date().toISOString(),
+          referrer: document.referrer || 'direct',
+        },
+      }),
+      keepalive: true,
+    }).catch((err) => console.warn('[logVisitor] send failed', err));
+  } catch (err) {
+    console.warn('[logVisitor] failed', err);
+  }
+}
+
 export function logEvent(stage: Stage): void {
   if (typeof window === 'undefined') return; // SSR 가드 (localStorage 없음)
   try {

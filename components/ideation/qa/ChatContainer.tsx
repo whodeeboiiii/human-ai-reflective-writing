@@ -88,6 +88,7 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
   addTurnRef.current = addTurn;
 
   const scrollAnchorRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.body.classList.add('qa');
@@ -107,7 +108,14 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
 
   const scrollToBottom = useCallback(() => {
     requestAnimationFrame(() => {
-      scrollAnchorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      const stage = stageRef.current;
+      if (stage && stage.scrollHeight > stage.clientHeight) {
+        // Fixed layout (>1200px): stage is the scroll container — scroll it directly.
+        stage.scrollTop = stage.scrollHeight;
+      } else {
+        // Tablet static layout: whole page scrolls.
+        scrollAnchorRef.current?.scrollIntoView({ block: 'end' });
+      }
     });
   }, []);
 
@@ -475,7 +483,7 @@ export default function ChatContainer({ sessionId }: { sessionId: string }) {
 
       {/* Two-Column Layout: Thread + Side Panel */}
       <main className={styles.qaStageWrapper}>
-        <div className={styles.qaStage} id="qa-stage">
+        <div className={styles.qaStage} id="qa-stage" ref={stageRef}>
           <div className={styles.qaThread} aria-live="polite" aria-relevant="additions">
           {/* Session header */}
           <div className={styles.qaSessionHead}>

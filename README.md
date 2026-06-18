@@ -132,7 +132,6 @@ components/           # UI 컴포넌트
 lib/                  # 비즈니스 로직 (이벤트 로깅, LLM 프롬프트 등)
 store/                # Zustand 전역 상태
 types/                # TypeScript 타입 정의
-docs/                 # 설계 문서 및 GAS 코드
 ```
 
 ---

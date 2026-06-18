@@ -107,7 +107,7 @@ export function ChatInput({ enabled, done, onSend }: Props) {
       handleUndo();
       return;
     }
-    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }

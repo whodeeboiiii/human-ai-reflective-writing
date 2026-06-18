@@ -77,66 +77,18 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Visual — scattered thoughts → single line */}
-            <div className={styles.heroVisual} aria-hidden="true">
-              <svg viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#E8C468" stopOpacity="0.12" />
-                    <stop offset="60%" stopColor="#E8C468" stopOpacity="0.03" />
-                    <stop offset="100%" stopColor="#E8C468" stopOpacity="0" />
-                  </radialGradient>
-                  <linearGradient id="thread" x1="0" x2="1" y1="0" y2="0">
-                    <stop offset="0%" stopColor="#E8C468" stopOpacity="0" />
-                    <stop offset="22%" stopColor="#E8C468" stopOpacity="0.9" />
-                    <stop offset="78%" stopColor="#9A7A1E" stopOpacity="0.9" />
-                    <stop offset="100%" stopColor="#9A7A1E" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-                <circle cx="260" cy="260" r="240" fill="url(#halo)" />
-                <g stroke="#2D2520" strokeOpacity="0.07" fill="none">
-                  <circle cx="260" cy="260" r="200" />
-                  <circle cx="260" cy="260" r="150" />
-                  <circle cx="260" cy="260" r="100" />
-                </g>
-                <g fill="#2D2520" fillOpacity="0.45">
-                  <circle cx="90" cy="110" r="2.5" />
-                  <circle cx="160" cy="70" r="1.8" />
-                  <circle cx="230" cy="120" r="2.2" />
-                  <circle cx="310" cy="60" r="1.6" />
-                  <circle cx="380" cy="110" r="2.4" />
-                  <circle cx="430" cy="180" r="1.8" />
-                  <circle cx="120" cy="180" r="1.8" />
-                  <circle cx="280" cy="180" r="1.6" />
-                  <circle cx="200" cy="220" r="2.0" />
-                  <circle cx="350" cy="200" r="2.0" />
-                </g>
-                <g stroke="#2D2520" strokeOpacity="0.22" fill="none" strokeLinecap="round">
-                  <path d="M90,110  C140,180 180,220 240,260" strokeWidth="0.8" />
-                  <path d="M160,70  C200,160 220,220 250,258" strokeWidth="0.8" />
-                  <path d="M230,120 C240,180 250,230 255,258" strokeWidth="0.8" />
-                  <path d="M310,60  C290,140 275,220 265,258" strokeWidth="0.8" />
-                  <path d="M380,110 C340,180 300,230 275,260" strokeWidth="0.8" />
-                  <path d="M430,180 C370,220 320,250 285,260" strokeWidth="0.8" />
-                  <path d="M120,180 C180,220 220,240 245,260" strokeWidth="0.8" />
-                  <path d="M280,180 C270,220 265,240 262,258" strokeWidth="0.8" />
-                  <path d="M200,220 C230,240 240,250 250,260" strokeWidth="0.8" />
-                  <path d="M350,200 C320,230 290,250 272,260" strokeWidth="0.8" />
-                </g>
-                <line x1="50" y1="260" x2="470" y2="260" stroke="url(#thread)" strokeWidth="2" strokeLinecap="round" />
-                <circle cx="260" cy="260" r="4.5" fill="#E8C468" />
-                <circle cx="260" cy="260" r="10" fill="none" stroke="#E8C468" strokeOpacity="0.35" />
-                <g stroke="#2D2520" strokeOpacity="0.18">
-                  <line x1="50" y1="300" x2="50" y2="306" />
-                  <line x1="155" y1="300" x2="155" y2="306" />
-                  <line x1="260" y1="300" x2="260" y2="306" />
-                  <line x1="365" y1="300" x2="365" y2="306" />
-                  <line x1="470" y1="300" x2="470" y2="306" />
-                </g>
-                <text x="50" y="324" fontFamily="JetBrains Mono, monospace" fontSize="9" fill="#8A7A6D" letterSpacing="1.2">idea</text>
-                <text x="240" y="324" fontFamily="JetBrains Mono, monospace" fontSize="9" fill="#8A7A6D" letterSpacing="1.2">draft</text>
-                <text x="438" y="324" fontFamily="JetBrains Mono, monospace" fontSize="9" fill="#8A7A6D" letterSpacing="1.2">voice</text>
-              </svg>
+            {/* Demo video */}
+            <div className={styles.heroVideo}>
+              <div className={styles.heroVideoWrap}>
+                <iframe
+                  src="https://www.youtube.com/embed/gzeGmDbMzms"
+                  title="Flect 시연 영상"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className={styles.heroVideoFrame}
+                />
+              </div>
+              <p className={styles.heroVideoLabel}>Flect 시연 영상</p>
             </div>
           </div>
         </div>
